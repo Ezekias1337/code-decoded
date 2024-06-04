@@ -1,0 +1,17 @@
+@import "../../css/variables";
+
+.privacy-policy {
+  background-color: $neutral-900;
+  h1.page-title {
+    color: $primary-500;
+  }
+  
+  .privacy-policy-wrapper {
+    color: $neutral-200;
+    padding-bottom: 80px;
+
+    h2 {
+      color: $primary-300;
+    }
+  }
+}

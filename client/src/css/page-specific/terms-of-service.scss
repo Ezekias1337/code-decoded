@@ -1,0 +1,18 @@
+@import "../../css/variables";
+
+.terms-of-service {
+  background-color: $neutral-900;
+
+  h1.page-title {
+    color: $primary-500;
+  }
+
+  .terms-of-service-wrapper {
+    color: $neutral-200;
+    padding-bottom: 80px;
+
+    h2 {
+      color: $primary-300;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@import "../../../css/variables";
+
+.general-link {
+  font-size: $general;
+
+  &.primary-link {
+    color: $primary-500;
+    &:hover {
+      color: $primary-300;
+    }
+  }
+
+  &.primary-dark-link {
+    color: $primary-900;
+    &:hover {
+      color: $primary-800;
+    }
+  }
+
+  &.success-link {
+    color: $success-500;
+    &:hover {
+      color: $success-300;
+    }
+  }
+
+  &.warning-link {
+    color: $warning-500;
+    &:hover {
+      color: $warning-300;
+    }
+  }
+
+  &.error-link {
+    color: $error-500;
+    &:hover {
+      color: $error-300;
+    }
+  }
+
+  &.info-link {
+    color: $info-500;
+    &:hover {
+      color: $info-300;
+    }
+  }
+
+  &.neutral-link {
+    color: $neutral-100;
+    &:hover {
+      color: $primary-200;
+    }
+  }
+
+  &.neutral-dark-link {
+    color: $primary-900;
+    &:hover {
+      color: $primary-800;
+    }
+  }
+}

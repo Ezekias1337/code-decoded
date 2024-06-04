@@ -1,0 +1,42 @@
+@import "../../css/variables";
+
+.about-us {
+  background-color: $neutral-900;
+
+  h1.page-title {
+    color: $primary-500;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    font-size: $header-3;
+    line-height: 40px;
+    
+    @media screen and (max-width: 768px) {
+      font-size: $general;
+    }
+  }
+
+  .our-story-wrapper {
+    background-color: $primary-800;
+    color: $neutral-200;
+  }
+
+  .our-mission-wrapper {
+    background-color: $primary-200;
+    color: $neutral-800;
+  }
+
+  .why-choose-us-wrapper {
+    background-color: $neutral-800;
+    color: $primary-200;
+  }
+
+  .get-in-touch-wrapper {
+    background-color: $primary-400;
+    color: $neutral-700;
+  }
+}

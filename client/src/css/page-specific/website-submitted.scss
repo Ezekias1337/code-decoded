@@ -1,0 +1,23 @@
+@import "../../css/variables";
+
+.website-submitted {
+  .website-submitted-wrapper {
+    background-color: $neutral-900;
+
+    .website-submitted-header {
+      padding-top: 160px;
+      padding-bottom: 80px;
+      color: $primary-500;
+    }
+
+    .website-submitted-explanation {
+      padding-bottom: 40px;
+      color: $neutral-200;
+      text-align: center;
+    }
+
+    .button-wrapper {
+      padding-bottom: 160px;
+    }
+  }
+}

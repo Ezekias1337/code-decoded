@@ -1,0 +1,141 @@
+@import "../../../css/variables";
+
+nav.navbar {
+  background-color: $neutral-100;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  .navbar-brand {
+    display: inline-block;
+    .navbar-logo {
+      width: 150px;
+    }
+  }
+
+  .nav-link {
+    font-size: 32px;
+  }
+
+  .navbar-menu {
+    width: 100%;
+  }
+
+  .navbar-menu ul {
+    justify-content: end;
+    gap: 30px;
+
+    li {
+      display: block;
+
+      .nav-link {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .nav-link-underline {
+    height: 2.5px;
+    width: 0%;
+    transition: 0.3s;
+  }
+
+  .nav-link-wrapper:hover {
+    .nav-link-underline {
+      width: 100%;
+      transition: 0.3s;
+    }
+  }
+
+  .navbar-background-image {
+    position: absolute;
+    width: 100%;
+  }
+
+  .nav-link {
+    color: $primary-600;
+  }
+
+  .nav-link-wrapper:hover {
+    .nav-link {
+      color: $primary-400 !important;
+    }
+  }
+
+  .nav-link-underline {
+    background-color: $primary-400;
+  }
+
+  /* 
+  Resize the logo depending on screen size
+  ! 768 breakpoint for when nav becomes mobile 
+*/
+
+  @media screen and (max-width: 768px) {
+    display: block !important;
+    padding-top: 40px;
+    padding-bottom: 20px;
+
+    .navbar-menu {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0px;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .navbar-menu-open {
+      opacity: 1;
+      visibility: visible;
+      max-height: 800px;
+    }
+
+    .navbar-menu ul {
+      flex-direction: column;
+    }
+
+    a.nav-link {
+      font-size: $general;
+    }
+
+    .navbar-brand {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .navbar-toggle {
+        height: calc(100% - 10px);
+        background-color: $primary-900;
+        color: $primary-500;
+        border: 1px solid $primary-500;
+        box-shadow: 0px 0px 0px 0px transparent;
+        transition: box-shadow 0.3s ease-in-out;
+        padding: 5px 15px;
+        border-radius: $border-radius;
+
+        &:hover,
+        &:focus {
+          box-shadow: 0px 3px 5px 0px $primary-700;
+        }
+      }
+    }
+
+    a.nav-link {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 840px) {
+    a.nav-link {
+      font-size: $general;
+    }
+  }
+
+  @media screen and (min-width: 950px) {
+    a.nav-link {
+      font-size: $general;
+    }
+  }
+}

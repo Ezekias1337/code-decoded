@@ -1,0 +1,29 @@
+@import "../../css/variables";
+
+.individual-result-container {
+  min-width: 200px;
+  width: 30%;
+  border: 2px solid $quarternary-color;
+  padding: 40px;
+  background-color: $primary-color;
+  margin-bottom: 40px;
+
+  h3,
+  h4,
+  p {
+    color: $neutral;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  h3 {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+}

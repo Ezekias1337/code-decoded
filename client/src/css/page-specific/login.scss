@@ -1,0 +1,70 @@
+@import "../../css/variables";
+
+.login {
+  .login-wrapper {
+    background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei.svg");
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
+    animation: changeAvailableTiersBackground 10s infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+
+    h1.page-title {
+      color: $neutral-100;
+    }
+
+    @media (max-width: 768px) {
+      background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves.svg");
+      animation-name: changeAvailableTiersBackgroundMobile;
+      animation-duration: 20s;
+    }
+
+    @keyframes changeAvailableTiersBackground {
+      0% {
+        background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei.svg");
+        background-position-x: 0%;
+      }
+      20% {
+        background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei-2.svg");
+        background-position-x: 20%;
+      }
+      40% {
+        background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei-3.svg");
+        background-position-x: 40%;
+      }
+      60% {
+        background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei-4.svg");
+        background-position-x: 60%;
+      }
+      80% {
+        background-image: url("/assets/images/svgs/stacked-waves/desktop/stacked-waves-haikei-5.svg");
+        background-position-x: 80%;
+      }
+    }
+
+    @keyframes changeAvailableTiersBackgroundMobile {
+      0% {
+        background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves.svg");
+        background-position-x: 0%;
+      }
+      20% {
+        background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves-2.svg");
+        background-position-x: 20%;
+      }
+      40% {
+        background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves-3.svg");
+        background-position-x: 40%;
+      }
+      60% {
+        background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves-4.svg");
+        background-position-x: 60%;
+      }
+      80% {
+        background-image: url("/assets/images/svgs/stacked-waves/mobile/stacked-waves-5.svg");
+        background-position-x: 80%;
+      }
+    }
+  }
+}

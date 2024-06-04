@@ -1,0 +1,122 @@
+@import "../../css/variables";
+
+.card {
+  border-radius: $border-radius;
+
+  &.image-only-card {
+    height: 30vh;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: background-size 1s;
+
+    img {
+      height: 100%;
+    }
+
+    h4 {
+      color: $neutral-500;
+      font-weight: bold;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    &:hover {
+      background-size: 100%;
+      box-shadow: 0px 4px 3px 0px $primary-500;
+    }
+
+    @media (max-width: 576px) {
+      background-size: cover;
+    }
+
+    @media (min-width: 576px) {
+      background-size: cover;
+      background-position-y: 30%;
+    }
+
+    @media (min-width: 605px) {
+      background-size: cover;
+      background-position-y: 10%;
+    }
+
+    @media (min-width: 1100px) {
+      background-size: 90%;
+      background-position-y: 0%;
+    }
+
+    @media (min-width: 1300px) {
+      background-size: 80%;
+      background-position-y: 0%;
+    }
+
+    @media (min-width: 1500px) {
+      background-size: 70%;
+      background-position-y: 0%;
+    }
+
+    @media (min-width: 1800px) {
+      background-size: 60%;
+      background-position-y: 0%;
+    }
+
+    @media (max-width: 768px) {
+      width: 45vw;
+    }
+
+    @media (min-width: 768px) {
+      width: 25vw;
+    }
+  }
+
+  &.image-and-body-card {
+    width: 25vw;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: $neutral-800;
+    border: 1px solid $neutral-300;
+    box-shadow: 0px 4px 5px 0px $primary-200;
+
+    @media (max-width: 768px) {
+      width: 65vw;
+    }
+
+    img {
+      min-width: 100%;
+      max-width: 100%;
+      border-radius: 4px;
+    }
+
+    .card-text-wrapper {
+      flex: 1;
+      flex-direction: column;
+
+      h3 {
+        font-weight: bold;
+        color: $primary-600;
+      }
+
+      p {
+        flex: 1;
+        color: $neutral-200;
+      }
+
+      h3,
+      p {
+        padding-top: 10px;
+      }
+    }
+
+    .card-button-wrapper {
+      gap: 10px;
+      padding-top: 10px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

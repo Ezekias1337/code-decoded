@@ -1,0 +1,53 @@
+@import "../../css/variables";
+
+.tomar-examen {
+  background-color: $neutral-100;
+
+  h1.page-title {
+    color: $primary-500;
+  }
+
+  div.examen-wrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 80px;
+
+    div.examen-headers-wrapper {
+      grid-template-columns: 70% auto;
+      color: $primary-700;
+      padding-bottom: 20px;
+    }
+
+    .pregunta-header {
+      padding-bottom: 20px;
+      font-size: $header-3;
+      color: $primary-600;
+    }
+
+    .pregunta-row {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 70% 1fr 1fr;
+      color: $neutral-900;
+      font-size: $general;
+
+      input[type="checkbox"] {
+        width: 25px;
+        height: 25px;
+      }
+
+      .checkbox-wrapper {
+        align-items: center;
+        justify-content: center;
+
+        .checkbox-label {
+          font-size: $general;
+        }
+      }
+    }
+
+    .button-wrapper {
+      padding-top: 40px;
+    }
+  }
+}

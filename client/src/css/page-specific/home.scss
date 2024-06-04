@@ -1,0 +1,17 @@
+@import "../../css/variables";
+
+.home-page {
+  background-color: $neutral-100;
+
+  .hero-container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    color: $primary-100;
+    background-image: url("/assets/images/backgrounds/hero.jpg");
+    background-position-x: 50%;
+
+    .button-wrapper {
+      padding-top: 40px;
+    }
+  }
+}

@@ -1,0 +1,229 @@
+@import "variables";
+
+/* 
+  General Styling
+*/
+
+body {
+  font-family: "Times New Roman", Times, serif !important;
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $neutral-900;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary-500;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-700;
+}
+
+::-moz-selection {
+  background: $primary-500;
+  color: $neutral-100;
+}
+
+::selection {
+  background: $primary-500;
+  color: $neutral-100;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.full-width-height {
+  width: 100%;
+  height: 100%;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.full-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space-around-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.display-grid {
+  display: grid;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-left {
+  justify-content: left;
+}
+
+.justify-content-right {
+  justify-content: right;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.justify-content-space-around {
+  justify-content: space-around;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-top {
+  align-items: start;
+}
+
+.align-items-bottom {
+  align-items: end;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.margin-left-and-right {
+  margin-left: 11.5%;
+  margin-right: 11.5%;
+}
+
+.padding-left-and-right {
+  padding-left: 11.5%;
+  padding-right: 11.5%;
+}
+
+.padding-top-20 {
+  padding-top: 20px;
+}
+
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}
+
+.padding-top-40 {
+  padding-top: 40px;
+}
+
+.padding-bottom-40 {
+  padding-bottom: 40px;
+}
+
+.padding-top-80 {
+  padding-top: 80px;
+}
+
+.padding-bottom-80 {
+  padding-bottom: 80px;
+}
+
+.button-wrapper {
+  @extend .full-flex;
+  gap: 20px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: $header-1;
+}
+
+h2 {
+  font-size: $header-2;
+}
+
+h3 {
+  font-size: $header-3;
+}
+
+span {
+  font-size: $general;
+}
+
+p {
+  font-size: $body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-title {
+  @extend .full-flex;
+  @extend .bold-text;
+}
+
+.z-index-0 {
+  z-index: 0;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
+.z-index-3 {
+  z-index: 3;
+}
+
+.semi-dark-image-overlay {
+  background-color: $transparent-black-200 !important;
+  background-blend-mode: multiply;
+}
+
+.dark-image-overlay {
+  background-color: $transparent-black-800 !important;
+  background-blend-mode: multiply;
+}

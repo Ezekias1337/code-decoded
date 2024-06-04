@@ -1,0 +1,22 @@
+@import "../../css/variables";
+
+.under-construction {
+  .under-construction-wrapper {
+    background-color: $neutral-900;
+
+    .under-construction-icon {
+      color: $primary-500;
+      padding-bottom: 40px;
+    }
+    
+
+    .under-construction-explanation {
+      padding-bottom: 40px;
+      color: $neutral-200;
+    }
+
+    .button-wrapper {
+      padding-bottom: 160px;
+    }
+  }
+}

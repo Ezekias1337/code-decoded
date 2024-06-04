@@ -1,0 +1,27 @@
+@import "../../../css/variables";
+
+nav .pagination {
+  li.page-item {
+    cursor: pointer;
+
+    &.disabled-page-item,
+    a.active {
+      cursor: not-allowed;
+    }
+
+    a {
+      background-color: $neutral;
+      color: $primary-color;
+
+      &:hover:not(.active) {
+        box-shadow: 0px 4px 3px 0px $primary-color;
+      }
+    }
+
+    a.active {
+      background-color: $primary-color;
+      color: $neutral;
+      border: 1px solid $primary-color;
+    }
+  }
+}

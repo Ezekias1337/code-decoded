@@ -1,0 +1,532 @@
+@import "../../../../css/variables";
+
+/* 
+  ! Need to take a look at responsiveness of the
+  ! fields and their icons
+*/
+
+/* 
+  Base Styling
+*/
+
+::placeholder {
+  color: $primary-700;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: $primary-700;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: $primary-500;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 70px 20px $neutral-800;
+}
+
+form {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+
+  label.form-label {
+    padding-bottom: 10px;
+  }
+
+  .column-6-field {
+    grid-column: span 1;
+
+    @media screen and (max-width: 768px) {
+      grid-column: span 2;
+    }
+  }
+  .column-12-field {
+    grid-column: span 2;
+  }
+}
+
+div.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .icon-input {
+    color: $primary-500;
+  }
+
+  .icon-input-left {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .icon-input-right {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    width: 25px !important;
+    height: 25px !important;
+  }
+}
+
+select.input-field {
+  height: 49.4px;
+  padding: 10px;
+}
+
+.input-field {
+  font-size: 18px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 55px;
+  transition: 0.2s ease-in-out;
+  background-color: $neutral-800;
+  border: 1px solid $primary-500;
+  color: $primary-500;
+  border-radius: $border-radius;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 4px 3px 0px $primary-600;
+  }
+}
+
+.input-field:not(textarea, select) {
+  height: 28px;
+}
+
+.input-field:focus-visible {
+  outline: none;
+}
+
+.form-label {
+  font-size: 24px;
+  color: $primary-500;
+}
+
+.form button:not(.toggle-password-visibility-button) {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.form-error-message {
+  color: $error-200;
+  font-weight: bold;
+}
+
+.text-area-wrapper {
+  grid-column: span 2;
+}
+
+textarea {
+  resize: vertical; /* Allow resizing horizontally and vertically */
+  overflow: auto; /* Display scrollbars when content overflows */
+}
+
+/* Style the handle */
+textarea::-webkit-resizer {
+  background-size: 20px;
+  background-image: url("../../../../../assets/images/icons/textarea-resize-icon.svg"); /* Set the background color of the handle */
+}
+
+textarea::-moz-resizer {
+  width: 2px; /* Set the width of the handle */
+  height: 2px; /* Set the height of the handle */
+  background-color: $primary-500; /* Set the background color of the handle */
+}
+
+textarea::-ms-resizer {
+  width: 2px; /* Set the width of the handle */
+  height: 2px; /* Set the height of the handle */
+  background-color: $primary-500; /* Set the background color of the handle */
+}
+/* 
+  Select Input
+*/
+
+.select-wrapper {
+  position: relative;
+
+  svg {
+    color: $primary-500;
+    position: absolute;
+    top: 60%;
+    right: 5%;
+    pointer-events: none;
+  }
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* 
+  Date Input
+*/
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.toggle-password-visibility-button {
+  position: absolute;
+  width: 8% !important;
+  height: 30% !important;
+  top: 62%;
+  right: 3%;
+  opacity: 0%;
+  z-index: 1;
+}
+
+/* Switch Input */
+
+div.switch-wrapper {
+  input {
+    display: none;
+  }
+  
+  .switch-label:first-of-type {
+    padding-right: 10px;
+  }
+  
+  .switch-label:nth-of-type(n-1) {
+    padding-left: 10px;
+  }
+
+  input:checked ~ .switch-slider {
+    background: $primary-500;
+  }
+
+  input:checked ~ .switch-slider::after {
+    transform: translateX(30px);
+    background: #ffffff;
+  }
+
+  .switch-slider {
+    display: block;
+    width: 50px;
+    height: 20px;
+    padding: 3px;
+    border-radius: 15px;
+    border: 2px solid $primary-500;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .switch-slider::after {
+    content: "";
+    display: inherit;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    background: $primary-500;
+    transition: 0.3s;
+  }
+}
+
+/* 
+  Country Code and Phone Number Input
+*/
+
+div.country-code-input-wrapper {
+  button.toggle-country-code-menu {
+    margin: 0;
+  }
+}
+
+.phone-number-input {
+  padding-left: 22%;
+}
+
+.country-code-arrow {
+  left: 12%;
+}
+
+.flag-separator {
+  left: 18%;
+}
+
+@media (max-width: 576px) {
+  .phone-number-input {
+    padding-left: 30%;
+  }
+
+  .country-code-arrow {
+    left: 17%;
+  }
+
+  .flag-separator {
+    left: 25%;
+  }
+}
+
+@media (min-width: 576px) {
+  .phone-number-input {
+    padding-left: 32%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 15%;
+  }
+
+  .flag-separator {
+    left: 22%;
+  }
+}
+
+@media (min-width: 600px) {
+  .phone-number-input {
+    padding-left: 24%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 13%;
+  }
+
+  .flag-separator {
+    left: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .phone-number-input {
+    padding-left: 36%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 20%;
+  }
+
+  .flag-separator {
+    left: 30%;
+  }
+}
+
+@media (min-width: 900px) {
+  .phone-number-input {
+    padding-left: 30%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 17%;
+  }
+
+  .flag-separator {
+    left: 25%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .phone-number-input {
+    padding-left: 27%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 15%;
+  }
+
+  .flag-separator {
+    left: 23%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .phone-number-input {
+    padding-left: 24%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 13%;
+  }
+
+  .flag-separator {
+    left: 20%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .phone-number-input {
+    padding-left: 22%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 12%;
+  }
+
+  .flag-separator {
+    left: 18%;
+  }
+}
+
+@media (min-width: 1700px) {
+  .phone-number-input {
+    padding-left: 18%;
+    padding-right: 5%;
+  }
+
+  .country-code-arrow {
+    left: 10%;
+  }
+
+  .flag-separator {
+    left: 15%;
+  }
+}
+
+.country-code-input-wrapper,
+.country-code-icon {
+  width: 40px;
+  height: 30px;
+
+  .input-wrapper {
+    margin-top: 20px !important;
+
+    @media (max-width: 576px) {
+      min-width: 303px;
+    }
+
+    @media (min-width: 576px) {
+      min-width: 250px;
+    }
+
+    @media (min-width: 768px) {
+      min-width: 250px;
+    }
+
+    @media (min-width: 820px) {
+      max-width: 800px;
+      min-width: 300px;
+    }
+
+    @media (min-width: 1060px) {
+      max-width: 800px;
+      min-width: 385px;
+    }
+
+    label.form-label {
+      display: none;
+    }
+  }
+}
+
+.country-code-menu-wrapper {
+  max-height: 800px;
+  padding-left: 0px;
+  overflow-y: scroll;
+  list-style-type: none;
+
+  @media (max-width: 576px) {
+    min-width: 303px;
+  }
+
+  @media (min-width: 576px) {
+    min-width: 250px;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 250px;
+  }
+
+  @media (min-width: 820px) {
+    max-width: 800px;
+    min-width: 300px;
+  }
+
+  @media (min-width: 1060px) {
+    max-width: 800px;
+    min-width: 385px;
+  }
+}
+
+.country-code-arrow {
+  position: absolute;
+  top: 60%;
+  z-index: 5;
+  color: $primary-500;
+}
+
+.flag-separator {
+  width: 1.5px;
+  height: 48px;
+  position: absolute;
+  top: 44%;
+  z-index: 5;
+  pointer-events: none;
+  background-color: $primary-500;
+}
+
+.country-code-input-wrapper {
+  position: absolute;
+  top: 54%;
+  left: 2.5%;
+  z-index: 6;
+
+  .toggle-country-code-menu {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: none;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    //padding-top: 20px;
+    z-index: 6;
+  }
+
+  div.input-wrapper .icon-input-right {
+    bottom: 24%;
+  }
+}
+
+.country-code-label {
+  font-size: $body;
+  color: $primary-500;
+  padding-left: 10px;
+}
+
+.country-code-option {
+  border-bottom: 1.5px solid;
+  display: flex;
+  align-items: center;
+  background-color: $neutral-800;
+  border-color: $primary-500;
+
+  &:hover {
+    background-color: $primary-500;
+
+    .country-code-label {
+      color: $neutral-800;
+    }
+  }
+}
+
+.country-code-menu-wrapper {
+  background-color: $primary-100;
+  border: 1.5px solid $primary-500;
+  border-radius: $border-radius;
+}
+
+.form-button-container {
+  button:nth-of-type(2) {
+    margin-left: 15px;
+  }
+}

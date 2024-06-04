@@ -1,0 +1,58 @@
+@import "../../css/variables";
+
+.alert-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .alert {
+    border-radius: $border-radius;
+    border-width: 1.5px;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 100%;
+
+    &.primary-alert {
+      background-color: $primary-200;
+      border-color: $primary-100;
+      color: $primary-800;
+    }
+    &.primary-dark-alert {
+      background-color: $primary-800;
+      border-color: $primary-200;
+      color: $primary-200;
+    }
+    &.success-alert {
+      background-color: $success-200;
+      border-color: $success-800;
+      color: $success-800;
+    }
+    &.warning-alert {
+      background-color: $warning-200;
+      border-color: $warning-800;
+      color: $warning-800;
+    }
+    &.error-alert {
+      background-color: $error-200;
+      border-color: $error-800;
+      color: $error-800;
+    }
+    &.info-alert {
+      background-color: $info-200;
+      border-color: $info-800;
+      color: $info-800;
+    }
+    &.neutral-alert {
+      background-color: $neutral-200;
+      border-color: $neutral-800;
+      color: $neutral-800;
+    }
+    &.neutral-dark-alert {
+      background-color: $neutral-800;
+      border-color: $neutral-200;
+      color: $neutral-200;
+    }
+  }
+}
