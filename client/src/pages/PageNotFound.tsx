@@ -1,8 +1,6 @@
 // Library Imports
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 // Components
-import NavBar from "../components/general-page-layout/navbar/Navbar";
-import Footer from "../components/general-page-layout/footer/Footer";
 import { Button } from "../components/button/Button";
 // CSS
 import "../css/page-specific/page-not-found.scss";
@@ -10,7 +8,6 @@ import "../css/page-specific/page-not-found.scss";
 const PageNotFound = () => {
   return (
     <section className="page-not-found">
-      <NavBar />
       <div className="page-not-found-wrapper padding-left-and-right">
         <h1 className="page-not-found-warning full-flex">Woops!</h1>
 
@@ -30,7 +27,6 @@ const PageNotFound = () => {
           />
         </div>
       </div>
-      <Footer />
     </section>
   );
 };
