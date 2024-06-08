@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import dotenv from "dotenv";
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 
 dotenv.config({ path: resolve(__dirname, ".env") });
 
@@ -11,7 +12,7 @@ const VITE_FRONTEND_PORT_COERCED_TO_NUMBER: number = Number(
 );
 
 const configObject = {
-  plugins: [react()],
+  plugins: [react(), TanStackRouterVite()],
   base: process.env.VITE_ROUTING_URL_BASE,
   server: {
     port: VITE_FRONTEND_PORT_COERCED_TO_NUMBER,

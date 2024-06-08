@@ -1,14 +1,14 @@
 // Library Imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { Link, To } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 export const FooterSocialIcon = ({
   icon,
   url,
 }: {
   icon: IconProp;
-  url: To;
+  url: never;
 }) => {
   return (
     <div className="footer-social-wrapper full-flex mx-2">

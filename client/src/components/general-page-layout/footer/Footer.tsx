@@ -5,7 +5,7 @@ import { FooterLink } from "./dependents/FooterLink";
 import "./footer.scss";
 // Assets and Images
 import logo from "../../../../public/assets/images/logo/logo.png";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 const Footer = () => {
   return (
@@ -53,9 +53,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-navigation-column">
-          <h5 className="footer-navigation-header bold-text full-flex">
-            Otro
-          </h5>
+          <h5 className="footer-navigation-header bold-text full-flex">Otro</h5>
 
           <div className="footer-link-column display-flex">
             <FooterLink
