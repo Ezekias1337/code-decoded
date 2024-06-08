@@ -95,7 +95,7 @@ nav.navbar {
     }
 
     a.nav-link {
-      font-size: $general;
+      font-size: $header-6;
     }
 
     .navbar-brand {
@@ -129,13 +129,13 @@ nav.navbar {
 
   @media screen and (min-width: 840px) {
     a.nav-link {
-      font-size: $general;
+      font-size: $header-6;
     }
   }
 
   @media screen and (min-width: 950px) {
     a.nav-link {
-      font-size: $general;
+      font-size: $header-6;
     }
   }
 }
