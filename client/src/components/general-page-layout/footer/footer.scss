@@ -84,7 +84,7 @@
   .footer-navigation a {
     color: $primary-600;
     text-decoration: none;
-    font-size: $paragraph;
+    font-size: $header-5;
 
     .footer-navigation-underline {
       background-color: $primary-400;
@@ -164,7 +164,7 @@
         a.full-flex
         div.footer-navigation-link-wrapper
         span.footer-navigation-link {
-        font-size: $paragraph;
+        font-size: $header-6;
       }
     }
 
