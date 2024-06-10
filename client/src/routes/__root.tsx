@@ -9,8 +9,7 @@ import Footer from "../components/general-page-layout/footer/Footer";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Navbar />
-      <hr />
+      <Navbar variant="glassmorphic"/>
       <Outlet />
       <TanStackRouterDevtools />
       <Footer />

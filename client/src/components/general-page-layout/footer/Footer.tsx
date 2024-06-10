@@ -72,7 +72,7 @@ const Footer = () => {
       <div className="footer-copywrite-disclaimer-wrapper align-items-center display-flex justify-content-space-between">
         <div className="copywrite-container display-flex">
           <small className="copywrite-disclaimer">
-            © 2024 Fisher & Paykel | Created by Code Decoded
+            © 2024 Code Decoded LLC
           </small>
         </div>
 

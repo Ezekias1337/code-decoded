@@ -10,7 +10,11 @@ import "./navbar.scss";
 // Assets and Images
 import logo from "../../../../public/assets/images/logo/logo.png";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  variant: "default" | "glassmorphic";
+}
+
+const Navbar: React.FC<NavbarProps> = ({ variant }) => {
   const [isOpen, setIsOpen] = useState(false);
   const windowWidth = useWindowWidth();
 
@@ -19,7 +23,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="navbar display-flex align-items-center">
+    <nav className={`navbar ${variant}-navbar display-flex align-items-center padding-left-80 padding-right-80`}>
       <div className="navbar-brand">
         <Link to="/">
           <img src={logo} alt="Logo" className="navbar-logo" />
