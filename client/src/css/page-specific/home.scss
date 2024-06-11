@@ -39,12 +39,27 @@
           max-width: 50%;
         }
       }
-      
+
       .hero-button-container {
         @media screen and (min-width: 768px) {
           max-width: 50%;
         }
       }
+    }
+  }
+
+  .our-work {
+    color: $neutral-200;
+    background-color: $neutral-800;
+    background-size: cover;
+    background-image: url("../../../public/assets/images/svgs/mobile/blob-scene.svg");
+
+    @media screen and (min-width: 768px) {
+      background-image: url("../../../public/assets/images/svgs/desktop/blob-scene.svg");
+    }
+
+    p {
+      font-size: $header-5;
     }
   }
 }

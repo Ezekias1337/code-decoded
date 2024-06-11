@@ -1,6 +1,6 @@
 // Library Imports
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Interfaces and Types
 import { ButtonProps } from "../../constants/interfaces/ButtonProps";
