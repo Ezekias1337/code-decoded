@@ -49,13 +49,28 @@
   }
 
   .our-work {
+    position: relative;
     color: $neutral-200;
-    background-color: $neutral-800;
-    background-size: cover;
-    background-image: url("../../../public/assets/images/svgs/mobile/blob-scene.svg");
+    overflow: hidden;
 
-    @media screen and (min-width: 768px) {
-      background-image: url("../../../public/assets/images/svgs/desktop/blob-scene.svg");
+    .background-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      /* background-image: url("../../../public/assets/images/svgs/mobile/blob-scene.svg");
+      background-size: cover;
+      background-repeat: no-repeat; */
+
+      #blob-scene-visual {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     p {

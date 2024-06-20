@@ -1,10 +1,18 @@
+// Library Imports
+
+
 // Components
 import { PageHeader } from "../../general-page-layout/page-header/PageHeader";
+import BlobScene from "./BlobScene";
 //import { Button } from "../../button/Button";
 
 const OurWork = () => {
   return (
     <section className="our-work padding-left-and-right padding-top-40 padding-bottom-80">
+      <div className="background-svg">
+        <BlobScene />
+      </div>
+      
       <div className="our-work-text-wrapper">
         <PageHeader title="Our Work" />
 
