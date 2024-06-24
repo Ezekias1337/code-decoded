@@ -1,10 +1,6 @@
-// Library Imports
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 // Components
 import { PageHeader } from "../../general-page-layout/page-header/PageHeader";
 import { CustomerReview } from "../../customer-review/customerReview";
-
 //import { Button } from "../../button/Button";
 
 // Types and Interfaces
