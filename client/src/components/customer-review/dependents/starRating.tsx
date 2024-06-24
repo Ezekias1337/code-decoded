@@ -11,8 +11,8 @@ interface StarRatingProps {
 export const StarRating: FC<StarRatingProps> = ({
   rating /* , totalStars */,
 }) => {
-  const filledStarColor = "#e3d552";
-  const emptyStarColor = "#b4b4b4";
+  const filledStarColor = "#84a5e2";
+  const emptyStarColor = "#a7acb4";
   const maxRating = 5;
   const filledStars = Math.min(Math.max(rating, 0), maxRating);
   const remainingStars = maxRating - filledStars;

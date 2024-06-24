@@ -77,4 +77,18 @@
       font-size: $header-5;
     }
   }
+
+  .home-customer-reviews {
+    background-color: $neutral-700;
+
+    .page-title {
+      color: $primary-500;
+    }
+
+    .customer-reviews-container {
+      align-items: stretch;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 }

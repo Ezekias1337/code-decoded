@@ -13,8 +13,8 @@ interface StarIconProps {
 }
 
 const calculatePath = (percentage: number, starSvgPath: string) => {
-  const filledStarColor = "#e3d552";
-  const emptyStarColor = "#b4b4b4";
+  const filledStarColor = "#84a5e2";
+  const emptyStarColor = "#a7acb4";
   const fillPercentage = Math.min(100, Math.max(0, percentage));
   const viewBox = "0 0 543 512"; // Adjust the viewBox based on your SVG path
 

@@ -1,25 +1,31 @@
 @import "../../css/variables";
 
 .customer-review {
-  border: 1.5px solid var(--neutral-white, #fff);
-  background: $light-gray;
-  max-width: 423px;
+  border: 1.5px solid $primary-500;
+  border-radius: $border-radius;
+  background: $neutral-800;
   flex-shrink: 0;
   position: relative;
+  align-self: stretch;
+  justify-content: stretch;
 
   img {
     width: 44px;
   }
 
+  .author-name-and-rating-info-container {
+    span {
+      padding-bottom: 10px;
+    }
+  }
+
   .review-details-container {
-    margin-top: 20px;
-    margin-left: 20px;
     display: flex;
     align-items: center;
 
     span {
       font-size: $header-6;
-      color: $primary-color;
+      color: $primary-500;
       margin-left: 10px;
     }
   }
@@ -27,16 +33,12 @@
   .rating-number-and-star-container {
     display: flex;
     margin-left: 6px;
-    color: $primary-color;
-
-    text {
-      margin-bottom: 12px;
-    }
+    color: $primary-300;
+    padding-top: 10px;
+    margin-left: 10px;
   }
 
   .review-body-container {
-    padding-left: 70px;
-    padding-right: 70px;
-    color: $primary-color;
+    color: $primary-200;
   }
 }

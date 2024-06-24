@@ -6,25 +6,20 @@ import { StarRating } from "./dependents/starRating";
 import "./customerReview.scss";
 
 export interface CustomerReviewProps {
-  language: string;
   authorImage: string;
   authorName: string;
   rating: number;
-  reviewBody: {
-    english: string;
-    spanish: string;
-  };
+  reviewBody: string;
 }
 
 export const CustomerReview: FC<CustomerReviewProps> = ({
-  language,
   authorImage,
   authorName,
   rating,
   reviewBody,
 }) => {
   return (
-    <div className="customer-review">
+    <div className="customer-review padding-top-20 padding-bottom-20 padding-left-40 padding-right-40">
       <div className="review-details-container">
         <img src={authorImage} />
         <div className="author-name-and-rating-info-container">
@@ -36,9 +31,7 @@ export const CustomerReview: FC<CustomerReviewProps> = ({
         </div>
       </div>
       <div className="review-body-container">
-        <p>
-          {language === "English" ? reviewBody.english : reviewBody.spanish}
-        </p>
+        <p>{reviewBody}</p>
       </div>
     </div>
   );

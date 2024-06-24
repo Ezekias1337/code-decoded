@@ -41,7 +41,7 @@ const OurWork = () => {
   ];
 
   return (
-    <section className="our-work padding-left-and-right padding-top-40 padding-bottom-80">
+    <section className="our-work padding-left-and-right padding-top-80 padding-bottom-80">
       <div className="background-svg">
         <BlobScene />
       </div>

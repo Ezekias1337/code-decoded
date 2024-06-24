@@ -1,6 +1,10 @@
 @import "../../../../css/variables";
 
 .carousel {
+  a {
+    text-decoration: none;
+  }
+
   .carousel-item {
     width: 320px;
     height: 420px;
