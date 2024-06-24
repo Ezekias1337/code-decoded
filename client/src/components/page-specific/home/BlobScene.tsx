@@ -4,13 +4,13 @@ import { motion, Variants } from "framer-motion";
 
 const pathVariants1: Variants = {
   initial: {
-    opacity: 0,
-    pathLength: 0,
+    opacity: 1,
+    pathLength: 1,
     transform: "translateX(-10px)",
   },
   animate: {
-    opacity: 1,
-    pathLength: 1,
+    opacity: 0,
+    pathLength: 0,
     transform: "translateX(0px)",
     transition: {
       duration: 3,
@@ -23,8 +23,8 @@ const pathVariants1: Variants = {
 
 const pathVariants2: Variants = {
   initial: {
-    opacity: 0,
-    pathLength: 0,
+    opacity: 0.5,
+    pathLength: 0.5,
     transform: "translateX(-20px)",
   },
   animate: {
@@ -61,13 +61,13 @@ const pathVariants3: Variants = {
 
 const pathVariants4: Variants = {
     initial: {
-      opacity: 0,
-      pathLength: 0,
+      opacity: 1,
+      pathLength: 1,
       transform: "translateX(0px)",
     },
     animate: {
-      opacity: 1,
-      pathLength: 1,
+      opacity: 0,
+      pathLength: 0,
       transform: "translateX(10px)", // Adjusted from -10px to 10px
       transition: {
         duration: 3,
@@ -80,13 +80,13 @@ const pathVariants4: Variants = {
   
   const pathVariants5: Variants = {
     initial: {
-      opacity: 0,
-      pathLength: 0,
+      opacity: 0.5,
+      pathLength: 0.5,
       transform: "translateX(0px)",
     },
     animate: {
-      opacity: 1,
-      pathLength: 1,
+      opacity: 0,
+      pathLength: 0,
       transform: "translateX(20px)", // Adjusted from -20px to 20px
       transition: {
         duration: 4,
@@ -99,13 +99,13 @@ const pathVariants4: Variants = {
   
   const pathVariants6: Variants = {
     initial: {
-      opacity: 0,
-      pathLength: 0,
+      opacity: 1,
+      pathLength: 1,
       transform: "translateX(0px)",
     },
     animate: {
-      opacity: 1,
-      pathLength: 1,
+      opacity: 0,
+      pathLength: 0,
       transform: "translateX(30px)", // Adjusted from -30px to 30px
       transition: {
         duration: 5,
