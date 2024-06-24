@@ -121,4 +121,12 @@
       font-size: $header-4;
     }
   }
+  
+  .pricing {
+    background-color: $neutral-800;
+    
+    .page-title {
+      color: $primary-500;
+    }
+  }
 }

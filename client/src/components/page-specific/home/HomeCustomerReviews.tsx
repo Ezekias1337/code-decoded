@@ -36,7 +36,7 @@ const HomeCustomerReviews = () => {
   ];
 
   return (
-    <section className="home-customer-reviews padding-left-and-right padding-top-80 padding-bottom-80">
+    <section className="home-customer-reviews padding-left-and-right padding-top-40 padding-bottom-80">
       <PageHeader title="Customer Reviews" />
 
       <div className="customer-reviews-container gap-20">

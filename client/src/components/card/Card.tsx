@@ -57,7 +57,7 @@ export const Card: FC<CardProps> = ({
   button2Variant,
   button2OnClick,
   button2Icon,
-/*   button2Link,
+  /*   button2Link,
   buttonSize, */
   imageSource,
 }) => {
@@ -82,8 +82,11 @@ export const Card: FC<CardProps> = ({
     );
   } else if (cardVariant === "imageAndBody") {
     return (
-      <div className="card image-and-body-card">
-        <img src={imageSource} />
+      <div className="card image-and-body-card padding-top-20 padding-bottom-20 padding-left-40 padding-right-40">
+        <div className="card-image-wrapper">
+          <img src={imageSource} />
+        </div>
+
         <div className="card-text-wrapper display-flex">
           <h3>{headerText}</h3>
           {bodyText ? (
