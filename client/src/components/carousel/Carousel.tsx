@@ -14,7 +14,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 // Components
 import CarouselItem from "./dependents/components/CarouselItem";
 // CSS
-
+import "./dependents/css/carousel.scss";
 // Assets and Images
 
 export interface CarouselItemProps {
@@ -22,6 +22,7 @@ export interface CarouselItemProps {
   title: string;
   body: string;
   backgroundImage: string;
+  url?: string;
 }
 
 interface CarouselProps {
@@ -30,15 +31,15 @@ interface CarouselProps {
 
 const Carousel: FC<CarouselProps> = ({ carouselItems }) => {
   return (
-    <div className="carousel-wrapper">
+    <div className="carousel full-flex gap-20">
       {carouselItems.map((item, index) => (
-        
         <CarouselItem
           icon={item.icon}
           title={item.title}
           body={item.body}
           backgroundImage={item.backgroundImage}
           key={index}
+          url={item?.url}
         />
       ))}
     </div>

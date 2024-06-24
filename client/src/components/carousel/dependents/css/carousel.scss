@@ -1,0 +1,35 @@
+@import "../../../../css/variables";
+
+.carousel {
+  .carousel-item {
+    width: 320px;
+    height: 420px;
+    border: 1.5px solid $neutral-200;
+    border-radius: $border-radius;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .carousel-content {
+      width: 100%;
+      height: 100%;
+      justify-content: end;
+
+      .carousel-item-title {
+        color: $primary-500;
+      }
+
+      .carousel-item-body {
+        color: $neutral-200;
+      }
+
+      svg {
+        width: 15%;
+        path {
+          width: 100%;
+          color: $primary-300;
+        }
+      }
+    }
+  }
+}
