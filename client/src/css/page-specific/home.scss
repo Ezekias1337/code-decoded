@@ -60,9 +60,6 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      /* background-image: url("../../../public/assets/images/svgs/mobile/blob-scene.svg");
-      background-size: cover;
-      background-repeat: no-repeat; */
 
       #blob-scene-visual {
         position: absolute;
@@ -113,20 +110,44 @@
       z-index: -1;
     }
 
-    .page-title, p {
+    .page-title,
+    p {
       color: $primary-100;
     }
-    
+
     p {
       font-size: $header-4;
     }
   }
-  
+
   .pricing {
     background-color: $neutral-800;
-    
+
     .page-title {
       color: $primary-500;
+    }
+  }
+
+  .get-started {
+    background-image: url("../../../public/assets/images/backgrounds/misc-technology.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .get-started-dark-overlay {
+      width: 100vw;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .page-title,
+    p {
+      color: $primary-200;
+      z-index: 1;
+    }
+
+    p {
+      font-size: $header-4;
     }
   }
 }
