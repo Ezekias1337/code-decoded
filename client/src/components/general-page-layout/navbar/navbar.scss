@@ -11,7 +11,8 @@ nav.navbar {
     //width: 100vw;
     z-index: 1000; // Ensure it stays on top of other elements
     background: linear-gradient(rgba(#141E31, 0.7), rgba(#626B7B, 0.4));
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
     
     .nav-link {
       color: $primary-500;

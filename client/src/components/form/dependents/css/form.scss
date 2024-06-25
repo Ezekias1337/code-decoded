@@ -9,6 +9,26 @@
   Base Styling
 */
 
+::-webkit-input-placeholder {
+  color: $primary-700;
+  opacity: 1; /* Firefox */
+}
+
+::-moz-placeholder {
+  color: $primary-700;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  color: $primary-700;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  color: $primary-700;
+  opacity: 1; /* Firefox */
+}
+
 ::placeholder {
   color: $primary-700;
   opacity: 1; /* Firefox */
@@ -25,6 +45,7 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: $primary-500;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 70px 20px $neutral-800;
 }
