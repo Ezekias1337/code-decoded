@@ -1,7 +1,7 @@
 @import "../../../css/variables";
 
 nav.navbar {
-  background-color: $neutral-100;
+  background-color: $neutral-800;
   width: calc(100% - 160px);
 
   &.glassmorphic-navbar {
@@ -60,6 +60,45 @@ nav.navbar {
     }
   }
 
+  .dropdown-menu-wrapper {
+    .nav-link {
+      gap: 5px;
+      
+    }
+
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0px;
+      flex-direction: column;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .dropdown-content-open {
+      opacity: 1;
+      visibility: visible;
+      margin-top: 5px;
+      max-height: 800px;
+      flex-direction: column;
+      background-color: $neutral-800;
+      border: 1.5px solid $primary-500;
+      border-radius: $border-radius;
+      -webkit-border-radius: $border-radius;
+      -moz-border-radius: $border-radius;
+      -ms-border-radius: $border-radius;
+      -o-border-radius: $border-radius;
+    }
+
+    .dropdown-item {
+      text-decoration: none;
+      color: $primary-500;
+
+      &:hover {
+        color: $primary-200;
+      }
+    }
+  }
+
   .navbar-background-image {
     position: absolute;
     width: 100%;
@@ -105,7 +144,7 @@ nav.navbar {
       flex-direction: column;
     }
 
-    a.nav-link {
+    .nav-link {
       font-size: $header-6;
     }
 
@@ -137,20 +176,20 @@ nav.navbar {
       }
     }
 
-    a.nav-link {
+    .nav-link {
       display: flex;
       justify-content: center;
     }
   }
 
   @media screen and (min-width: 840px) {
-    a.nav-link {
+    .nav-link {
       font-size: $header-6;
     }
   }
 
   @media screen and (min-width: 950px) {
-    a.nav-link {
+    .nav-link {
       font-size: $header-6;
     }
   }

@@ -4,7 +4,8 @@ import { Link } from "@tanstack/react-router";
 // Functions, Helpers, Utils, and Hooks
 import useWindowWidth from "../../../hooks/useWindowWidth";
 // Components
-import { AnimatedNavLink } from "./dependents/AnimatedNavLink";
+import AnimatedNavLink from "./dependents/AnimatedNavLink";
+import NavDropdownMenu from "./dependents/NavDropdownMenu";
 // CSS
 import "./navbar.scss";
 // Assets and Images
@@ -23,7 +24,9 @@ const Navbar: React.FC<NavbarProps> = ({ variant }) => {
   };
 
   return (
-    <nav className={`navbar ${variant}-navbar full-flex padding-left-80 padding-right-80 padding-top-40 padding-bottom-40`}>
+    <nav
+      className={`navbar ${variant}-navbar full-flex padding-left-80 padding-right-80 padding-top-40 padding-bottom-40`}
+    >
       <div className="navbar-brand">
         <Link to="/">
           <img src={logo} alt="Logo" className="navbar-logo" />
@@ -37,10 +40,29 @@ const Navbar: React.FC<NavbarProps> = ({ variant }) => {
       <div className={`navbar-menu${isOpen ? " navbar-menu-open" : ""}`}>
         <ul className="space-around-flex align-items-center">
           <li>
-            <AnimatedNavLink linkText="Página Principal" url="/" />
+            <AnimatedNavLink linkText="Home" url="/" />
           </li>
           <li>
-            <AnimatedNavLink linkText="Iniciar Sesión" url="/login" />
+            <NavDropdownMenu
+              linkText="Info"
+              dropdownItems={[
+                {
+                  text: "Dependencia 1",
+                  url: "/dependents/1",
+                },
+                {
+                  text: "Dependencia 2",
+                  url: "/dependents/2",
+                },
+                {
+                  text: "Dependencia 3",
+                  url: "/dependents/3",
+                },
+              ]}
+            />
+          </li>
+          <li>
+            <AnimatedNavLink linkText="Login" url="/login" />
           </li>
         </ul>
       </div>

@@ -21,7 +21,7 @@ const Hero = () => {
           websites and phone apps that drive growth and captivate your audience.{" "}
         </p>
 
-        <div className="button-wrapper padding-top-40 padding-bottom-80">
+        <div className="button-wrapper justify-content-left padding-top-40 padding-bottom-80">
           <Button
             text="Schedule a Consultation"
             variant="primary"

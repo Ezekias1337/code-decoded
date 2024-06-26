@@ -7,7 +7,7 @@ type AnimatedNavLinkProps = {
   url: string;
 };
 
-export const AnimatedNavLink: React.FC<AnimatedNavLinkProps> = ({
+const AnimatedNavLink: React.FC<AnimatedNavLinkProps> = ({
   linkText,
   url,
 }) => {
@@ -20,3 +20,5 @@ export const AnimatedNavLink: React.FC<AnimatedNavLinkProps> = ({
     </div>
   );
 };
+
+export default AnimatedNavLink;
