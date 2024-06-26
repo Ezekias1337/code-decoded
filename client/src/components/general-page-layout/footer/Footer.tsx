@@ -20,18 +20,18 @@ const Footer = () => {
       <div className="footer-navigation display-flex justify-content-space-around">
         <div className="footer-navigation-column">
           <h5 className="footer-navigation-header bold-text full-flex">
-            Contacto
+            Contact
           </h5>
 
           <div className="footer-link-column display-flex">
             <FooterLink
-              linkText="(664) 231-3450"
-              url="tel:+526642313450"
+              linkText="(858) 752-7345"
+              url="tel:+18587527345"
               openInNewTab={false}
             />
             <FooterLink
-              linkText="Correo"
-              url="mailto: 123@placeholder.com"
+              linkText="Email"
+              url="mailto: codedecodedbiz@gmail.com"
               openInNewTab={false}
             />
           </div>
@@ -53,7 +53,9 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-navigation-column">
-          <h5 className="footer-navigation-header bold-text full-flex">Otro</h5>
+          <h5 className="footer-navigation-header bold-text full-flex">
+            Other
+          </h5>
 
           <div className="footer-link-column display-flex">
             <FooterLink
