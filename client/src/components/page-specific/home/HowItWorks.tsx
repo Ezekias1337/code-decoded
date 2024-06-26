@@ -33,7 +33,7 @@ const HowItWorks = () => {
       </p>
 
       <div className="button-wrapper">
-        <Button text="Get Started" variant="primary" buttonSize="large" />
+        <Button text="Get Started" variant="primary-dark" buttonSize="large" />
       </div>
     </section>
   );

@@ -27,7 +27,7 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
     <div
       className="dropdown-menu-wrapper position-relative"
       onClick={handleToggle}
-      onTouchStart={handleToggle}
+      /* onTouchStart={handleToggle} */
     >
       <div className="nav-link-wrapper">
         <div className="nav-link full-flex">
@@ -44,10 +44,14 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
 
       <div
         className={`dropdown-content${isOpen ? "-open" : ""} full-flex padding-left-20 padding-right-20 padding-top-20 padding-bottom-20 position-absolute`}
-        onMouseLeave={handleClose}
       >
         {dropdownItems.map((item, index) => (
-          <Link key={index} to={item.url} className="dropdown-item">
+          <Link
+            key={index}
+            to={item.url}
+            className="dropdown-item"
+            onClick={handleClose}
+          >
             {item.text}
           </Link>
         ))}
