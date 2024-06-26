@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ variant }) => {
   };
 
   return (
-    <nav className={`navbar ${variant}-navbar display-flex align-items-center padding-left-80 padding-right-80`}>
+    <nav className={`navbar ${variant}-navbar full-flex padding-left-80 padding-right-80 padding-top-40 padding-bottom-40`}>
       <div className="navbar-brand">
         <Link to="/">
           <img src={logo} alt="Logo" className="navbar-logo" />

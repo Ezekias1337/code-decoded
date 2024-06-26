@@ -1,6 +1,10 @@
 @import "../../../../css/variables";
 
 .carousel {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   a {
     text-decoration: none;
   }

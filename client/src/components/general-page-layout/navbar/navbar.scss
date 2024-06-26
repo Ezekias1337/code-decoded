@@ -3,17 +3,17 @@
 nav.navbar {
   background-color: $neutral-100;
   width: calc(100% - 160px);
-  
+
   &.glassmorphic-navbar {
     position: absolute;
     top: 0;
     left: 0;
     //width: 100vw;
     z-index: 1000; // Ensure it stays on top of other elements
-    background: linear-gradient(rgba(#141E31, 0.7), rgba(#626B7B, 0.4));
+    background: linear-gradient(rgba(#141e31, 0.7), rgba(#626b7b, 0.4));
     -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-    
+    backdrop-filter: blur(10px);
+
     .nav-link {
       color: $primary-500;
     }
@@ -86,7 +86,6 @@ nav.navbar {
 
   @media screen and (max-width: 768px) {
     display: block !important;
-    padding-top: 20px;
     padding-bottom: 20px;
 
     .navbar-menu {
@@ -117,7 +116,7 @@ nav.navbar {
       align-items: center;
 
       .navbar-toggle {
-        height: calc(100% - 10px);
+        height: calc(100%);
         background-color: $primary-900;
         color: $primary-500;
         border: 1px solid $primary-500;
@@ -125,6 +124,11 @@ nav.navbar {
         transition: box-shadow 0.3s ease-in-out;
         padding: 5px 15px;
         border-radius: $border-radius;
+        padding-bottom: 8px;
+
+        span {
+          font-size: $header-5;
+        }
 
         &:hover,
         &:focus {
