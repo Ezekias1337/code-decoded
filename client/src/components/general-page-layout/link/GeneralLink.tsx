@@ -1,12 +1,12 @@
 // Library Imports
 import { FC } from "react";
-import { Link, To } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 // CSS
 import "./general-link.scss";
 
 type LinkProps = {
   text: string;
-  url: To;
+  url: string;
   openInNewTab: boolean;
   additionalClassNames?: string;
   variant?: string;
