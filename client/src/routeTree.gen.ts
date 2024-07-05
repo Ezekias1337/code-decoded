@@ -18,6 +18,7 @@ import { Route as rootRoute } from './routes/__root'
 
 const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')()
 const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')()
+const AboutUsLazyImport = createFileRoute('/about-us')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
@@ -36,6 +37,11 @@ const PrivacyPolicyLazyRoute = PrivacyPolicyLazyImport.update({
   import('./routes/privacy-policy.lazy').then((d) => d.Route),
 )
 
+const AboutUsLazyRoute = AboutUsLazyImport.update({
+  path: '/about-us',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about-us.lazy').then((d) => d.Route))
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -50,6 +56,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/about-us': {
+      id: '/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof AboutUsLazyImport
       parentRoute: typeof rootRoute
     }
     '/privacy-policy': {
@@ -73,6 +86,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  AboutUsLazyRoute,
   PrivacyPolicyLazyRoute,
   TermsOfServiceLazyRoute,
 })
@@ -86,12 +100,16 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/about-us",
         "/privacy-policy",
         "/terms-of-service"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/about-us": {
+      "filePath": "about-us.lazy.tsx"
     },
     "/privacy-policy": {
       "filePath": "privacy-policy.lazy.tsx"

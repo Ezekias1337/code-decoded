@@ -1,42 +1,61 @@
 @import "../../css/variables";
 
 .about-us {
-  background-color: $neutral-900;
-
+  background-color: $neutral-800;
   h1.page-title {
     color: $primary-500;
   }
 
-  h2 {
-    text-align: center;
-  }
+  section {
+    padding-top: 40px;
+    padding-bottom: 80px;
 
-  p {
-    font-size: $header-3;
-    line-height: 40px;
-    
-    @media screen and (max-width: 768px) {
-      font-size: $header-6;
+    p {
+      font-size: $header-5;
     }
   }
 
-  .our-story-wrapper {
+  section.expertise-and-experience,
+  section.quality-and-attention-to-detail {
+    background-color: $neutral-700;
+
+    h2.page-title {
+      color: $primary-500;
+    }
+
+    p {
+      color: $primary-400;
+    }
+  }
+
+  section.personalized-approach,
+  section.our-values {
+    background-color: $primary-500;
+
+    h2.page-title,
+    h3 {
+      color: $primary-100;
+    }
+
+    p {
+      color: $neutral-100;
+    }
+
+    h3:nth-of-type(2),
+    h3:nth-of-type(3) {
+      margin-top: 20px;
+    }
+  }
+
+  section.cutting-edge-technology {
     background-color: $primary-800;
-    color: $neutral-200;
-  }
 
-  .our-mission-wrapper {
-    background-color: $primary-200;
-    color: $neutral-800;
-  }
+    h2.page-title {
+      color: $neutral-100;
+    }
 
-  .why-choose-us-wrapper {
-    background-color: $neutral-800;
-    color: $primary-200;
-  }
-
-  .get-in-touch-wrapper {
-    background-color: $primary-400;
-    color: $neutral-700;
+    p {
+      color: $primary-100;
+    }
   }
 }

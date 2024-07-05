@@ -7,7 +7,7 @@ import { GeneralLink } from "../components/general-page-layout/link/GeneralLink"
 import "../css/page-specific/terms-of-service.scss";
 
 const TermsOfService = () => (
-  <section className="terms-of-service">
+  <div className="terms-of-service">
     <PageHeader title="Terms Of Service" />
     <div className="terms-of-service-wrapper padding-left-and-right">
       <p>
@@ -147,7 +147,7 @@ const TermsOfService = () => (
         read, understood, and agree to be bound by these Terms of Service.
       </p>
     </div>
-  </section>
+  </div>
 );
 
 export const Route = createLazyFileRoute("/terms-of-service" as never)({

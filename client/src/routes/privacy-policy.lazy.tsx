@@ -7,7 +7,7 @@ import { GeneralLink } from "../components/general-page-layout/link/GeneralLink"
 import "../css/page-specific/privacy-policy.scss";
 
 const PrivacyPolicy = () => (
-  <section className="privacy-policy">
+  <div className="privacy-policy">
     <PageHeader title="Privacy Policy" />
     <div className="privacy-policy-wrapper padding-left-and-right">
       <p>
@@ -125,7 +125,7 @@ const PrivacyPolicy = () => (
         of your information as described in this Privacy Policy.
       </p>
     </div>
-  </section>
+  </div>
 );
 
 export const Route = createLazyFileRoute("/privacy-policy" as never)({
