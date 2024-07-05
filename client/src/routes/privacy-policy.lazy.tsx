@@ -11,10 +11,9 @@ const PrivacyPolicy = () => (
     <PageHeader title="Privacy Policy" />
     <div className="privacy-policy-wrapper padding-left-and-right">
       <p>
-        At WebLord LLC, we value your privacy and are committed to protecting
-        your personal information. This Privacy Policy outlines how we collect,
-        use, and safeguard the information you provide to us through our website
-        and any associated services.
+        At Code Decoded, we are committed to protecting your privacy. This
+        Privacy Policy outlines how we collect, use, and safeguard your
+        information when you visit our website. Information We Collect:
       </p>
 
       <h2 className="padding-top-40 padding-bottom-20">
@@ -115,8 +114,8 @@ const PrivacyPolicy = () => (
         If you have any questions, concerns, or feedback regarding this Privacy
         Policy or our data practices, please contact us at{" "}
         <GeneralLink
-          text="contact@weblords.com"
-          url="mailto:contact@weblords.com"
+          text="codedecodedbiz@gmail.com"
+          url="mailto:codedecodedbiz@gmail.com"
           openInNewTab={false}
         />
         .

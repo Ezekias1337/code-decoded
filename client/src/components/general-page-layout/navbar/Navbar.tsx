@@ -1,6 +1,6 @@
 // Library Imports
 import React, { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 // Functions, Helpers, Utils, and Hooks
 import useWindowWidth from "../../../hooks/useWindowWidth";
 // Components
@@ -11,13 +11,11 @@ import "./navbar.scss";
 // Assets and Images
 import logo from "../../../../public/assets/images/logo/logo.png";
 
-interface NavbarProps {
-  variant: "default" | "glassmorphic";
-}
-
-const Navbar: React.FC<NavbarProps> = ({ variant }) => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const windowWidth = useWindowWidth();
+  const location = useLocation(); // Get the current location
+  const variant = location.pathname === "/" ? "glassmorphic" : "default"; // Set the variant based on the current path
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
