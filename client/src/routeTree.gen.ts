@@ -13,7 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-./routes/terms-of-service.lazy
+
 // Create Virtual Routes
 
 const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')()
