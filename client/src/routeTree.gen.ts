@@ -13,13 +13,21 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-
+./routes/terms-of-service.lazy
 // Create Virtual Routes
 
+const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')()
 const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const TermsOfServiceLazyRoute = TermsOfServiceLazyImport.update({
+  path: '/terms-of-service',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/terms-of-service.lazy').then((d) => d.Route),
+)
 
 const PrivacyPolicyLazyRoute = PrivacyPolicyLazyImport.update({
   path: '/privacy-policy',
@@ -51,6 +59,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyLazyImport
       parentRoute: typeof rootRoute
     }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -59,6 +74,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   PrivacyPolicyLazyRoute,
+  TermsOfServiceLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -70,7 +86,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/privacy-policy"
+        "/privacy-policy",
+        "/terms-of-service"
       ]
     },
     "/": {
@@ -78,6 +95,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/privacy-policy": {
       "filePath": "privacy-policy.lazy.tsx"
+    },
+    "/terms-of-service": {
+      "filePath": "terms-of-service.lazy.tsx"
     }
   }
 }
