@@ -2,7 +2,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
-//import { GeneralLink } from "../components/general-page-layout/link/GeneralLink";
 // CSS
 import "../css/page-specific/about-us.scss";
 
