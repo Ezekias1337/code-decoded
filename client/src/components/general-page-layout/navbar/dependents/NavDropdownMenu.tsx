@@ -34,7 +34,6 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
           {linkText}{" "}
           <FontAwesomeIcon
             icon={isOpen === false ? faChevronDown : faChevronUp}
-            className={`country-code-arrow`}
             size="sm"
             key={`${name}-menu-arrow`}
           />

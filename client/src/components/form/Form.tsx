@@ -35,7 +35,7 @@ export const Form: FC<FormProps> = ({
   customSubmitArgs,
   redirectUrl,
 }) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
   const [postingToServerInProgress, setPostingToServerInProgress] =
     useState(false);
@@ -47,9 +47,9 @@ export const Form: FC<FormProps> = ({
 
   useEffect(() => {
     if (submissionSuccessful && redirectUrl) {
-      navigate(redirectUrl);
+      //navigate(redirectUrl);
     }
-  }, [submissionSuccessful, navigate, redirectUrl]);
+  }, [submissionSuccessful, /* navigate, */ redirectUrl]);
 
   return (
     <form
