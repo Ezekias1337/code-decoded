@@ -79,9 +79,9 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom-navigation-wrapper display-flex justify-content-right">
-          <div>
+         {/*  <div>
             <FooterLink linkText="Admin" url="/login" openInNewTab={false} />
-          </div>
+          </div> */}
           <div>
             <FooterLink
               linkText="Terms of Service"

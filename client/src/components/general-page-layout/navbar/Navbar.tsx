@@ -45,16 +45,12 @@ const Navbar: React.FC = () => {
               linkText="Info"
               dropdownItems={[
                 {
-                  text: "Dependencia 1",
-                  url: "/dependents/1",
+                  text: "About Us",
+                  url: "/about-us",
                 },
                 {
-                  text: "Dependencia 2",
-                  url: "/dependents/2",
-                },
-                {
-                  text: "Dependencia 3",
-                  url: "/dependents/3",
+                  text: "FAQ",
+                  url: "/faqs",
                 },
               ]}
             />

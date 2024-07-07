@@ -63,7 +63,6 @@ nav.navbar {
   .dropdown-menu-wrapper {
     .nav-link {
       gap: 5px;
-      
     }
 
     .dropdown-content {
@@ -91,10 +90,15 @@ nav.navbar {
 
     .dropdown-item {
       text-decoration: none;
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $primary-500;
       color: $primary-500;
 
       &:hover {
         color: $primary-200;
+        border-color: $primary-200;
       }
     }
   }
