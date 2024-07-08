@@ -7,7 +7,10 @@
     "dev": "npm run tsr:generate && vite",
     "build": "npm install && tsc && vite build",
     "preview": "vite preview",
-    "tsr:generate": "npx run tsr generate"
+    "tsr:generate": "npx run tsr generate",
+    "clear-cache": "npm cache clean --force",
+    "delete-node-modules-and-package-lock": "rm -rf node_modules package-lock.json && npm i registry.npmjs.org",
+    "fix-terminal-lag": "npm run clear-cache && npm run delete-node-modules-and-package-lock"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

@@ -1,14 +1,13 @@
 // Library Imports
 import { RequestHandler } from "express";
 import createHttpError from "http-errors";
-import { Server } from "socket.io";
 import { Resend } from "resend";
 // Models
-import WebsiteModel from "../models/website";
+import WebsiteOrAppModel from "../models/websiteOrApp";
 // ENV
 import env from "../util/validateEnv";
 
-interface websiteCreationBody {
+interface websiteOrAppCreationBody {
   name: string;
   phoneNumber: string;
   emailAddress: string;
@@ -17,115 +16,115 @@ interface websiteCreationBody {
   websiteStatus: string;
 }
 
-export const getWebsite: RequestHandler = async (req, res, next) => {
+export const getWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const websiteFromDB = await WebsiteModel.findById(
+    const websiteOrAppFromDB = await WebsiteOrAppModel.findById(
       req.params.websiteId
     ).exec();
 
-    if (!websiteFromDB) {
+    if (!websiteOrAppFromDB) {
       return res
         .status(404)
         .json({ error: "Website with the given ID doesn't exist" });
     }
 
-    res.status(200).json(websiteFromDB);
+    res.status(200).json(websiteOrAppFromDB);
   } catch (error) {
     next(error);
   }
 };
 
-export const getAllWebsites: RequestHandler = async (req, res, next) => {
+export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfWebsites = await WebsiteModel.find().exec();
+    const arrayOfWebsitesOrApps = await WebsiteOrAppModel.find().exec();
 
-    if (!arrayOfWebsites) {
+    if (!arrayOfWebsitesOrApps) {
       return res.status(404).json({
         error:
           "Unable to fetch websites from the Database, verify server is running properly.",
       });
     }
 
-    res.status(200).json(arrayOfWebsites);
+    res.status(200).json(arrayOfWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getNotStartedWebsites: RequestHandler = async (req, res, next) => {
+export const getNotStartedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfNotStartedWebsites = await WebsiteModel.find({
+    const arrayOfNotStartedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Not Started",
     }).exec();
-    res.status(200).json(arrayOfNotStartedWebsites);
+    res.status(200).json(arrayOfNotStartedWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getInProgressWebsites: RequestHandler = async (req, res, next) => {
+export const getInProgressWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfInProgressWebsites = await WebsiteModel.find({
+    const arrayOfInProgressWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "In Progress",
     }).exec();
-    res.status(200).json(arrayOfInProgressWebsites);
+    res.status(200).json(arrayOfInProgressWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getCompletedWebsites: RequestHandler = async (req, res, next) => {
+export const getCompletedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfCompletedWebsites = await WebsiteModel.find({
+    const arrayOfCompletedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Completed",
     }).exec();
-    res.status(200).json(arrayOfCompletedWebsites);
+    res.status(200).json(arrayOfCompletedWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getRejectedWebsites: RequestHandler = async (req, res, next) => {
+export const getRejectedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfRejectedWebsites = await WebsiteModel.find({
+    const arrayOfRejectedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Rejected",
     }).exec();
-    res.status(200).json(arrayOfRejectedWebsites);
+    res.status(200).json(arrayOfRejectedWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const approveWebsite: RequestHandler = async (req, res, next) => {
+export const approveWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const approvedWebsite = await WebsiteModel.findOneAndUpdate(
+    const approvedWebsiteOrApp = await WebsiteOrAppModel.findOneAndUpdate(
       { _id: req.body.websiteId },
       { $set: { websiteStatus: "In Progress" } },
       { new: true }
     ).exec();
-    res.status(200).json(approvedWebsite);
+    res.status(200).json(approvedWebsiteOrApp);
   } catch (error) {
     next(error);
   }
 };
 
-export const rejectWebsite: RequestHandler = async (req, res, next) => {
+export const rejectWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const rejectedWebsite = await WebsiteModel.findOneAndUpdate(
+    const rejectedWebsiteOrApp = await WebsiteOrAppModel.findOneAndUpdate(
       { _id: req.body.websiteId },
       { $set: { websiteStatus: "Rejected" } },
       { new: true }
     ).exec();
-    res.status(200).json(rejectedWebsite);
+    res.status(200).json(rejectedWebsiteOrApp);
   } catch (error) {
     next(error);
   }
 };
 
-export const createWebsite: RequestHandler<
+export const createWebsiteOrApp: RequestHandler<
   unknown,
   unknown,
-  websiteCreationBody,
+  websiteOrAppCreationBody,
   unknown
 > = async (req, res, next) => {
   const name = req.body.name;
@@ -134,8 +133,6 @@ export const createWebsite: RequestHandler<
   const needLogo = req.body.doYouNeedALogo;
   const websiteDescription = req.body.describeYourDreamWebsite;
   const websiteStatus = "Not Started";
-
-  const io: Server = req.app.get("io");
 
   try {
     if (
@@ -151,7 +148,7 @@ export const createWebsite: RequestHandler<
       );
     }
 
-    const newWebsite = await WebsiteModel.create({
+    const newWebsiteOrApp = await WebsiteOrAppModel.create({
       name: name,
       phoneNumber: phoneNumber,
       emailAddress: emailAddress,
@@ -160,12 +157,12 @@ export const createWebsite: RequestHandler<
       websiteStatus: websiteStatus,
     });
 
-    res.status(201).json(newWebsite);
+    res.status(201).json(newWebsiteOrApp);
     const resend = new Resend(env.EMAIL_KEY);
 
     await resend.emails.send({
-      from: "no-reply@weblordshub.com",
-      to: ["overlord@weblordshub.com"],
+      from: "no-reply@codedecoded.com",
+      to: ["overlord@codedecoded.com"],
       subject: "New Website Submitted",
       html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html dir="ltr" lang="en">
@@ -189,13 +186,13 @@ export const createWebsite: RequestHandler<
   }
 };
 
-export const deleteWebsite: RequestHandler = async (req, res, next) => {
+export const deleteWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const websiteFromDB = await WebsiteModel.findByIdAndDelete(
+    const websiteOrAppFromDB = await WebsiteOrAppModel.findByIdAndDelete(
       req.body.websiteId
     ).exec();
 
-    res.status(200).json(websiteFromDB);
+    res.status(200).json(websiteOrAppFromDB);
   } catch (error) {
     next(error);
   }

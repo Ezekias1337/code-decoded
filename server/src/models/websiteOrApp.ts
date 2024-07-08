@@ -1,6 +1,6 @@
 import { InferSchemaType, model, Schema } from "mongoose";
 
-const websiteSchema = new Schema(
+const websiteOrAppSchema = new Schema(
   {
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
@@ -21,6 +21,6 @@ const websiteSchema = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-type Website = InferSchemaType<typeof websiteSchema>;
+type WebsiteOrApp = InferSchemaType<typeof websiteOrAppSchema>;
 
-export default model<Website>("Website", websiteSchema);
+export default model<WebsiteOrApp>("WebsiteOrApp", websiteOrAppSchema);
