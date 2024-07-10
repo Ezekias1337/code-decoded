@@ -99,24 +99,24 @@ export const CountryCodeInput: FC<CountryCodeInputFieldProps> = ({
           setShowMenu(!showMenu);
         }}
       ></button>
-      {showMenu === false ? (
-        <></>
-      ) : (
-        <>
-          <SearchInput
-            name="Country Code Search Bar"
-            additionalClassNames="country-code-search-bar"
-            label="Search Country Code"
-            required={false}
-            setStateHook={setCountryCodeSearchParams}
-            setErrorHook={setCountryCodeSearchErrors}
-            columns="12"
-          />
-          <ul className="country-code-menu-wrapper z-index-3">
-            {arrayOfOptions}
-          </ul>
-        </>
-      )}
+      <SearchInput
+        name="Country Code Search Bar"
+        additionalClassNames={`country-code-search-bar show-search-bar-${showMenu}`}
+        label="Search Country Code"
+        required={false}
+        setStateHook={setCountryCodeSearchParams}
+        setErrorHook={setCountryCodeSearchErrors}
+        columns="12"
+      />
+      <ul
+        className={`country-code-menu-wrapper show-country-code-menu-${showMenu} ${arrayOfOptions.length === 0 ? "no-results padding-top-20 padding-bottom-20" : ""} z-index-3`}
+      >
+        {arrayOfOptions?.length > 0 ? (
+          arrayOfOptions
+        ) : (
+          <span className="padding-left-20">No Results Found</span>
+        )}
+      </ul>
     </div>
   );
 };

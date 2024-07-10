@@ -53,6 +53,5 @@ export const renderCountryCodeOptions = (
 
     arrayOfCountryCodeOptions.push(elementToPush);
   }
-
   return arrayOfCountryCodeOptions;
 };

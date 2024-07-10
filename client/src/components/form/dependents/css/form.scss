@@ -516,6 +516,38 @@ div.country-code-input-wrapper {
   div.input-wrapper .icon-input-right {
     bottom: 24%;
   }
+
+  .show-country-code-menu-false,
+  .show-country-code-menu-true {
+    &.no-results {
+      background-color: $neutral-800;
+      color: $primary-500;
+    }
+  }
+  
+  .show-search-bar-false,
+  .show-search-bar-false + svg,
+  .show-country-code-menu-false {
+    opacity: 0%;
+    height: 0%;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+  .show-search-bar-true,
+  .show-search-bar-true + svg,
+  .show-country-code-menu-true {
+    opacity: 100%;
+    height: fit-content;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
 }
 
 .country-code-label {
