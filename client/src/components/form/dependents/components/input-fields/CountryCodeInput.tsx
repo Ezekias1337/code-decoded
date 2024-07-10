@@ -90,6 +90,9 @@ export const CountryCodeInput: FC<CountryCodeInputFieldProps> = ({
 
   return (
     <div className={`country-code-input-wrapper z-index-2`}>
+      {showMenu && (
+        <div className="darken-background-overlay" onClick={() => setShowMenu(false)}></div>
+      )}
       <button
         className="toggle-country-code-menu"
         style={{ backgroundImage: `url(${countryImage})` }}
