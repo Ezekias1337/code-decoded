@@ -5,6 +5,7 @@ import {
   Img,
   Heading,
   Text,
+  Link
 } from "@react-email/components";
 import * as React from "react";
 
@@ -33,7 +34,7 @@ export default function Email() {
         </Text>
         <Text style={customerInfo}>
           <strong style={customerInfoStrong}>Email Address:</strong>{" "}
-          johndoe@placeholder.com
+          <Link style={link}>johndoe@placeholder.com</Link>
         </Text>
         <Text style={customerInfo}>
           <strong style={customerInfoStrong}>Product Tier:</strong> Static
@@ -49,8 +50,6 @@ export default function Email() {
           sint occaecat cupidatat non proident, sunt in culpa qui officia
           deserunt mollit anim id est laborum.
         </Text>
-        
-        
       </Body>
     </Html>
   );
@@ -82,4 +81,11 @@ const customerInfo = {
 const customerInfoStrong = {
   ...customerInfo,
   color: getColor("$primary-300"),
+};
+
+const link = {
+  fontSize: getFontSize("$header-4"),
+  lineHeight: "30px",
+  color: getColor("$primary-500"),
+  textDecoration: "none",
 };

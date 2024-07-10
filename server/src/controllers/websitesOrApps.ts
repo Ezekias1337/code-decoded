@@ -198,7 +198,7 @@ export const createWebsiteOrApp: RequestHandler<
             </h1>
             <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Name:</strong> ${name}</p>
             <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Phone Number:</strong> ${phoneNumber}</p>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Email Address:</strong> ${emailAddress}</p>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Email Address:</strong> <a style="color:#4276cf;text-decoration:none;font-size:31.1px;line-height:30px" target="_blank">${emailAddress}</a></p>
             <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Product Tier:</strong> ${productTier}</p>
             <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Website Description:</strong> ${websiteDescription}</p>
           </body>
