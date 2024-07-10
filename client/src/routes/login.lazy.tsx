@@ -77,9 +77,9 @@ const LogIn = () => {
   ];
 
   useEffect(() => {
-    if (loginSuccessful) {
+    /* if (loginSuccessful) {
       navigate({ to: "/user-home" });
-    }
+    } */
   }, [loginSuccessful, navigate]);
 
   const customSubmitArgsSubmitCase = {
