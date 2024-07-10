@@ -1,0 +1,409 @@
+{
+  "variables": [
+    {
+      "name": "$primary-100",
+      "value": "#d6e1f6",
+      "compiledValue": "#d6e1f6"
+    },
+    {
+      "name": "$primary-200",
+      "value": "#adc3ec",
+      "compiledValue": "#adc3ec"
+    },
+    {
+      "name": "$primary-300",
+      "value": "#84a5e2",
+      "compiledValue": "#84a5e2"
+    },
+    {
+      "name": "$primary-400",
+      "value": "#5b87d8",
+      "compiledValue": "#5b87d8"
+    },
+    {
+      "name": "$primary-500",
+      "value": "#4276cf",
+      "compiledValue": "#4276cf"
+    },
+    {
+      "name": "$primary-600",
+      "value": "#365ea4",
+      "compiledValue": "#365ea4"
+    },
+    {
+      "name": "$primary-700",
+      "value": "#294579",
+      "compiledValue": "#294579"
+    },
+    {
+      "name": "$primary-800",
+      "value": "#1d2d4f",
+      "compiledValue": "#1d2d4f"
+    },
+    {
+      "name": "$primary-900",
+      "value": "#101625",
+      "compiledValue": "#101625"
+    },
+    {
+      "name": "$success-100",
+      "value": "#d6f6e4",
+      "compiledValue": "#d6f6e4"
+    },
+    {
+      "name": "$success-200",
+      "value": "#adf1c9",
+      "compiledValue": "#adf1c9"
+    },
+    {
+      "name": "$success-300",
+      "value": "#84ebae",
+      "compiledValue": "#84ebae"
+    },
+    {
+      "name": "$success-400",
+      "value": "#5be593",
+      "compiledValue": "#5be593"
+    },
+    {
+      "name": "$success-500",
+      "value": "#32e078",
+      "compiledValue": "#32e078"
+    },
+    {
+      "name": "$success-600",
+      "value": "#29b860",
+      "compiledValue": "#29b860"
+    },
+    {
+      "name": "$success-700",
+      "value": "#208f48",
+      "compiledValue": "#208f48"
+    },
+    {
+      "name": "$success-800",
+      "value": "#166630",
+      "compiledValue": "#166630"
+    },
+    {
+      "name": "$success-900",
+      "value": "#0d3d18",
+      "compiledValue": "#0d3d18"
+    },
+    {
+      "name": "$warning-100",
+      "value": "#fff6d6",
+      "compiledValue": "#fff6d6"
+    },
+    {
+      "name": "$warning-200",
+      "value": "#ffedad",
+      "compiledValue": "#ffedad"
+    },
+    {
+      "name": "$warning-300",
+      "value": "#ffe384",
+      "compiledValue": "#ffe384"
+    },
+    {
+      "name": "$warning-400",
+      "value": "#ffda5b",
+      "compiledValue": "#ffda5b"
+    },
+    {
+      "name": "$warning-500",
+      "value": "#ffd132",
+      "compiledValue": "#ffd132"
+    },
+    {
+      "name": "$warning-600",
+      "value": "#ccaa29",
+      "compiledValue": "#ccaa29"
+    },
+    {
+      "name": "$warning-700",
+      "value": "#998320",
+      "compiledValue": "#998320"
+    },
+    {
+      "name": "$warning-800",
+      "value": "#665c16",
+      "compiledValue": "#665c16"
+    },
+    {
+      "name": "$warning-900",
+      "value": "#33250d",
+      "compiledValue": "#33250d"
+    },
+    {
+      "name": "$error-100",
+      "value": "#f6d6d6",
+      "compiledValue": "#f6d6d6"
+    },
+    {
+      "name": "$error-200",
+      "value": "#ecadad",
+      "compiledValue": "#ecadad"
+    },
+    {
+      "name": "$error-300",
+      "value": "#e28484",
+      "compiledValue": "#e28484"
+    },
+    {
+      "name": "$error-400",
+      "value": "#d85b5b",
+      "compiledValue": "#d85b5b"
+    },
+    {
+      "name": "$error-500",
+      "value": "#cf3232",
+      "compiledValue": "#cf3232"
+    },
+    {
+      "name": "$error-600",
+      "value": "#a42a2a",
+      "compiledValue": "#a42a2a"
+    },
+    {
+      "name": "$error-700",
+      "value": "#792122",
+      "compiledValue": "#792122"
+    },
+    {
+      "name": "$error-800",
+      "value": "#4f1919",
+      "compiledValue": "#4f1919"
+    },
+    {
+      "name": "$error-900",
+      "value": "#251010",
+      "compiledValue": "#251010"
+    },
+    {
+      "name": "$info-100",
+      "value": "#d6e6f6",
+      "compiledValue": "#d6e6f6"
+    },
+    {
+      "name": "$info-200",
+      "value": "#adcdeb",
+      "compiledValue": "#adcdeb"
+    },
+    {
+      "name": "$info-300",
+      "value": "#84b3e0",
+      "compiledValue": "#84b3e0"
+    },
+    {
+      "name": "$info-400",
+      "value": "#5b9ad5",
+      "compiledValue": "#5b9ad5"
+    },
+    {
+      "name": "$info-500",
+      "value": "#3280ca",
+      "compiledValue": "#3280ca"
+    },
+    {
+      "name": "$info-600",
+      "value": "#2968a3",
+      "compiledValue": "#2968a3"
+    },
+    {
+      "name": "$info-700",
+      "value": "#204f7b",
+      "compiledValue": "#204f7b"
+    },
+    {
+      "name": "$info-800",
+      "value": "#163754",
+      "compiledValue": "#163754"
+    },
+    {
+      "name": "$info-900",
+      "value": "#0d1e2d",
+      "compiledValue": "#0d1e2d"
+    },
+    {
+      "name": "$neutral-100",
+      "value": "#fcfcfd",
+      "compiledValue": "#fcfcfd"
+    },
+    {
+      "name": "$neutral-200",
+      "value": "#d0d3d7",
+      "compiledValue": "#d0d3d7"
+    },
+    {
+      "name": "$neutral-300",
+      "value": "#a7acb4",
+      "compiledValue": "#a7acb4"
+    },
+    {
+      "name": "$neutral-400",
+      "value": "#7d8491",
+      "compiledValue": "#7d8491"
+    },
+    {
+      "name": "$neutral-500",
+      "value": "#626b7b",
+      "compiledValue": "#626b7b"
+    },
+    {
+      "name": "$neutral-600",
+      "value": "#354054",
+      "compiledValue": "#354054"
+    },
+    {
+      "name": "$neutral-700",
+      "value": "#141e31",
+      "compiledValue": "#141e31"
+    },
+    {
+      "name": "$neutral-800",
+      "value": "#040a15",
+      "compiledValue": "#040a15"
+    },
+    {
+      "name": "$neutral-900",
+      "value": "#000103",
+      "compiledValue": "#000103"
+    },
+    {
+      "name": "$transparent-black-100",
+      "value": "rgba($neutral-900, 0.1)",
+      "compiledValue": "rgba(0, 1, 3, 0.1)"
+    },
+    {
+      "name": "$transparent-black-200",
+      "value": "rgba($neutral-900, 0.2)",
+      "compiledValue": "rgba(0, 1, 3, 0.2)"
+    },
+    {
+      "name": "$transparent-black-300",
+      "value": "rgba($neutral-900, 0.3)",
+      "compiledValue": "rgba(0, 1, 3, 0.3)"
+    },
+    {
+      "name": "$transparent-black-400",
+      "value": "rgba($neutral-900, 0.4)",
+      "compiledValue": "rgba(0, 1, 3, 0.4)"
+    },
+    {
+      "name": "$transparent-black-500",
+      "value": "rgba($neutral-900, 0.5)",
+      "compiledValue": "rgba(0, 1, 3, 0.5)"
+    },
+    {
+      "name": "$transparent-black-600",
+      "value": "rgba($neutral-900, 0.6)",
+      "compiledValue": "rgba(0, 1, 3, 0.6)"
+    },
+    {
+      "name": "$transparent-black-700",
+      "value": "rgba($neutral-900, 0.7)",
+      "compiledValue": "rgba(0, 1, 3, 0.7)"
+    },
+    {
+      "name": "$transparent-black-800",
+      "value": "rgba($neutral-900, 0.8)",
+      "compiledValue": "rgba(0, 1, 3, 0.8)"
+    },
+    {
+      "name": "$transparent-black-900",
+      "value": "rgba($neutral-900, 0.9)",
+      "compiledValue": "rgba(0, 1, 3, 0.9)"
+    },
+    {
+      "name": "$header-1",
+      "value": "53.75px",
+      "compiledValue": "53.75px"
+    },
+    {
+      "name": "$header-2",
+      "value": "44.79px",
+      "compiledValue": "44.79px"
+    },
+    {
+      "name": "$header-3",
+      "value": "37.32px",
+      "compiledValue": "37.32px"
+    },
+    {
+      "name": "$header-4",
+      "value": "31.1px",
+      "compiledValue": "31.1px"
+    },
+    {
+      "name": "$header-5",
+      "value": "25.92px",
+      "compiledValue": "25.92px"
+    },
+    {
+      "name": "$header-6",
+      "value": "21.6px",
+      "compiledValue": "21.6px"
+    },
+    {
+      "name": "$paragraph",
+      "value": "18px",
+      "compiledValue": "18px"
+    },
+    {
+      "name": "$small",
+      "value": "15px",
+      "compiledValue": "15px"
+    },
+    {
+      "name": "$extra-small",
+      "value": "12.5px",
+      "compiledValue": "12.5px"
+    },
+    {
+      "name": "$border-radius",
+      "value": "5px",
+      "compiledValue": "5px"
+    },
+    {
+      "name": "$primary-shadow",
+      "value": "0px 0px 5px rgba($primary-300, 1)",
+      "compiledValue": "0px 0px 5px #84a5e2"
+    },
+    {
+      "name": "$primary-dark-shadow",
+      "value": "0px 0px 5px rgba($primary-800, 1)",
+      "compiledValue": "0px 0px 5px #1d2d4f"
+    },
+    {
+      "name": "$success-shadow",
+      "value": "0px 0px 5px rgba($success-300, 1)",
+      "compiledValue": "0px 0px 5px #84ebae"
+    },
+    {
+      "name": "$warning-shadow",
+      "value": "0px 0px 5px rgba($warning-300, 1)",
+      "compiledValue": "0px 0px 5px #ffe384"
+    },
+    {
+      "name": "$error-glow",
+      "value": "0px 0px 5px rgba($error-300, 1)",
+      "compiledValue": "0px 0px 5px #e28484"
+    },
+    {
+      "name": "$info-glow",
+      "value": "0px 0px 5px rgba($info-300, 1)",
+      "compiledValue": "0px 0px 5px #84b3e0"
+    },
+    {
+      "name": "$neutral-glow",
+      "value": "0px 0px 5px rgba($neutral-100, 1)",
+      "compiledValue": "0px 0px 5px #fcfcfd"
+    },
+    {
+      "name": "$neutral-dark-glow",
+      "value": "0px 0px 5px rgba($neutral-800, 1)",
+      "compiledValue": "0px 0px 5px #040a15"
+    }
+  ]
+}

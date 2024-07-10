@@ -1,6 +1,20 @@
 {
+  "name": "email",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "export-scss": "sass-export ../client/src/css/_variables.scss -o ./variables.json",
+    "dev": "npm run export-scss && email dev"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@react-email/components": "0.0.15",
     "react-email": "2.1.0"
+  },
+  "devDependencies": {
+    "sass": "^1.77.7",
+    "sass-export": "^2.1.2"
   }
 }
