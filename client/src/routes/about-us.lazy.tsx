@@ -10,7 +10,7 @@ const AboutUs = () => (
     <PageHeader title="About Us" />
 
     <section className="expertise-and-experience padding-left-and-right">
-      <h2 className="page-title">Expertise and Experience</h2>
+      <h2 className="page-title">Expertise And Experience</h2>
       <p>
         With four years of experience in web and app development, I bring a
         wealth of knowledge and technical skill to every project. From designing

@@ -42,17 +42,22 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
       </div>
 
       <div
-        className={`dropdown-content${isOpen ? "-open" : ""} full-flex padding-left-20 padding-right-20 padding-top-20 padding-bottom-20 position-absolute`}
+        className={`dropdown-content${isOpen ? "-open" : ""} full-flex flex-direction-column  position-absolute`}
       >
         {dropdownItems.map((item, index) => (
-          <Link
-            key={index}
-            to={item.url}
-            className="dropdown-item"
-            onClick={handleClose}
-          >
-            {item.text}
-          </Link>
+          <>
+            <Link
+              key={index}
+              to={item.url}
+              className="dropdown-item padding-left-20 padding-right-20"
+              onClick={handleClose}
+            >
+              {item.text}
+            </Link>
+            {index !== dropdownItems.length - 1 && (
+              <hr className="dropdown-item-underline" />
+            )}
+          </>
         ))}
       </div>
     </div>

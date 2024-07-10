@@ -38,6 +38,10 @@ nav.navbar {
     justify-content: end;
     gap: 30px;
 
+    @media screen and (max-width: 768px) {
+      padding-left: 0px;
+    }
+
     li {
       display: block;
 
@@ -65,27 +69,36 @@ nav.navbar {
       gap: 5px;
     }
 
+    .dropdown-content,
+    .dropdown-content-open {
+      margin-top: 5px;
+      width: 200%;
+      background-color: $neutral-800;
+      border: 1.5px solid $primary-500;
+      right: -50%;
+      border-radius: $border-radius;
+      -webkit-border-radius: $border-radius;
+      -moz-border-radius: $border-radius;
+      -ms-border-radius: $border-radius;
+      -o-border-radius: $border-radius;
+
+      @media screen and (max-width: 768px) {
+        width: calc(100vw - 60px);
+        left: -220%;
+      }
+    }
+
     .dropdown-content {
       opacity: 0;
       visibility: hidden;
       max-height: 0px;
-      flex-direction: column;
       transition: all 0.5s ease-in-out;
     }
 
     .dropdown-content-open {
       opacity: 1;
       visibility: visible;
-      margin-top: 5px;
       max-height: 800px;
-      flex-direction: column;
-      background-color: $neutral-800;
-      border: 1.5px solid $primary-500;
-      border-radius: $border-radius;
-      -webkit-border-radius: $border-radius;
-      -moz-border-radius: $border-radius;
-      -ms-border-radius: $border-radius;
-      -o-border-radius: $border-radius;
     }
 
     .dropdown-item {
@@ -93,13 +106,19 @@ nav.navbar {
       text-align: center;
       padding-top: 10px;
       padding-bottom: 10px;
-      border-bottom: 1px solid $primary-500;
       color: $primary-500;
+      width: calc(100% - 40px);
 
       &:hover {
         color: $primary-200;
-        border-color: $primary-200;
+        background-color: $primary-500;
       }
+    }
+
+    .dropdown-item-underline {
+      width: 100%;
+      color: $primary-500;
+      margin: 0px;
     }
   }
 
