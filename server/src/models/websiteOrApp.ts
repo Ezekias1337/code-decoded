@@ -5,11 +5,11 @@ const websiteOrAppSchema = new Schema(
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     emailAddress: { type: String, required: true },
-    doYouNeedALogo: {
-      type: ["I need a new logo", "I already have a logo"],
+    productTier: {
+      type: ["Digital Business Card", "Static Website or App", "Dynamic Website or App"],
       required: true,
     },
-    describeYourDreamWebsite: {
+    websiteOrAppDescription: {
       type: String,
       required: true,
     },

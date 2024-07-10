@@ -125,7 +125,7 @@ const ContactUs = () => {
         required: true,
       },
       {
-        name: "Describe Your Dream Website or App",
+        name: "Describe Your Dream Website Or App",
         label: "Describe Your Dream Website or App",
         additionalClassNames: "",
         placeholder:
@@ -161,7 +161,7 @@ const ContactUs = () => {
     argument1: arrayOfInputFields,
     argument2: formInputData,
     argument3: setFormErrorData,
-    argument4: "/api/websites/create-website",
+    argument4: "/api/websites-or-apps/create-website-or-app",
     argument5: "POST",
   };
 
@@ -190,7 +190,6 @@ const ContactUs = () => {
         }
       }
     });
-    formStateWithDefaultValues.caseStatus = "Pending";
 
     setErrorHook(errors);
 
@@ -228,7 +227,7 @@ const ContactUs = () => {
       {arrayOfInputFields ? (
         <Form
           inputFields={arrayOfInputFields}
-          apiEndpoint="/api/websites/create-website"
+          apiEndpoint="/api/websites-or-apps/create-website-or-app"
           formId="contact-us-form"
           setStateHook={setFormInputData}
           setErrorHook={setFormErrorData}
@@ -243,7 +242,7 @@ const ContactUs = () => {
               arrayOfInputFields,
               formInputData,
               setFormErrorData,
-              "/api/websites/create-website",
+              "/api/websites-or-apps/create-website-or-app",
               "POST"
             )
           }

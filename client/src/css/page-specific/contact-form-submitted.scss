@@ -1,0 +1,19 @@
+@import "../../css/variables";
+
+.contact-form-submitted {
+  background-color: $neutral-800;
+
+  h2 {
+    color: $primary-200;
+  }
+
+  h3 {
+    color: $primary-500;
+  }
+
+  p,
+  li {
+    color: $primary-200;
+    font-size: $header-6;
+  }
+}

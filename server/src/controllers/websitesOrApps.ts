@@ -11,8 +11,8 @@ interface websiteOrAppCreationBody {
   name: string;
   phoneNumber: string;
   emailAddress: string;
-  doYouNeedALogo: string;
-  describeYourDreamWebsite: string;
+  productTier: string;
+  describeYourDreamWebsiteOrApp: string;
   websiteStatus: string;
 }
 
@@ -51,7 +51,11 @@ export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getNotStartedWebsitesOrApps: RequestHandler = async (req, res, next) => {
+export const getNotStartedWebsitesOrApps: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
   try {
     const arrayOfNotStartedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Not Started",
@@ -62,7 +66,11 @@ export const getNotStartedWebsitesOrApps: RequestHandler = async (req, res, next
   }
 };
 
-export const getInProgressWebsitesOrApps: RequestHandler = async (req, res, next) => {
+export const getInProgressWebsitesOrApps: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
   try {
     const arrayOfInProgressWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "In Progress",
@@ -73,7 +81,11 @@ export const getInProgressWebsitesOrApps: RequestHandler = async (req, res, next
   }
 };
 
-export const getCompletedWebsitesOrApps: RequestHandler = async (req, res, next) => {
+export const getCompletedWebsitesOrApps: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
   try {
     const arrayOfCompletedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Completed",
@@ -84,7 +96,11 @@ export const getCompletedWebsitesOrApps: RequestHandler = async (req, res, next)
   }
 };
 
-export const getRejectedWebsitesOrApps: RequestHandler = async (req, res, next) => {
+export const getRejectedWebsitesOrApps: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
   try {
     const arrayOfRejectedWebsitesOrApps = await WebsiteOrAppModel.find({
       websiteStatus: "Rejected",
@@ -130,8 +146,8 @@ export const createWebsiteOrApp: RequestHandler<
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
   const emailAddress = req.body.emailAddress;
-  const needLogo = req.body.doYouNeedALogo;
-  const websiteDescription = req.body.describeYourDreamWebsite;
+  const productTier = req.body.productTier;
+  const websiteDescription = req.body.describeYourDreamWebsiteOrApp;
   const websiteStatus = "Not Started";
 
   try {
@@ -139,7 +155,7 @@ export const createWebsiteOrApp: RequestHandler<
       !name ||
       !phoneNumber ||
       !emailAddress ||
-      !needLogo ||
+      !productTier ||
       !websiteDescription
     ) {
       throw createHttpError(
@@ -148,12 +164,22 @@ export const createWebsiteOrApp: RequestHandler<
       );
     }
 
+    if (name.length > 100) {
+      throw createHttpError(400, "Name is too long, try again.");
+    } else if (phoneNumber.length > 20) {
+      throw createHttpError(400, "Phone number is too long, try again.");
+    } else if (emailAddress.length > 100) {
+      throw createHttpError(400, "Email address is too long, try again.");
+    } else if (websiteDescription.length > 5000) {
+      throw createHttpError(400, "Description is too long, try again.");
+    }
+
     const newWebsiteOrApp = await WebsiteOrAppModel.create({
       name: name,
       phoneNumber: phoneNumber,
       emailAddress: emailAddress,
-      needLogo: needLogo,
-      websiteDescription: websiteDescription,
+      productTier: productTier,
+      websiteOrAppDescription: websiteDescription,
       websiteStatus: websiteStatus,
     });
 
@@ -161,9 +187,9 @@ export const createWebsiteOrApp: RequestHandler<
     const resend = new Resend(env.EMAIL_KEY);
 
     await resend.emails.send({
-      from: "no-reply@codedecoded.com",
-      to: ["overlord@codedecoded.com"],
-      subject: "New Website Submitted",
+      from: "no-reply@codeddecoded.com",
+      to: ["codedecodedbiz@gmail.com"],
+      subject: "New Website or App Request Submitted",
       html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html dir="ltr" lang="en">
       
@@ -174,7 +200,7 @@ export const createWebsiteOrApp: RequestHandler<
           <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Customer Name:</strong> ${name}</p>
           <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Phone Number:</strong> ${phoneNumber}</p>
           <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Email Address:</strong> ${emailAddress}</p>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Need Logo:</strong> ${needLogo}</p>
+          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Product Tier:</strong> ${productTier}</p>
           <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Website Description:</strong> ${websiteDescription}</p>
         </body>
       
