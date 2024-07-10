@@ -15,7 +15,15 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const windowWidth = useWindowWidth();
   const location = useLocation(); // Get the current location
-  const variant = location.pathname === "/" ? "glassmorphic" : "default"; // Set the variant based on the current path
+
+  const listOfUrlsToUseGlassmorphicVariant = ["/", "/login"];
+  let variant: string;
+
+  if (listOfUrlsToUseGlassmorphicVariant.includes(location.pathname)) {
+    variant = "glassmorphic";
+  } else {
+    variant = "default";
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

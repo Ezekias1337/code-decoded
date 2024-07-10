@@ -19,6 +19,7 @@ import { Route as rootRoute } from './routes/__root'
 const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')()
 const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')()
 const PageNotFoundLazyImport = createFileRoute('/page-not-found')()
+const LoginLazyImport = createFileRoute('/login')()
 const FaqsLazyImport = createFileRoute('/faqs')()
 const ContactUsLazyImport = createFileRoute('/contact-us')()
 const ContactFormSubmittedLazyImport = createFileRoute(
@@ -49,6 +50,11 @@ const PageNotFoundLazyRoute = PageNotFoundLazyImport.update({
 } as any).lazy(() =>
   import('./routes/page-not-found.lazy').then((d) => d.Route),
 )
+
+const LoginLazyRoute = LoginLazyImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 
 const FaqsLazyRoute = FaqsLazyImport.update({
   path: '/faqs',
@@ -116,6 +122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/page-not-found': {
       id: '/page-not-found'
       path: '/page-not-found'
@@ -148,6 +161,7 @@ export const routeTree = rootRoute.addChildren({
   ContactFormSubmittedLazyRoute,
   ContactUsLazyRoute,
   FaqsLazyRoute,
+  LoginLazyRoute,
   PageNotFoundLazyRoute,
   PrivacyPolicyLazyRoute,
   TermsOfServiceLazyRoute,
@@ -166,6 +180,7 @@ export const routeTree = rootRoute.addChildren({
         "/contact-form-submitted",
         "/contact-us",
         "/faqs",
+        "/login",
         "/page-not-found",
         "/privacy-policy",
         "/terms-of-service"
@@ -185,6 +200,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/faqs": {
       "filePath": "faqs.lazy.tsx"
+    },
+    "/login": {
+      "filePath": "login.lazy.tsx"
     },
     "/page-not-found": {
       "filePath": "page-not-found.lazy.tsx"
