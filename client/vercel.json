@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://code-decoded.onrender.com/$1"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
