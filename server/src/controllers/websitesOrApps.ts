@@ -191,20 +191,18 @@ export const createWebsiteOrApp: RequestHandler<
       to: ["codedecodedbiz@gmail.com"],
       subject: "New Website or App Request Submitted",
       html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html dir="ltr" lang="en">
-      
-        <body style="font-family:&quot;Times New Roman&quot;,Times,serif;background-color:#e6e6e6;margin:0 auto;padding:40px;color:#264166"><img src="https://www.osa-law.com/assets/Full_Logo-0c350564.png" style="display:block;outline:none;border:none;text-decoration:none" width="300" />
-          <h1>
-            <p style="font-size:56.8px;line-height:60px;margin:16px 0;background-color:#264166;color:#e6e6e6;padding-top:40px;padding-bottom:40px;padding-left:40px;padding-right:40px">We have received a new potential customer:</p>
-          </h1>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Customer Name:</strong> ${name}</p>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Phone Number:</strong> ${phoneNumber}</p>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Email Address:</strong> ${emailAddress}</p>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Product Tier:</strong> ${productTier}</p>
-          <p style="font-size:32px;line-height:30px;margin:16px 0;color:#264166"><strong>Website Description:</strong> ${websiteDescription}</p>
-        </body>
-      
-      </html>`,
+        <html dir="ltr" lang="en">
+          <body style="font-family:&quot;Times New Roman&quot;,Times,serif;background-color:#040a15;margin:0 auto;padding-left:40px;padding-right:40px;padding-top:80px;padding-bottom:80px"><img src="https://codeddecoded.com/assets/images/logo/logo.png" style="display:block;outline:none;border:none;text-decoration:none" width="300" />
+            <h1>
+              <p style="font-size:56.8px;line-height:40px;margin:16px 0;color:#4276cf;padding-bottom:40px">We have received a new potential customer:</p>
+            </h1>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Name:</strong> ${name}</p>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Phone Number:</strong> ${phoneNumber}</p>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Email Address:</strong> ${emailAddress}</p>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Product Tier:</strong> ${productTier}</p>
+            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Website Description:</strong> ${websiteDescription}</p>
+          </body>
+        </html>`,
     });
   } catch (error) {
     console.log(error);

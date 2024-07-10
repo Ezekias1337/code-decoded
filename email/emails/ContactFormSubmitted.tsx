@@ -18,7 +18,7 @@ export default function Email() {
     <Html>
       <Body style={main}>
         <Img
-          src="https://www.osa-law.com/assets/Full_Logo-0c350564.png"
+          src="https://codeddecoded.com/assets/images/logo/logo.png"
           width={300}
         />
         <Heading>
