@@ -23,14 +23,10 @@ const Hero = () => {
 
         <div className="button-wrapper justify-content-left padding-top-40 padding-bottom-80">
           <Button
-            text="Schedule a Consultation"
+            text="Request a Consultation"
             variant="primary"
             buttonSize="medium"
-          />
-          <Button
-            text="Get Started"
-            variant="primary-dark"
-            buttonSize="medium"
+            url="/contact-us"
           />
         </div>
       </div>

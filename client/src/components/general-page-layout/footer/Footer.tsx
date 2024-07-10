@@ -45,11 +45,7 @@ const Footer = () => {
               url="/about-us"
               openInNewTab={false}
             />
-            <FooterLink
-              linkText="Free Consultation"
-              url="/contact-us"
-              openInNewTab={false}
-            />
+            <FooterLink linkText="FAQ" url="/faqs" openInNewTab={false} />
           </div>
         </div>
         <div className="footer-navigation-column">
@@ -59,15 +55,11 @@ const Footer = () => {
 
           <div className="footer-link-column display-flex">
             <FooterLink
-              linkText="Client Reviews"
-              url="/under-construction"
+              linkText="Request Consultation"
+              url="/contact-us"
               openInNewTab={false}
             />
-            <FooterLink
-              linkText="Our Work"
-              url="/under-construction"
-              openInNewTab={false}
-            />
+            <FooterLink linkText="Login" url="/login" openInNewTab={false} />
           </div>
         </div>
       </div>
@@ -79,7 +71,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom-navigation-wrapper display-flex justify-content-right">
-         {/*  <div>
+          {/*  <div>
             <FooterLink linkText="Admin" url="/login" openInNewTab={false} />
           </div> */}
           <div>

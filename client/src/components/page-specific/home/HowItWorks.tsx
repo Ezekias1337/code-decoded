@@ -17,7 +17,7 @@ const HowItWorks = () => {
         <source src={laptopVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="how-it-works-overlay dark-image-overlay-700"></div>
+      <div className="how-it-works-overlay dark-image-overlay-800"></div>
 
       <PageHeader title="How It Works" />
       <p className="padding-bottom-40">
@@ -33,7 +33,12 @@ const HowItWorks = () => {
       </p>
 
       <div className="button-wrapper">
-        <Button text="Get Started" variant="primary-dark" buttonSize="large" />
+        <Button
+          text="Get Started"
+          variant="primary-dark"
+          buttonSize="large"
+          url="/contact-us"
+        />
       </div>
     </section>
   );
