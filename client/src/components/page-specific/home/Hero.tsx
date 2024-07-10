@@ -2,7 +2,7 @@
 import { Button } from "../../button/Button";
 
 // Assets and Images
-import heroVideo from "../../../../public/assets/videos/animated-tech-globe.mp4";
+import heroVideo from "/assets/videos/animated-tech-globe.mp4";
 
 const Hero = () => {
   return (

@@ -4,7 +4,7 @@ import { FooterLink } from "./dependents/FooterLink";
 // CSS
 import "./footer.scss";
 // Assets and Images
-import logo from "../../../../public/assets/images/logo/logo.png";
+import logo from "/assets/images/logo/logo.png";
 import { Link } from "@tanstack/react-router";
 
 const Footer = () => {

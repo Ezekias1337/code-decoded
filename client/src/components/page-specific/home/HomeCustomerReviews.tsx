@@ -6,9 +6,9 @@ import { CustomerReview } from "../../customer-review/customerReview";
 // Types and Interfaces
 import { CustomerReviewProps } from "../../customer-review/customerReview";
 // Assets
-import JuanPicture from "../../../../public/assets/images/customer-reviews/juan-profile-pic.png";
-import NikkiPicture from "../../../../public/assets/images/customer-reviews/nikki-profile-pic.jpeg";
-import IsaiahPicture from "../../../../public/assets/images/customer-reviews/isaiah-profile-pic.png";
+import JuanPicture from "/assets/images/customer-reviews/juan-profile-pic.png";
+import NikkiPicture from "/assets/images/customer-reviews/nikki-profile-pic.jpeg";
+import IsaiahPicture from "/assets/images/customer-reviews/isaiah-profile-pic.png";
 
 const HomeCustomerReviews = () => {
   const customerReviews: CustomerReviewProps[] = [

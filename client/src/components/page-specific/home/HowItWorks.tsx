@@ -3,7 +3,7 @@ import { PageHeader } from "../../general-page-layout/page-header/PageHeader";
 import { Button } from "../../button/Button";
 
 // Assets
-import laptopVideo from "../../../../public/assets/videos/animated-laptop.mp4";
+import laptopVideo from "/assets/videos/animated-laptop.mp4";
 
 const HowItWorks = () => {
   return (

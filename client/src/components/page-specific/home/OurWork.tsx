@@ -5,15 +5,14 @@ import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 import { PageHeader } from "../../general-page-layout/page-header/PageHeader";
 import BlobScene from "./BlobScene";
 import Carousel from "../../carousel/Carousel";
-//import { Button } from "../../button/Button";
 
 // Types and Interfaces
 import { CarouselItemProps } from "../../carousel/Carousel";
 
 // Assets
-import OsaLogo from "../../../../public/assets/images/our-work/osa-logo.png";
-import WeblordsLogo from "../../../../public/assets/images/our-work/weblords-logo.png";
-import TimeAmigoLogo from "../../../../public/assets/images/our-work/time-amigo-logo.png";
+import OsaLogo from "/assets/images/our-work/osa-logo.png";
+import WeblordsLogo from "/assets/images/our-work/weblords-logo.png";
+import TimeAmigoLogo from "/assets/images/our-work/time-amigo-logo.png";
 
 const OurWork = () => {
   const carouselItems: CarouselItemProps[] = [

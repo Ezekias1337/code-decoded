@@ -9,9 +9,9 @@
 // Interfaces and Types
 
 // Assets
-import ThumbsUp from "../../../../public/assets/images/icons/card-icons/thumbs-up-solid.svg";
-import HandShake from "../../../../public/assets/images/icons/card-icons/handshake-solid.svg";
-import Trophy from "../../../../public/assets/images/icons/card-icons/trophy-solid.svg";
+import ThumbsUp from "/assets/images/icons/card-icons/thumbs-up-solid.svg";
+import HandShake from "/assets/images/icons/card-icons/handshake-solid.svg";
+import Trophy from "/assets/images/icons/card-icons/trophy-solid.svg";
 // Components
 import { PageHeader } from "../../general-page-layout/page-header/PageHeader";
 import { Card } from "../../card/Card";

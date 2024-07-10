@@ -27,7 +27,6 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
     <div
       className="dropdown-menu-wrapper position-relative"
       onClick={handleToggle}
-      /* onTouchStart={handleToggle} */
     >
       <div className="nav-link-wrapper">
         <div className="nav-link full-flex">
@@ -44,20 +43,19 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
       <div
         className={`dropdown-content${isOpen ? "-open" : ""} full-flex flex-direction-column  position-absolute`}
       >
-        {dropdownItems.map((item, index) => (
-          <>
+        {dropdownItems.map((item) => (
+          <React.Fragment key={item.url}>
             <Link
-              key={index}
               to={item.url}
               className="dropdown-item padding-left-20 padding-right-20"
               onClick={handleClose}
             >
               {item.text}
             </Link>
-            {index !== dropdownItems.length - 1 && (
+            {item !== dropdownItems[dropdownItems.length - 1] && (
               <hr className="dropdown-item-underline" />
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

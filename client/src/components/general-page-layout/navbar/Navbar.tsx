@@ -9,13 +9,13 @@ import NavDropdownMenu from "./dependents/NavDropdownMenu";
 // CSS
 import "./navbar.scss";
 // Assets and Images
-import logo from "../../../../public/assets/images/logo/logo.png";
+import logo from "/assets/images/logo/logo.png";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const windowWidth = useWindowWidth();
   const location = useLocation(); // Get the current location
-
+  
   const listOfUrlsToUseGlassmorphicVariant = ["/", "/login"];
   let variant: string;
 
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
   } else {
     variant = "default";
   }
-
+  
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
