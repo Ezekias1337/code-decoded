@@ -10,13 +10,15 @@ import ScrollToTop from "../components/general-page-layout/ScrollToTop";
 // Constants
 const IS_DEV = import.meta.env.VITE_IS_DEV;
 
+console.log(IS_DEV);
+
 export const Route = createRootRoute({
   component: () => (
     <>
       <ScrollToTop />
       <Navbar />
       <Outlet />
-      {IS_DEV && <TanStackRouterDevtools />}
+      {IS_DEV === "TRUE" && <TanStackRouterDevtools />}
       <Footer />
     </>
   ),
