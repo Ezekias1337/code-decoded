@@ -9,8 +9,11 @@ import "./css/styles.scss";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
+//404 Page
+import PageNotFound from "./routes/page-not-found.lazy"
+
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({ routeTree, defaultNotFoundComponent: PageNotFound });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {

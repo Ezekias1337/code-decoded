@@ -1,22 +1,20 @@
 @import "../../css/variables";
 
 .page-not-found {
-  .page-not-found-wrapper {
-    background-color: $neutral-900;
+  background-color: $neutral-800;
 
-    .page-not-found-warning {
-      padding-top: 160px;
-      padding-bottom: 80px;
-      color: $primary-500;
-    }
+  .page-not-found-warning {
+    padding-top: 160px;
+    padding-bottom: 80px;
+    color: $primary-500;
+  }
 
-    .page-not-found-explanation {
-      padding-bottom: 40px;
-      color: $neutral-200;
-    }
+  .page-not-found-explanation {
+    padding-bottom: 40px;
+    color: $neutral-200;
+  }
 
-    .button-wrapper {
-      padding-bottom: 160px;
-    }
+  .button-wrapper {
+    padding-bottom: 160px;
   }
 }

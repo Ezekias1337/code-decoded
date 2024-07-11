@@ -10,8 +10,6 @@ import ScrollToTop from "../components/general-page-layout/ScrollToTop";
 // Constants
 const IS_DEV = import.meta.env.VITE_IS_DEV;
 
-console.log(IS_DEV);
-
 export const Route = createRootRoute({
   component: () => (
     <>
