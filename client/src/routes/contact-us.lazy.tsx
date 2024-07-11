@@ -1,6 +1,7 @@
 // Library Imports
 import { useState, useEffect } from "react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Functions, Helpers, Utils and Hooks
 import fetchData from "../functions/network/fetchData";
 import { camelCasifyString } from "../../../shared/utils/strings/camelCasifyString";
@@ -222,6 +223,12 @@ const ContactUs = () => {
 
   return (
     <div className="contact-us">
+      <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | Contact Us</title>
+      </Helmet>
+    </HelmetProvider>
+      
       <PageHeader title="Contact Us" />
 
       {arrayOfInputFields ? (

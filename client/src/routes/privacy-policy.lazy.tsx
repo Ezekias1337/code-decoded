@@ -1,5 +1,6 @@
 // Library Imports
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import { GeneralLink } from "../components/general-page-layout/link/GeneralLink";
@@ -8,6 +9,12 @@ import "../css/page-specific/privacy-policy.scss";
 
 const PrivacyPolicy = () => (
   <div className="privacy-policy">
+    <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | Privacy Policy</title>
+      </Helmet>
+    </HelmetProvider>
+    
     <PageHeader title="Privacy Policy" />
     <div className="privacy-policy-wrapper padding-left-and-right">
       <p>

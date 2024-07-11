@@ -1,5 +1,6 @@
 // Library Imports
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import Accordion, {
@@ -122,6 +123,12 @@ const accordionItems: AccordionItemStrings[] = [
 
 const FrequentlyAskedQuestions = () => (
   <div className="frequently-asked-questions">
+    <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | FAQs</title>
+      </Helmet>
+    </HelmetProvider>
+    
     <PageHeader title="Frequently Asked Questions" />
 
     <div className="accordion-wrapper padding-left-and-right padding-bottom-80">

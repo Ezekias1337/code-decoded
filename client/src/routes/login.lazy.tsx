@@ -1,6 +1,7 @@
 // Library Imports
 import { useState, useEffect, FormEvent } from "react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Functions, Helpers, Utils, and Hooks
 import fetchData from "../functions/network/fetchData";
 import { camelCasifyString } from "../../../shared/utils/strings/camelCasifyString";
@@ -148,6 +149,12 @@ const LogIn = () => {
 
   return (
     <div className="login">
+      <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | Login</title>
+      </Helmet>
+    </HelmetProvider>
+      
       <PageHeader title="Login" />
       <div className="background-svg">
         <BlobScene />

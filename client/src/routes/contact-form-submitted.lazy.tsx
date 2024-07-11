@@ -1,5 +1,6 @@
 // Library Imports
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import { GeneralLink } from "../components/general-page-layout/link/GeneralLink";
@@ -9,6 +10,12 @@ import "../css/page-specific/contact-form-submitted.scss";
 
 const ContactFormSubmitted = () => (
   <div className="contact-form-submitted padding-left-and-right">
+    <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | Contact Form Submitted</title>
+      </Helmet>
+    </HelmetProvider>
+    
     <PageHeader title="Thanks For Contacting Us" />
 
     <h2 className="padding-bottom-40">

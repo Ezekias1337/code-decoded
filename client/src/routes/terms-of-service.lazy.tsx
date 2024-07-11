@@ -1,5 +1,6 @@
 // Library Imports
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import { GeneralLink } from "../components/general-page-layout/link/GeneralLink";
@@ -8,6 +9,12 @@ import "../css/page-specific/terms-of-service.scss";
 
 const TermsOfService = () => (
   <div className="terms-of-service">
+    <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | Terms of Service</title>
+      </Helmet>
+    </HelmetProvider>
+    
     <PageHeader title="Terms Of Service" />
     <div className="terms-of-service-wrapper padding-left-and-right">
       <p>

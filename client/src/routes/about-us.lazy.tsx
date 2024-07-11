@@ -1,5 +1,6 @@
 // Library Imports
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 // CSS
@@ -7,6 +8,12 @@ import "../css/page-specific/about-us.scss";
 
 const AboutUs = () => (
   <div className="about-us">
+    <HelmetProvider>
+      <Helmet>
+        <title>Code Decoded | About Us</title>
+      </Helmet>
+    </HelmetProvider>
+    
     <PageHeader title="About Us" />
 
     <section className="expertise-and-experience padding-left-and-right">
