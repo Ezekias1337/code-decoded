@@ -31,4 +31,4 @@ userSchema.virtual("profilePicturePath").get(function () {
 
 type User = InferSchemaType<typeof userSchema>;
 
-export default model<User>("User", userSchema, "code-decoded-main-website");
+export default model<User>("User", userSchema);

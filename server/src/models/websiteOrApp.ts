@@ -23,4 +23,4 @@ const websiteOrAppSchema = new Schema(
 
 type WebsiteOrApp = InferSchemaType<typeof websiteOrAppSchema>;
 
-export default model<WebsiteOrApp>("WebsiteOrApp", websiteOrAppSchema, "code-decoded-main-website");
+export default model<WebsiteOrApp>("WebsiteOrApp", websiteOrAppSchema);
