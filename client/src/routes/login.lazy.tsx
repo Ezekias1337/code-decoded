@@ -115,7 +115,6 @@ const LogIn = () => {
         }
       }
     });
-    formStateWithDefaultValues.caseStatus = "Pending";
 
     setErrorHook(errors);
 
