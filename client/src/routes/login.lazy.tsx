@@ -42,8 +42,8 @@ const LogIn = () => {
   const navigate = useNavigate({ from: "/login" });
   const arrayOfInputFields: Field[] = [
     {
-      name: "Email",
-      label: "Email",
+      name: "Email Address",
+      label: "Email Address",
       additionalClassNames: "",
       placeholder: "Email",
       columns: "12",
