@@ -30,9 +30,9 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
       throw createHttpError(401, "User not authenticated.");
     }
 
-    const user = await UserModel.findById(authenticatedUserIdFromSession)
-      .select("+emailAddress")
-      .exec();
+    const user = await UserModel.findById(
+      authenticatedUserIdFromSession
+    ).exec();
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -41,9 +41,7 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
 
 export const getUser: RequestHandler = async (req, res, next) => {
   try {
-    const userFromDB = await UserModel.findById(req.body.userId)
-      .select("+emailAddress")
-      .exec();
+    const userFromDB = await UserModel.findById(req.body.userId).exec();
     res.status(200).json(userFromDB);
   } catch (error) {
     next(error);
@@ -154,7 +152,7 @@ export const login: RequestHandler<
     }
 
     const user = await UserModel.findOne({ emailAddress: email })
-      .select("+password +emailAddress")
+      .select("+password")
       .exec();
 
     if (!user) {

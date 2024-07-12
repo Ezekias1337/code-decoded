@@ -1,8 +1,12 @@
 // Library Imports
 import React, { useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+//Context
+import { useAuth } from "../../../context/AuthContext";
 // Functions, Helpers, Utils, and Hooks
 import useWindowWidth from "../../../hooks/useWindowWidth";
+import { isAuthenticated } from "../../../authentication/authState";
+import logout from "../../../functions/network/logout";
 // Components
 import AnimatedNavLink from "./dependents/AnimatedNavLink";
 import NavDropdownMenu from "./dependents/NavDropdownMenu";
@@ -14,8 +18,12 @@ import logo from "/assets/images/logo/logo.png";
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const windowWidth = useWindowWidth();
-  const location = useLocation(); // Get the current location
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const userAuthenticated = isAuthenticated();
+  const { dispatch } = useAuth();
+
   const listOfUrlsToUseGlassmorphicVariant = ["/", "/login"];
   let variant: string;
 
@@ -24,9 +32,15 @@ const Navbar: React.FC = () => {
   } else {
     variant = "default";
   }
-  
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    dispatch({ type: "SET_USER", payload: null });
+    navigate({ to: "/login", replace: true });
   };
 
   return (
@@ -64,7 +78,23 @@ const Navbar: React.FC = () => {
             />
           </li>
           <li>
-            <AnimatedNavLink linkText="Login" url="/login" />
+            {userAuthenticated ? (
+              <NavDropdownMenu
+                linkText="Account"
+                dropdownItems={[
+                  {
+                    text: "Profile",
+                    url: "/profile",
+                  },
+                  {
+                    text: "Logout",
+                    onClick: handleLogout,
+                  },
+                ]}
+              />
+            ) : (
+              <AnimatedNavLink linkText="Login" url="/login" />
+            )}
           </li>
         </ul>
       </div>

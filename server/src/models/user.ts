@@ -3,7 +3,7 @@ import { InferSchemaType, model, Schema } from "mongoose";
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
-    emailAddress: { type: String, required: true, unique: true, select: false },
+    emailAddress: { type: String, required: true, unique: true },
     password: { type: String, required: true, select: false },
     role: {
       type: ["Admin", "Admin Assistant", "Employee"],

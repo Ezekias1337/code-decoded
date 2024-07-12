@@ -6,7 +6,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 type DropdownMenuProps = {
   linkText: string;
-  dropdownItems: { text: string; url: string }[];
+  dropdownItems: { text: string; url?: string; onClick?: () => void }[];
 };
 
 const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -48,7 +48,10 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
             <Link
               to={item.url}
               className="dropdown-item padding-left-20 padding-right-20"
-              onClick={handleClose}
+              onClick={() => {
+                item.onClick && item.onClick();
+                handleClose;
+              }}
             >
               {item.text}
             </Link>

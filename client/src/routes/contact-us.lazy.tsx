@@ -211,7 +211,6 @@ const ContactUs = () => {
         setSubmissionSuccessful(true);
         return response.json();
       } catch (error) {
-        console.log(error);
         setSubmissionInProgress(false);
 
         errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =

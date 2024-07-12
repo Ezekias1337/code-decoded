@@ -1,4 +1,4 @@
-export interface CaseReturnedFromDB {
+export interface WebsiteOrAppReturnedFromDB {
     id: number
     name: string
     description: string

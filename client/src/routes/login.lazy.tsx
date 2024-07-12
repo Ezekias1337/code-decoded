@@ -1,10 +1,10 @@
 // Library Imports
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 // Functions, Helpers, Utils, and Hooks
-import fetchData from "../functions/network/fetchData";
-import { camelCasifyString } from "../../../shared/utils/strings/camelCasifyString";
+import login from "../functions/network/login";
+import { useAuth } from "../context/AuthContext";
 // Constants
 import {
   textAndNumbersNoSpacesPattern,
@@ -17,11 +17,11 @@ import {
 // Interfaces and Types
 import {
   FormState,
-  SetStateHookForm,
+  //SetStateHookForm,
 } from "../components/form/dependents/constants/formProps";
 import {
   Field,
-  InputField,
+  //InputField,
 } from "../components/form/dependents/constants/formTypes";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
@@ -35,11 +35,16 @@ import BlobScene from "../components/page-specific/home/BlobScene";
 import "../css/page-specific/login.scss";
 
 const LogIn = () => {
-  const [formInputData, setFormInputData] = useState<FormState>({});
+  const user = useAuth().state.user;
+
+  const [formInputData, setFormInputData] = useState<FormState>({
+    emailAddress: "",
+    password: "",
+  });
   const [formErrorData, setFormErrorData] = useState<FormState>({});
   const [formErrorMessage, setFormErrorMessage] = useState<string>("");
-  const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
   const [loginInProgress, setLoginInProgress] = useState<boolean>(false);
+  const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
   const navigate = useNavigate({ from: "/login" });
   const arrayOfInputFields: Field[] = [
     {
@@ -78,83 +83,19 @@ const LogIn = () => {
   ];
 
   useEffect(() => {
-    /* if (loginSuccessful) {
+    if (loginSuccessful || user !== null) {
       navigate({ to: "/user-home" });
-    } */
-  }, [loginSuccessful, navigate]);
-
-  const customSubmitArgsSubmitCase = {
-    argument1: arrayOfInputFields,
-    argument2: formInputData,
-    argument3: setFormErrorData,
-    argument4: "/api/users/login",
-    argument5: "POST",
-  };
-
-  const createNewConsultation = async (
-    e: FormEvent,
-    inputFields: InputField[],
-    formState: FormState,
-    setErrorHook: SetStateHookForm,
-    apiEndpoint: string,
-    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
-  ): Promise<unknown> => {
-    e.preventDefault();
-    setLoginInProgress(true);
-
-    const errors: Record<string, string> = {};
-    const formStateWithDefaultValues = { ...formState };
-
-    inputFields.forEach((field) => {
-      if (!formState[camelCasifyString(field.name)]) {
-        if (field.defaultValue) {
-          formStateWithDefaultValues[camelCasifyString(field.name)] =
-            field.defaultValue;
-        } else {
-          errors[camelCasifyString(field.name)] = `${field.name} is required`;
-          setLoginInProgress(false);
-        }
-      }
-    });
-
-    setErrorHook(errors);
-
-    if (Object.keys(errors).length === 0) {
-      try {
-        const response = await fetchData(apiEndpoint, {
-          method: method,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(formStateWithDefaultValues),
-        });
-
-        setFormInputData({});
-        setErrorHook({});
-
-        setLoginSuccessful(true);
-        return response.json();
-      } catch (error) {
-        console.log(error);
-        setLoginInProgress(false);
-
-        /* errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =
-          `Failed to login, please try again later.`;
-        setErrorHook(errors); */
-        setFormErrorMessage("Failed to login, please try again later.");
-      }
     }
-  };
+  }, [loginSuccessful, user, navigate]);
 
   return (
     <div className="login">
       <HelmetProvider>
-      <Helmet>
-        <title>Code Decoded | Login</title>
-      </Helmet>
-    </HelmetProvider>
-      
+        <Helmet>
+          <title>Code Decoded | Login</title>
+        </Helmet>
+      </HelmetProvider>
+
       <PageHeader title="Login" />
       <div className="background-svg">
         <BlobScene />
@@ -186,16 +127,22 @@ const LogIn = () => {
           button1Variant="primary-dark"
           button1Loading={loginInProgress}
           customSubmitFunction={(e) =>
-            createNewConsultation(
+            login(
               e,
-              arrayOfInputFields,
-              formInputData,
-              setFormErrorData,
-              "/api/users/login",
-              "POST"
+              formInputData.emailAddress as string,
+              formInputData.password as string,
+              setFormErrorMessage,
+              setLoginInProgress,
+              setLoginSuccessful
             )
           }
-          customSubmitArgs={customSubmitArgsSubmitCase}
+          customSubmitArgs={{
+            argument1: formInputData.emailAddress as string,
+            argument2: formInputData.password as string,
+            argument3: setFormErrorMessage,
+            argument4: setLoginInProgress,
+            argument5: setLoginSuccessful,
+          }}
         />
       ) : (
         <Loader variant="primary" />

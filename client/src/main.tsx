@@ -2,7 +2,8 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-
+// Context
+import { AuthProvider } from "./context/AuthContext";
 // CSS
 import "./css/styles.scss";
 
@@ -10,10 +11,13 @@ import "./css/styles.scss";
 import { routeTree } from "./routeTree.gen";
 
 //404 Page
-import PageNotFound from "./routes/page-not-found.lazy"
+import PageNotFound from "./routes/page-not-found.lazy";
 
 // Create a new router instance
-const router = createRouter({ routeTree, defaultNotFoundComponent: PageNotFound });
+const router = createRouter({
+  routeTree,
+  defaultNotFoundComponent: PageNotFound,
+});
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -28,7 +32,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </StrictMode>
   );
 }
