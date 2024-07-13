@@ -25,8 +25,8 @@ const Footer = () => {
 
           <div className="footer-link-column display-flex">
             <FooterLink
-              linkText="(858) 752-7345"
-              url="tel:+18587527345"
+              linkText="(682) 325-9573"
+              url="tel:+16823259573"
               openInNewTab={false}
             />
             <FooterLink

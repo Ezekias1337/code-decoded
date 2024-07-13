@@ -15,7 +15,7 @@ const ContactFormSubmitted = () => (
         <title>Code Decoded | Contact Form Submitted</title>
       </Helmet>
     </HelmetProvider>
-    
+
     <PageHeader title="Thanks For Contacting Us" />
 
     <h2 className="padding-bottom-40">
@@ -69,8 +69,8 @@ const ContactFormSubmitted = () => (
       />{" "}
       or call us at{" "}
       <GeneralLink
-        text="(858) 752-7345"
-        url="tel:+18587527345"
+        text="(682) 325-9573"
+        url="tel:+16823259573"
         openInNewTab={false}
       />
       .
