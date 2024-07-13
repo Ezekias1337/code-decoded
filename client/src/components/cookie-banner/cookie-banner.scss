@@ -1,0 +1,20 @@
+@import "../../css/variables";
+
+.cookie-banner {
+  background-color: $neutral-800;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: calc(100% - 60px);
+  }
+  
+  .cookie-banner-text {
+    color: $primary-100;
+    font-size: $header-6;
+  }
+}
