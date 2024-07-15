@@ -12,7 +12,8 @@ import http from "http";
 import { generateOriginUrl } from "../../shared/helpers/generateOriginUrl";
 //Routes
 import userRoutes from "./routes/users";
-import websitesOrApps from "./routes/websitesOrApps";
+import websitesOrAppsRoutes from "./routes/websitesOrApps";
+import analyticsRoutes from "./routes/analytics";
 
 // Server Configuration
 const app = express();
@@ -53,8 +54,9 @@ app.use(
 );
 
 // Use Imported routes
-app.use("/api/websites-or-apps", websitesOrApps);
 app.use("/api/users", userRoutes);
+app.use("/api/websites-or-apps", websitesOrAppsRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // Allow credentials in CORS configuration
 app.options("*", cors(corsOptions));
