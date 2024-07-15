@@ -9,7 +9,7 @@ import { isAuthenticated } from "../authentication/authState";
 // Components
 //import ProtectedRoute from "../components/protected-route/ProtectedRoute";
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
-import { Card } from "../components/card/Card";
+//import { Card } from "../components/card/Card";
 //import { GeneralLink } from "../components/general-page-layout/link/GeneralLink";
 //import { Button } from "../components/button/Button";
 // CSS
@@ -32,12 +32,12 @@ const UserHome = () => {
 
       <div className="user-home-wrapper">
         <div className="user-home-options">
-          <Card
+          {/* <Card
             headerText="View your profile"
             bodyText="Edit your profile, change your password, or delete your account."
             buttonCount={0}
             cardVariant="imageOnly"
-          />
+          /> */}
         </div>
       </div>
     </div>

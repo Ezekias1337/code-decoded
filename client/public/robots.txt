@@ -1,0 +1,6 @@
+# robots.txt
+
+# Allow all crawlers to access everything except /user-home and /user-profile
+User-agent: *
+Disallow: /user-home/
+Disallow: /user-profile/
