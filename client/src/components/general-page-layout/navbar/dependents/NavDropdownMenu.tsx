@@ -43,8 +43,8 @@ const NavDropdownMenu: React.FC<DropdownMenuProps> = ({
       <div
         className={`dropdown-content${isOpen ? "-open" : ""} full-flex flex-direction-column  position-absolute`}
       >
-        {dropdownItems.map((item) => (
-          <React.Fragment key={item.url}>
+        {dropdownItems.map((item, index) => (
+          <React.Fragment key={index}>
             <Link
               to={item.url}
               className="dropdown-item padding-left-20 padding-right-20"
