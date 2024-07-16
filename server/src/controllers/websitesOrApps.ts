@@ -205,7 +205,6 @@ export const createWebsiteOrApp: RequestHandler<
         </html>`,
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

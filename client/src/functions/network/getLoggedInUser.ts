@@ -19,7 +19,6 @@ const getLoggedInUser = async (): Promise<UserReturnedFromDB | null> => {
       return null;
     }
   } catch (error) {
-    console.error("Error getting logged in user:", error);
     return null;
   }
 };

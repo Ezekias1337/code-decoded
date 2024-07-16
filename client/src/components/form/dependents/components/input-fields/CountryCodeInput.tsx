@@ -26,7 +26,7 @@ export const CountryCodeInput: FC<CountryCodeInputFieldProps> = ({
   >(phoneNumberCountryCodes);
   const [countryCodeSearchParams, setCountryCodeSearchParams] =
     useState<FormState>({ countryCodeSearchBar: "" });
-  const [countryCodeSearchErrors, setCountryCodeSearchErrors] =
+  const [, setCountryCodeSearchErrors] =
     useState<FormState>({});
 
   const arrayOfNumChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -83,15 +83,15 @@ export const CountryCodeInput: FC<CountryCodeInputFieldProps> = ({
 
   useEffect(() => {
     setFilteredOptions(phoneNumberCountryCodes);
-    if (countryCodeSearchErrors) {
-      console.log(countryCodeSearchErrors);
-    }
   }, [showMenu]);
 
   return (
     <div className={`country-code-input-wrapper z-index-2`}>
       {showMenu && (
-        <div className="darken-background-overlay" onClick={() => setShowMenu(false)}></div>
+        <div
+          className="darken-background-overlay"
+          onClick={() => setShowMenu(false)}
+        ></div>
       )}
       <button
         className="toggle-country-code-menu"
