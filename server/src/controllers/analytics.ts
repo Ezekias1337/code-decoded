@@ -42,11 +42,34 @@ export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
  */
 
 export const updateAnalytics: RequestHandler = async (req, res, next) => {
+  let currentDocumentExists;
+
   try {
-    const analyticsData = new AnalyticsModel(req.body);
-    await analyticsData.save();
-    res.status(201).send(analyticsData);
+    currentDocumentExists = await AnalyticsModel.findOne({
+      userIdentifier: req.body.userIdentifier,
+    });
   } catch (error) {
     next(error);
+  }
+
+  if (currentDocumentExists === null || undefined) {
+    try {
+      const analyticsData = new AnalyticsModel(req.body);
+      await analyticsData.save();
+      res.status(201).send(analyticsData);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    try {
+      let analyticsData = await AnalyticsModel.findOneAndUpdate(
+        { userIdentifier: req.body.userIdentifier },
+        req.body
+      ).exec();
+
+      res.status(201).send(analyticsData);
+    } catch (error) {
+      next(error);
+    }
   }
 };

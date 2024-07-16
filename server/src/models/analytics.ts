@@ -19,6 +19,7 @@ const userAgentInfoSchema = new Schema(
 
 const analyticsSchema = new Schema(
   {
+    userIdentifier: { type: String, required: true, unique: true },
     userAgentInfo: { type: userAgentInfoSchema, required: true },
     pageVisits: { type: [pageVisitSchema], required: true },
   },

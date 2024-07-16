@@ -3,9 +3,21 @@ import { useEffect, useMemo } from "react";
 // Functions, Helpers, Utils, and Hooks
 import fetchData from "../functions/network/fetchData";
 import useDeviceInfo from "./useDeviceInfo";
+import generateRandomId from "../../../shared/utils/strings/generateRandomId";
 
 const useAnalytics = () => {
   const userAgentInfo = useDeviceInfo();
+
+  const getOrCreateIdentifier = () => {
+    let identifier = localStorage.getItem("userIdentifier");
+    if (!identifier) {
+      identifier = generateRandomId();
+      localStorage.setItem("userIdentifier", identifier);
+    }
+    return identifier;
+  };
+
+  const userIdentifier = useMemo(getOrCreateIdentifier, []);
 
   const sendAnalytics = useMemo(() => {
     return () => {
@@ -13,6 +25,7 @@ const useAnalytics = () => {
 
       if (pageVisits.length > 0) {
         const payload = {
+          userIdentifier,
           userAgentInfo,
           pageVisits,
         };
@@ -25,22 +38,17 @@ const useAnalytics = () => {
           },
           body: JSON.stringify(payload),
         });
-
-        localStorage.removeItem("pageVisits");
       }
     };
-  }, [userAgentInfo]);
+  }, [userIdentifier, userAgentInfo]);
 
   useEffect(() => {
-    /* 
-      This sets an interval to send analytics every minute, to decrease the frequency,
-      change the 1 to the desired time in minutes
-    */
-    const intervalId = setInterval(sendAnalytics, 1 * 60 * 1000);
-
+    const numberOfMinutes = 3;
+    const intervalId = setInterval(sendAnalytics, numberOfMinutes * 60 * 1000);
     window.addEventListener("beforeunload", sendAnalytics);
 
     return () => {
+      localStorage.removeItem("pageVisits");
       clearInterval(intervalId);
       window.removeEventListener("beforeunload", sendAnalytics);
     };
