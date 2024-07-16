@@ -48,6 +48,22 @@ input:-webkit-autofill:active {
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 70px 20px $neutral-800;
+
+  // Ensure blinking cursor is visible
+  caret-color: $primary-500;
+}
+
+// Handle the selection (highlighted) state
+input:-webkit-autofill::selection {
+  background-color: $neutral-100;
+  color: $primary-500;
+}
+
+input:-webkit-autofill:hover::selection,
+input:-webkit-autofill:focus::selection,
+input:-webkit-autofill:active::selection {
+  background-color: $neutral-100;
+  color: $primary-500;
 }
 
 form {
