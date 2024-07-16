@@ -62,6 +62,11 @@ const Navbar: React.FC = () => {
           <li>
             <AnimatedNavLink linkText="Home" url="/" />
           </li>
+          {userAuthenticated && (
+            <li>
+              <AnimatedNavLink linkText="User Home" url="/user-home" />
+            </li>
+          )}
           <li>
             <NavDropdownMenu
               linkText="Info"
