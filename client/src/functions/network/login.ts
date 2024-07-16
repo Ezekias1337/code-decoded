@@ -4,7 +4,7 @@ import {
   SetStateHookBoolean,
   SetStateHookString,
 } from "../../components/form/dependents/constants/formProps";
-import { FormEvent } from "react";
+import { FormEvent, SetStateAction, Dispatch } from "react";
 // Functions, Helpers, Utils, and Hooks
 import fetchData from "../network/fetchData";
 import { setAuthState } from "../../authentication/authState";
@@ -15,7 +15,7 @@ const login = async (
   password: string,
   setFormErrorMessage: SetStateHookString,
   setLoginInProgress: SetStateHookBoolean,
-  setLoginSuccessful: SetStateHookBoolean
+  setUserData: Dispatch<SetStateAction<UserReturnedFromDB | null>>
 ): Promise<UserReturnedFromDB> => {
   e.preventDefault();
   setLoginInProgress(true);
@@ -35,9 +35,9 @@ const login = async (
     throw new Error("Failed to login");
   }
   const user = await response.json();
+  setUserData(user);
   setAuthState({ user, loading: false });
   setFormErrorMessage("");
-  setLoginSuccessful(true);
   setLoginInProgress(false);
 
   return user;

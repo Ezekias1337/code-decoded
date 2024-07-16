@@ -18,7 +18,7 @@ interface AuthState {
 }
 
 // Define action types
-type AuthAction =
+export type AuthAction =
   | { type: "SET_USER"; payload: UserReturnedFromDB | null }
   | { type: "SET_LOADING"; payload: boolean };
 

@@ -23,6 +23,7 @@ import {
   Field,
   //InputField,
 } from "../components/form/dependents/constants/formTypes";
+import { UserReturnedFromDB } from "../constants/interfaces/user";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import { Loader } from "../components/general-page-layout/loader/Loader";
@@ -35,7 +36,9 @@ import BlobScene from "../components/page-specific/home/BlobScene";
 import "../css/page-specific/login.scss";
 
 const LogIn = () => {
-  const user = useAuth().state.user;
+  const authObj = useAuth();
+  const user = authObj.state.user;
+  const dispatch = authObj.dispatch;
 
   const [formInputData, setFormInputData] = useState<FormState>({
     emailAddress: "",
@@ -44,7 +47,7 @@ const LogIn = () => {
   const [formErrorData, setFormErrorData] = useState<FormState>({});
   const [formErrorMessage, setFormErrorMessage] = useState<string>("");
   const [loginInProgress, setLoginInProgress] = useState<boolean>(false);
-  const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserReturnedFromDB | null>(null);
   const navigate = useNavigate({ from: "/login" });
   const arrayOfInputFields: Field[] = [
     {
@@ -82,11 +85,26 @@ const LogIn = () => {
     },
   ];
 
+  /* 
+    In the form submit function it sets userData to the response from the API call,
+    This useEffect will update the global state with the user object
+  */
+
   useEffect(() => {
-    if (loginSuccessful || user !== null) {
+    if (userData) {
+      dispatch({ type: "SET_USER", payload: userData });
+    }
+  }, [userData, dispatch]);
+
+  /* 
+    Once the user object is set in the global state, we navigate to the user home page
+  */
+
+  useEffect(() => {
+    if (user !== null) {
       navigate({ to: "/user-home" });
     }
-  }, [loginSuccessful, user, navigate]);
+  }, [user, navigate]);
 
   return (
     <div className="login">
@@ -133,7 +151,7 @@ const LogIn = () => {
               formInputData.password as string,
               setFormErrorMessage,
               setLoginInProgress,
-              setLoginSuccessful
+              setUserData
             )
           }
           customSubmitArgs={{
@@ -141,7 +159,7 @@ const LogIn = () => {
             argument2: formInputData.password as string,
             argument3: setFormErrorMessage,
             argument4: setLoginInProgress,
-            argument5: setLoginSuccessful,
+            argument5: setUserData,
           }}
         />
       ) : (
@@ -152,13 +170,13 @@ const LogIn = () => {
           text="Don't have an account?"
           url="/register"
           openInNewTab={false}
-          variant="primary"
+          variant="neutral"
         />
         <GeneralLink
           text="Forgot Password?"
           url="/register"
           openInNewTab={false}
-          variant="primary"
+          variant="neutral"
         />
       </div>
     </div>

@@ -2,4 +2,19 @@
 
 .user-home {
   background-color: $neutral-800;
+
+  .user-home-options {
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    .card {
+      align-self: stretch;
+    }
+    
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+    
+    
+  }
 }
