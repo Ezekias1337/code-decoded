@@ -144,7 +144,7 @@ const ContactUs = () => {
       },
     ];
 
-    const haveLogoField = {
+    const productTierField = {
       ...tempInputFields[3],
       dropdownOptions: [
         "Digital Business Card",
@@ -153,7 +153,7 @@ const ContactUs = () => {
       ],
     };
 
-    tempInputFields[3] = haveLogoField;
+    tempInputFields[3] = productTierField;
 
     setArrayOfInputFields(tempInputFields);
   }, [formInputData]);

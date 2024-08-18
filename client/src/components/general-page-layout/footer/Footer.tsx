@@ -1,6 +1,12 @@
 // Library Imports
+import {
+  faInstagram,
+  faXTwitter,
+  faFacebook,
+} from "@fortawesome/free-brands-svg-icons";
 // Components
 import { FooterLink } from "./dependents/FooterLink";
+import { FooterSocialIcon } from "./dependents/FooterSocialIcon";
 // CSS
 import "./footer.scss";
 // Assets and Images
@@ -15,6 +21,21 @@ const Footer = () => {
           <Link to="/">
             <img src={logo} alt="Logo" className="footer-logo" />
           </Link>
+        </div>
+
+        <div className="social-col display-flex">
+          <FooterSocialIcon
+            icon={faInstagram}
+            url="https://www.instagram.com/codedecodedbiz/"
+          />
+          <FooterSocialIcon
+            icon={faFacebook}
+            url="https://www.facebook.com/people/Code-Decoded-Biz/100091360329586/"
+          />
+          <FooterSocialIcon
+            icon={faXTwitter}
+            url="https://x.com/CodeDecodedBiz"
+          />
         </div>
       </div>
       <div className="footer-navigation display-flex justify-content-space-around">

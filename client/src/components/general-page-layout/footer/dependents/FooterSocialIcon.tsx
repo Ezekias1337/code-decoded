@@ -8,7 +8,7 @@ export const FooterSocialIcon = ({
   url,
 }: {
   icon: IconProp;
-  url: never;
+  url: string;
 }) => {
   return (
     <div className="footer-social-wrapper full-flex mx-2">

@@ -7,8 +7,8 @@ export interface UserReturnedFromDB {
   name: string;
   emailAddress: string;
   role: string[];
+  phoneNumber: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
-  id: string;
 }

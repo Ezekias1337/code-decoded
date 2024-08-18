@@ -19,9 +19,15 @@ const fetchData = async (input: RequestInfo, init?: RequestInit) => {
     return response;
   } else {
     const errorBody = await response.json();
-    const errorMessage = errorBody.error;
+    const errorMessage = errorBody.message;
+    const consoleError = errorBody.error;
+
+    console.log(errorBody);
     console.log(errorMessage);
-    throw Error(errorMessage);
+    console.log(consoleError);
+
+    // Throwing a custom error object that preserves the original error details
+    throw { message: errorMessage, error: consoleError };
   }
 };
 

@@ -45,7 +45,7 @@ const UserHome = () => {
                 buttonCount={2}
                 cardVariant="bodyOnly"
                 button1Text="Edit Profile"
-                button1Link="/edit-profile"
+                button1Link={`/edit-profile?id=${user?._id}`}
                 button1Variant="primary-dark"
                 button1Icon={faPencil}
                 buttonSize="medium"

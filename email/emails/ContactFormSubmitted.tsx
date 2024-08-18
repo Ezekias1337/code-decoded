@@ -1,11 +1,11 @@
 import {
-  Button,
   Html,
   Body,
   Img,
   Heading,
   Text,
-  Link
+  Link,
+  Container,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -18,15 +18,18 @@ export default function Email() {
   return (
     <Html>
       <Body style={main}>
-        <Img
-          src="https://codeddecoded.com/assets/images/logo/logo.png"
-          width={300}
-        />
+        <Container style={container}>
+          <Img
+            src="https://codeddecoded.com/assets/images/logo/logo.png"
+            width={300}
+          />
+        </Container>
+
         <Heading>
           <Text style={header}>We have received a new potential customer:</Text>
         </Heading>
         <Text style={customerInfo}>
-          <strong style={customerInfoStrong}>Name:</strong> Frank Edwards
+          <strong style={customerInfoStrong}>Name:</strong> John Doe
         </Text>
         <Text style={customerInfo}>
           <strong style={customerInfoStrong}>Phone Number:</strong> +1 (555)
@@ -88,4 +91,13 @@ const link = {
   lineHeight: "30px",
   color: getColor("$primary-500"),
   textDecoration: "none",
+};
+
+const container = {
+  width: "100%",
+  maxWidth: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "20px 20px 40px 40px",
 };

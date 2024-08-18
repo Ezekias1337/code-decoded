@@ -5,8 +5,9 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     emailAddress: { type: String, required: true, unique: true },
     password: { type: String, required: true, select: false },
+    phoneNumber: { type: String, required: true, unique: true },
     role: {
-      type: ["Admin", "Admin Assistant", "Employee"],
+      type: ["Admin", "Admin Assistant", "Employee", "User"],
       required: true,
     },
     profilePicture: {
@@ -17,6 +18,7 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    isVerified: { type: Boolean, default: false },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

@@ -46,7 +46,7 @@ const Pricing = () => {
         />
         <Card
           cardVariant="imageAndBody"
-          headerText="Dyanmic Website or App - $4000+"
+          headerText="Dynamic Website or App - $4000+"
           bodyText="Stay ahead of the competition with a dynamic website, phone application, or desktop application that has network connectivity to a server and allows you to satisfy your business needs, engages your audience, and drives growth. /n Best for those who need automation or that want to display information that changes frequently, such as a menu or prices."
           buttonCount={0}
           button1Text="Get Started"

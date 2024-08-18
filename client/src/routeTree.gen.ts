@@ -13,7 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as VerifyEmailImport } from './routes/verify-email'
 import { Route as UserHomeImport } from './routes/user-home'
+import { Route as EditProfileImport } from './routes/edit-profile'
 
 // Create Virtual Routes
 
@@ -79,8 +81,18 @@ const AboutUsLazyRoute = AboutUsLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about-us.lazy').then((d) => d.Route))
 
+const VerifyEmailRoute = VerifyEmailImport.update({
+  path: '/verify-email',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const UserHomeRoute = UserHomeImport.update({
   path: '/user-home',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EditProfileRoute = EditProfileImport.update({
+  path: '/edit-profile',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -100,11 +112,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/edit-profile': {
+      id: '/edit-profile'
+      path: '/edit-profile'
+      fullPath: '/edit-profile'
+      preLoaderRoute: typeof EditProfileImport
+      parentRoute: typeof rootRoute
+    }
     '/user-home': {
       id: '/user-home'
       path: '/user-home'
       fullPath: '/user-home'
       preLoaderRoute: typeof UserHomeImport
+      parentRoute: typeof rootRoute
+    }
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailImport
       parentRoute: typeof rootRoute
     }
     '/about-us': {
@@ -170,7 +196,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  EditProfileRoute,
   UserHomeRoute,
+  VerifyEmailRoute,
   AboutUsLazyRoute,
   ContactFormSubmittedLazyRoute,
   ContactUsLazyRoute,
@@ -190,7 +218,9 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/edit-profile",
         "/user-home",
+        "/verify-email",
         "/about-us",
         "/contact-form-submitted",
         "/contact-us",
@@ -204,8 +234,14 @@ export const routeTree = rootRoute.addChildren({
     "/": {
       "filePath": "index.lazy.tsx"
     },
+    "/edit-profile": {
+      "filePath": "edit-profile.tsx"
+    },
     "/user-home": {
       "filePath": "user-home.tsx"
+    },
+    "/verify-email": {
+      "filePath": "verify-email.tsx"
     },
     "/about-us": {
       "filePath": "about-us.lazy.tsx"

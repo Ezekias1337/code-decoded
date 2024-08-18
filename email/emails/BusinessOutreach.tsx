@@ -48,21 +48,12 @@ export default function Email() {
             visitors into customers.
           </Text>
 
-          <Text style={bodyText}>
-            I noticed that some pages of the website are not mobile responsive.
-            With the majority of web traffic coming from phones this can greatly
-            harm the credibility of your brand. In addition the performance
-            metric of the website is a 43/100 due to the Largest Contentful
-            Paint being 7 seconds and the Total Blocking Time being 1,920 ms. I
-            can resolve these issues for your business.
-          </Text>
-
           <Container style={buttonContainer}>
             <Button href="https://codeddecoded.com/contact-us" style={button}>
-              Schedule a Free Consultation
+              <Text style={buttonText}>Schedule a Free Consultation</Text>
             </Button>
             <Button href="https://codeddecoded.com" style={button}>
-              Visit our Website
+              <Text style={buttonText}>Visit our Website</Text>
             </Button>
           </Container>
 
@@ -101,13 +92,6 @@ const bodyText = {
   marginBottom: "20px",
 };
 
-const link = {
-  fontSize: getFontSize("$header-4"),
-  lineHeight: "30px",
-  color: getColor("$primary-500"),
-  textDecoration: "none",
-};
-
 const container = {
   width: "100%",
   maxWidth: "100%",
@@ -137,6 +121,14 @@ const button = {
   boxShadow: getBoxShadow("$neutral-glow"),
   fontSize: getFontSize("$header-4"),
   width: "100%",
-  textAlign: "center",
   marginBottom: "20px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const buttonText = {
+  fontSize: getFontSize("$header-4"),
+  lineHeight: "30px",
+  color: getColor("$primary-900"),
 };
