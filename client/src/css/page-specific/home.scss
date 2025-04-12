@@ -33,6 +33,33 @@
       padding-top: 278px; // Adjust padding to account for navbar height if needed
       color: $neutral-100; // Adjust the text color for visibilityClassName
 
+      h1,
+      p,
+      .button-wrapper {
+        animation-name: slide-in-text;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes slide-in-text {
+        0% {
+          transform: translateX(100%);
+          -webkit-transform: translateX(100%);
+          -moz-transform: translateX(100%);
+          -ms-transform: translateX(100%);
+          -o-transform: translateX(100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0%);
+          -webkit-transform: translateY(0%);
+          -moz-transform: translateY(0%);
+          -ms-transform: translateY(0%);
+          -o-transform: translateY(0%);
+          opacity: 1;
+        }
+      }
+
       p {
         font-size: $header-5;
 
