@@ -20,19 +20,27 @@ const app = express();
 
 const MONGO_URL = env.MONGO_URL;
 const BACKEND_PORT = env.BACKEND_PORT;
-const FRONTEND_PORT = env.FRONTEND_PORT;
-const ORIGIN_URL_BASE = env.ORIGIN_URL_BASE;
+/* const FRONTEND_PORT = env.FRONTEND_PORT;
+const ORIGIN_URL_BASE = env.ORIGIN_URL_BASE; */
 const SESSION_SECRET = env.SESSION_SECRET;
-const IS_DEV = env.IS_DEV;
+//const IS_DEV = env.IS_DEV;
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",").map(origin => origin.trim()) || [];
 
-const ORIGIN_URL = generateOriginUrl(
+/* const ORIGIN_URL = generateOriginUrl(
   ORIGIN_URL_BASE,
   FRONTEND_PORT.toString(),
   IS_DEV
-);
+); */
 
-const corsOptions = {
-  origin: ORIGIN_URL,
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS error: Origin '${origin}' not allowed`));
+    }
+  },
   credentials: true,
 };
 

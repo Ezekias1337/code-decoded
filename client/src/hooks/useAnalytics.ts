@@ -28,6 +28,7 @@ const useAnalytics = () => {
           userIdentifier,
           userAgentInfo,
           pageVisits,
+          baseUrl: window.location.origin,
         };
 
         fetchData("/api/analytics/update-analytics", {
