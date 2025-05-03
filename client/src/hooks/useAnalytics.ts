@@ -49,7 +49,6 @@ const useAnalytics = () => {
     window.addEventListener("beforeunload", sendAnalytics);
 
     return () => {
-      localStorage.removeItem("pageVisits");
       clearInterval(intervalId);
       window.removeEventListener("beforeunload", sendAnalytics);
     };
