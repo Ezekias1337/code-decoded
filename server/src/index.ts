@@ -24,7 +24,7 @@ const BACKEND_PORT = env.BACKEND_PORT;
 const ORIGIN_URL_BASE = env.ORIGIN_URL_BASE; */
 const SESSION_SECRET = env.SESSION_SECRET;
 //const IS_DEV = env.IS_DEV;
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",").map(origin => origin.trim()) || [];
+const ALLOWED_ORIGINS = env.ALLOWED_ORIGINS.split(",");
 
 /* const ORIGIN_URL = generateOriginUrl(
   ORIGIN_URL_BASE,
