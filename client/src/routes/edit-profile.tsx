@@ -254,24 +254,17 @@ const EditProfile = () => {
           type: "SET_USER",
           payload: payloadForDispatch as UserReturnedFromDB,
         });
-        
 
         const responseJson = await response.json();
-        console.log(responseJson);
-        console.log(responseJson.message);
         if (
           responseJson.message ===
           "Email Address on file is different than the one provided, verification code sent."
         ) {
-          console.log("inside email verification");
           setRedirectUrl(`/verify-email/?id=${userToEdit?._id}&update=${true}`);
           setSubmissionInProgress(false);
-
-          errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =
-            `Failed to update user, please try again`;
-          setErrorHook(errors);
         }
         setSubmissionSuccessful(true);
+        setErrorHook({});
 
         return responseJson;
       } catch (error) {
