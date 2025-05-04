@@ -1,7 +1,5 @@
 // Library Imports
-import { FC, useState, useEffect } from "react";
-//Functions, Helpers, and Utils
-import { isAuthenticated } from "../../authentication/authState";
+import { useState, useEffect } from "react";
 // Interfaces and Types
 import { ButtonProps } from "../../constants/interfaces/ButtonProps";
 // Components
@@ -15,22 +13,29 @@ type CookieBannerProps = {
   button2?: ButtonProps;
 };
 
-const CookieBanner: FC<CookieBannerProps> = ({
+const COOKIE_NAME = "cookieAccepted";
+
+const CookieBanner: React.FC<CookieBannerProps> = ({
   bodyText,
   button1,
   button2 = null,
 }) => {
-  const userAuthenticated = isAuthenticated();
   const [cookieAccepted, setCookieAccepted] = useState(false);
 
   useEffect(() => {
-    if (userAuthenticated) {
+    const hasAccepted = document.cookie.includes(`${COOKIE_NAME}=true`);
+    if (hasAccepted) {
       setCookieAccepted(true);
     }
-  }, [userAuthenticated]);
+  }, []);
+
+  const handleAccept = () => {
+    document.cookie = `${COOKIE_NAME}=true; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year
+    setCookieAccepted(true);
+  };
 
   if (cookieAccepted) {
-    return null;
+    return <></>;
   }
 
   return (
@@ -42,7 +47,7 @@ const CookieBanner: FC<CookieBannerProps> = ({
           text={button1.text}
           variant={button1.variant}
           buttonSize={button1.buttonSize}
-          onClickHandler={() => setCookieAccepted(true)}
+          onClickHandler={handleAccept}
         />
         {button2 && (
           <Button

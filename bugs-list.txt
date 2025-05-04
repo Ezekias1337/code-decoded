@@ -1,0 +1,3 @@
+When making api requests if it hangs it doesnt show an error
+
+Need to look into best way to do error handling (thioping)

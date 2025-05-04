@@ -8,8 +8,8 @@ import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import cors from "cors";
 import http from "http";
-// Function Imports
-import { generateOriginUrl } from "../../shared/helpers/generateOriginUrl";
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 //Routes
 import userRoutes from "./routes/users";
 import websitesOrAppsRoutes from "./routes/websitesOrApps";
@@ -20,17 +20,10 @@ const app = express();
 
 const MONGO_URL = env.MONGO_URL;
 const BACKEND_PORT = env.BACKEND_PORT;
-/* const FRONTEND_PORT = env.FRONTEND_PORT;
-const ORIGIN_URL_BASE = env.ORIGIN_URL_BASE; */
+const IS_DEV = env.IS_DEV;
 const SESSION_SECRET = env.SESSION_SECRET;
-//const IS_DEV = env.IS_DEV;
 const ALLOWED_ORIGINS = env.ALLOWED_ORIGINS.split(",");
 
-/* const ORIGIN_URL = generateOriginUrl(
-  ORIGIN_URL_BASE,
-  FRONTEND_PORT.toString(),
-  IS_DEV
-); */
 
 const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
@@ -52,7 +45,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 24 * 60 * 60 * 1000 * 7,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      httpOnly: IS_DEV === "TRUE" ? false : true,
+      secure: IS_DEV === "TRUE" ? false : true,
+      sameSite: "lax", // or "strict" if you want stricter CSRF protection
     },
     rolling: true,
     store: MongoStore.create({
@@ -60,6 +56,13 @@ app.use(
     }),
   })
 );
+app.use(helmet());
+
+rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // limit each IP to 10 requests per windowMs
+  message: "Too many attempts, please try again later.",
+});
 
 // Use Imported routes
 app.use("/api/users", userRoutes);
@@ -70,10 +73,13 @@ app.use("/api/analytics", analyticsRoutes);
 app.options("*", cors(corsOptions));
 
 //Connect to DB
-const database = mongoose.connect(MONGO_URL).then(() => {
+mongoose.connect(MONGO_URL).then(() => {
   const server = http.createServer(app);
 
   server.listen(BACKEND_PORT, () => {
     console.log(`Listening on port: ${BACKEND_PORT}`);
   });
+}).catch(err => {
+  console.error("Failed to connect to MongoDB", err);
+  process.exit(1);
 });

@@ -136,7 +136,7 @@ export const updateUser: RequestHandler = async (req, res, next) => {
         verificationCode,
       });
 
-      return res.status(400).json({
+      return res.status(200).json({
         message:
           "Email Address on file is different than the one provided, verification code sent.",
       });

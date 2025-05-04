@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Frontend Debug",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5001",
+      "webRoot": "${workspaceFolder}/client",
+      "sourceMaps": true,
+      "trace": true,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Backend Debug (ts-node)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["ts-node", "src/index.ts"],
+      "cwd": "${workspaceFolder}/server",
+      "skipFiles": ["<node_internals>/**"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/server/**/*",
+        "!**/node_modules/**"
+      ],
+      "outFiles": []
+    }
+  ]
+}

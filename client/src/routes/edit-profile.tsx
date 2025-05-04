@@ -18,7 +18,7 @@ import {
 import { FormEvent } from "react";
 // Functions, Helpers, Utils, and Hooks
 import fetchData from "../functions/network/fetchData.ts";
-import getUser from "../functions/network/getUser.ts.ts";
+import getUser from "../functions/network/getUser.ts";
 import { camelCasifyString } from "../../../shared/utils/strings/camelCasifyString.ts";
 
 // Constants
@@ -44,7 +44,7 @@ const EditProfile = () => {
   const dispatch = authObject.dispatch;
   // Authenticated User
   const user = authObject.state.user;
-  // User who is being edited
+  // User who is being edited;
   const { id: userIdToEdit } = Route.useSearch();
 
   const [userToEdit, setUserToEdit] = useState<UserReturnedFromDB | null>(null);
@@ -65,9 +65,9 @@ const EditProfile = () => {
   }, [submissionSuccessful, navigate, redirectUrl]);
 
   useEffect(() => {
-    if (userIdToEdit === user?._id) {
+    if (userIdToEdit === user?._id && userToEdit !== user) {
       setUserToEdit(user);
-    } else if (userIdToEdit !== user?._id || userToEdit === null) {
+    } else if (userIdToEdit !== user?._id && userToEdit === null) {
       const fetchUser = async () => {
         const userFromDB = await getUser(userIdToEdit);
         setUserToEdit(userFromDB);
@@ -184,7 +184,7 @@ const EditProfile = () => {
         };
         tempInputFields[3] = roleField;
       } else {
-        tempInputFields.slice(0, -1);
+        tempInputFields = tempInputFields.slice(0, -1);
       }
 
       setArrayOfInputFields(tempInputFields);
@@ -254,26 +254,32 @@ const EditProfile = () => {
           type: "SET_USER",
           payload: payloadForDispatch as UserReturnedFromDB,
         });
-        setSubmissionSuccessful(true);
-        return response.json();
-      } catch (error) {
+        
+
+        const responseJson = await response.json();
+        console.log(responseJson);
+        console.log(responseJson.message);
         if (
-          (error as Error).message ===
+          responseJson.message ===
           "Email Address on file is different than the one provided, verification code sent."
         ) {
+          console.log("inside email verification");
           setRedirectUrl(`/verify-email/?id=${userToEdit?._id}&update=${true}`);
           setSubmissionInProgress(false);
 
           errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =
             `Failed to update user, please try again`;
           setErrorHook(errors);
-        } else {
-          // Handle cases where the error is not an instance of Error
-          setSubmissionInProgress(false);
-          errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =
-            `An unexpected error occurred`;
-          setErrorHook(errors);
         }
+        setSubmissionSuccessful(true);
+
+        return responseJson;
+      } catch (error) {
+        console.error("Error updating profile:", error);
+        setSubmissionInProgress(false);
+        errors[camelCasifyString(inputFields[inputFields.length - 1].name)] =
+          `An unexpected error occurred`;
+        setErrorHook(errors);
       }
     }
   };

@@ -13,6 +13,9 @@ const VITE_FRONTEND_PORT_COERCED_TO_NUMBER: number = Number(
 
 const configObject = {
   plugins: [react(), TanStackRouterVite()],
+  build: {
+    sourcemap: true,
+  },
   base: process.env.VITE_ROUTING_URL_BASE,
   server: {
     port: VITE_FRONTEND_PORT_COERCED_TO_NUMBER,
