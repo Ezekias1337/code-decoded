@@ -33,7 +33,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({
   }, []);
 
   const handleAccept = () => {
-    document.cookie = `${COOKIE_NAME}=true; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year
+    document.cookie = `${COOKIE_NAME}=true; path=/; SameSite=Lax; max-age=${60 * 60 * 24 * 365}`; // 1 year
     setCookieAccepted(true);
     window.dispatchEvent(new Event("cookie-consent-granted"));
   };
