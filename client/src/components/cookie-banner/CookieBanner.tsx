@@ -1,5 +1,7 @@
 // Library Imports
 import { useState, useEffect } from "react";
+// Hooks
+import useGlobalPrivacyControl from "../../hooks/useGlobalPrivacyControl";
 // Interfaces and Types
 import { ButtonProps } from "../../constants/interfaces/ButtonProps";
 // Components
@@ -20,6 +22,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({
   button1,
   button2 = null,
 }) => {
+  const hasGlobalPrivacyControl = useGlobalPrivacyControl();
   const [cookieAccepted, setCookieAccepted] = useState(false);
 
   useEffect(() => {
@@ -32,9 +35,10 @@ const CookieBanner: React.FC<CookieBannerProps> = ({
   const handleAccept = () => {
     document.cookie = `${COOKIE_NAME}=true; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year
     setCookieAccepted(true);
+    window.dispatchEvent(new Event("cookie-consent-granted"));
   };
 
-  if (cookieAccepted) {
+  if (cookieAccepted || hasGlobalPrivacyControl) {
     return <></>;
   }
 

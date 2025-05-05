@@ -1,13 +1,13 @@
 // Library Imports
 import { useState, useEffect } from "react";
 
-interface UserAgentInfo {
+export interface UserAgentInfo {
   browser: string | undefined;
   device: string | undefined;
   os: string | undefined;
 }
 
-const useDeviceInfo = (): UserAgentInfo => {
+const useDeviceInfo = (hasGlobalPrivacyControl: boolean): UserAgentInfo => {
   const [userAgentInfo, setUserAgentInfo] = useState<UserAgentInfo>({
     browser: undefined,
     device: undefined,
@@ -15,6 +15,10 @@ const useDeviceInfo = (): UserAgentInfo => {
   });
 
   useEffect(() => {
+    if (hasGlobalPrivacyControl) {
+      return
+    }
+
     const userAgent = window.navigator.userAgent;
 
     // Get browser name
@@ -62,7 +66,7 @@ const useDeviceInfo = (): UserAgentInfo => {
     }
 
     setUserAgentInfo({ browser, device, os });
-  }, []);
+  }, [hasGlobalPrivacyControl]);
 
   return userAgentInfo;
 };

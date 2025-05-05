@@ -52,7 +52,7 @@ export const updateAnalytics: RequestHandler = async (req, res, next) => {
     next(error);
   }
 
-  if (currentDocumentExists === null || undefined) {
+  if (!currentDocumentExists) {
     try {
       const analyticsData = new AnalyticsModel(req.body);
       await analyticsData.save();

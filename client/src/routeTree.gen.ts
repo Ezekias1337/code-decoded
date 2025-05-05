@@ -24,6 +24,7 @@ const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')()
 const PageNotFoundLazyImport = createFileRoute('/page-not-found')()
 const LoginLazyImport = createFileRoute('/login')()
 const FaqsLazyImport = createFileRoute('/faqs')()
+const DoNotSellLazyImport = createFileRoute('/do-not-sell')()
 const ContactUsLazyImport = createFileRoute('/contact-us')()
 const ContactFormSubmittedLazyImport = createFileRoute(
   '/contact-form-submitted',
@@ -63,6 +64,11 @@ const FaqsLazyRoute = FaqsLazyImport.update({
   path: '/faqs',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/faqs.lazy').then((d) => d.Route))
+
+const DoNotSellLazyRoute = DoNotSellLazyImport.update({
+  path: '/do-not-sell',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/do-not-sell.lazy').then((d) => d.Route))
 
 const ContactUsLazyRoute = ContactUsLazyImport.update({
   path: '/contact-us',
@@ -154,6 +160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactUsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/do-not-sell': {
+      id: '/do-not-sell'
+      path: '/do-not-sell'
+      fullPath: '/do-not-sell'
+      preLoaderRoute: typeof DoNotSellLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/faqs': {
       id: '/faqs'
       path: '/faqs'
@@ -202,6 +215,7 @@ export const routeTree = rootRoute.addChildren({
   AboutUsLazyRoute,
   ContactFormSubmittedLazyRoute,
   ContactUsLazyRoute,
+  DoNotSellLazyRoute,
   FaqsLazyRoute,
   LoginLazyRoute,
   PageNotFoundLazyRoute,
@@ -224,6 +238,7 @@ export const routeTree = rootRoute.addChildren({
         "/about-us",
         "/contact-form-submitted",
         "/contact-us",
+        "/do-not-sell",
         "/faqs",
         "/login",
         "/page-not-found",
@@ -251,6 +266,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/contact-us": {
       "filePath": "contact-us.lazy.tsx"
+    },
+    "/do-not-sell": {
+      "filePath": "do-not-sell.lazy.tsx"
     },
     "/faqs": {
       "filePath": "faqs.lazy.tsx"

@@ -14,13 +14,13 @@ const PrivacyPolicy = () => (
         <title>Code Decoded | Privacy Policy</title>
       </Helmet>
     </HelmetProvider>
-    
+
     <PageHeader title="Privacy Policy" />
     <div className="privacy-policy-wrapper padding-left-and-right">
       <p>
         At Code Decoded, we are committed to protecting your privacy. This
         Privacy Policy outlines how we collect, use, and safeguard your
-        information when you visit our website. Information We Collect:
+        information when you visit our website.
       </p>
 
       <h2 className="padding-top-40 padding-bottom-20">
@@ -97,6 +97,17 @@ const PrivacyPolicy = () => (
         promotional communications from us. You can unsubscribe from our mailing
         list by following the instructions included in our emails or by
         contacting us directly.
+      </p>
+      <p>
+        <strong>c. Data Collection Opt-Out:</strong> If you prefer not to have your
+        website interactions collected for analytics purposes, you can submit a
+        request through our{" "}
+        <GeneralLink
+          text="Do Not Sell or Share My Personal Information"
+          url="/do-not-sell"
+          openInNewTab={false}
+        />{" "}
+        page to opt out of data collection.
       </p>
 
       <h2 className="padding-top-40 padding-bottom-20">5. Data Security:</h2>

@@ -1,58 +1,43 @@
 // Library Imports
-import { useEffect, useMemo } from "react";
+import { useEffect, useRef } from "react";
 // Functions, Helpers, Utils, and Hooks
-import fetchData from "../functions/network/fetchData";
+import sendAnalytics from "../helpers/sendAnalytics";
+import getOrCreateIdentifier from "../utils/getOrCreateIdentifier";
 import useDeviceInfo from "./useDeviceInfo";
-import generateRandomId from "../../../shared/utils/strings/generateRandomId";
+import useCookieConsent from "./useCookieConsent";
+import useGlobalPrivacyControl from "./useGlobalPrivacyControl";
+
 
 const useAnalytics = () => {
-  const userAgentInfo = useDeviceInfo();
+  const hasCookieConsent = useCookieConsent();
+  const hasGlobalPrivacyControl = useGlobalPrivacyControl();
+  const userAgentInfo = useDeviceInfo(hasGlobalPrivacyControl);
+  const userIdentifier = getOrCreateIdentifier(hasGlobalPrivacyControl, hasCookieConsent);
 
-  const getOrCreateIdentifier = () => {
-    let identifier = localStorage.getItem("userIdentifier");
-    if (!identifier) {
-      identifier = generateRandomId();
-      localStorage.setItem("userIdentifier", identifier);
-    }
-    return identifier;
-  };
-
-  const userIdentifier = useMemo(getOrCreateIdentifier, []);
-
-  const sendAnalytics = useMemo(() => {
-    return () => {
-      const pageVisits = JSON.parse(localStorage.getItem("pageVisits") || "[]");
-
-      if (pageVisits.length > 0) {
-        const payload = {
-          userIdentifier,
-          userAgentInfo,
-          pageVisits,
-          baseUrl: window.location.origin,
-        };
-
-        fetchData("/api/analytics/update-analytics", {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-      }
-    };
-  }, [userIdentifier, userAgentInfo]);
+  // Refs to always have the latest data
+  const userAgentRef = useRef(userAgentInfo);
+  const userIdRef = useRef(userIdentifier);
 
   useEffect(() => {
-    const numberOfMinutes = 3;
-    const intervalId = setInterval(sendAnalytics, numberOfMinutes * 60 * 1000);
-    window.addEventListener("beforeunload", sendAnalytics);
+    userAgentRef.current = userAgentInfo;
+    userIdRef.current = userIdentifier;
+  }, [userAgentInfo, userIdentifier]);
+
+  useEffect(() => {
+    if (!hasCookieConsent) return;
+
+    const handleAnalytics = () => {
+      sendAnalytics(userIdRef.current, userAgentRef.current);
+    };
+
+    const intervalId = setInterval(handleAnalytics, 1 * 60 * 1000);
+    window.addEventListener("beforeunload", handleAnalytics);
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener("beforeunload", sendAnalytics);
+      window.removeEventListener("beforeunload", handleAnalytics);
     };
-  }, [sendAnalytics]);
+  }, [hasCookieConsent]);
 };
 
 export default useAnalytics;
