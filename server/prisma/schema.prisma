@@ -6,12 +6,11 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_URL")
 }
 
 enum Role {
@@ -22,16 +21,30 @@ enum Role {
 }
 
 model User {
-  id                 String   @id @default(uuid())
+  id                 String          @id @default(uuid())
   name               String
-  emailAddress       String   @unique
+  emailAddress       String          @unique
   password           String
-  phoneNumber        String   @unique
+  phoneNumber        String          @unique
   role               Role
-  profilePicture     Bytes?   
+  profilePicture     Bytes?
   profilePictureType String?
-  isVerified         Boolean  @default(false)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  isVerified         Boolean         @default(false)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  PendingChange      PendingChange[]
 }
 
+model PendingChange {
+  id                 String   @id @default(uuid())
+  userId             String
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name               String?
+  emailAddress       String?
+  phoneNumber        String?
+  role               Role?
+  profilePicture     Bytes?
+  profilePictureType String?
+  verificationCode   String
+  createdAt          DateTime @default(now())
+}

@@ -5,7 +5,7 @@ import fetchData from "./fetchData";
 
 const getUser = async (userId: string): Promise<UserReturnedFromDB | null> => {
   try {
-    const response = await fetchData(`/api/get-user/${userId}`, {
+    const response = await fetchData(`/api/users/:${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

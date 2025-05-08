@@ -4,6 +4,7 @@ import { Session } from "express-session";
 import createHttpError from "http-errors";
 import { Resend } from "resend";
 import bcrypt from "bcrypt";
+import { PrismaClient, Role } from "@prisma/client";
 // Models
 import UserModel from "../models/user";
 import PendingChangesModel from "../models/pendingChanges";
@@ -13,10 +14,11 @@ import generateRandomNumber from "../../../shared/utils/strings/generateRandomNu
 import env from "../util/validateEnv";
 
 interface userCreationBody {
-  name?: string;
-  emailAddress?: string;
-  password?: string;
-  role?: string;
+  name: string;
+  phoneNumber: string;
+  emailAddress: string;
+  password: string;
+  role: Role;
 }
 
 interface LoginBody {
@@ -27,6 +29,8 @@ interface LoginBody {
 interface CustomSession extends Session {
   userId?: string;
 }
+
+const prisma = new PrismaClient();
 
 const sendVerificationCode = async (
   emailAddress: string,
@@ -77,63 +81,68 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
       throw createHttpError(401, "User not authenticated.");
     }
 
-    const user = await UserModel.findById(
-      authenticatedUserIdFromSession
-    ).exec();
+    const user = await prisma.user.findUnique({
+      where: { id: authenticatedUserIdFromSession },
+    });
+
     res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 };
 
+
 export const getUser: RequestHandler = async (req, res, next) => {
   try {
     const userId = req.query.userId as string;
-    const userFromDB = await UserModel.findById(userId).exec();
+
+    const userFromDB = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
     res.status(200).json(userFromDB);
   } catch (error) {
     next(error);
   }
 };
 
+
 export const getAllUsers: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfUsers = await UserModel.find().exec();
+    const arrayOfUsers = await prisma.user.findMany();
     res.status(200).json(arrayOfUsers);
   } catch (error) {
     next(error);
   }
 };
 
+
 export const updateUser: RequestHandler = async (req, res, next) => {
   try {
     const { name, emailAddress, phoneNumber, role, userIdToEdit } = req.body;
 
-    // Fetch the existing user data
-    const existingUser = await UserModel.findById(userIdToEdit).exec();
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userIdToEdit },
+    });
 
     if (!existingUser) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if the new email address is different
     if (emailAddress !== existingUser.emailAddress) {
-      const verificationCode = generateRandomNumber(6, "string");
-      await sendVerificationCode(
-        emailAddress,
-        verificationCode as string,
-        name
-      );
+      const verificationCode: string = generateRandomNumber(6).toString();
 
-      await PendingChangesModel.create({
-        userId: userIdToEdit,
-        changes: {
-          ...(name && { name }),
-          ...(emailAddress && { emailAddress }),
-          ...(phoneNumber && { phoneNumber }),
-          ...(role && { role }),
+      await sendVerificationCode(emailAddress, verificationCode, name);
+
+      await prisma.pendingChange.create({
+        data: {
+          userId: userIdToEdit,
+          verificationCode,
+          name,
+          emailAddress,
+          phoneNumber,
+          role,
         },
-        verificationCode,
       });
 
       return res.status(200).json({
@@ -142,21 +151,15 @@ export const updateUser: RequestHandler = async (req, res, next) => {
       });
     }
 
-    // Proceed with the update
-    const update = {
-      $set: {
+    const updatedUser = await prisma.user.update({
+      where: { id: userIdToEdit },
+      data: {
         name,
         emailAddress,
         phoneNumber,
         role,
       },
-    };
-
-    const updatedUser = await UserModel.findOneAndUpdate(
-      { _id: existingUser._id },
-      update,
-      { new: true } // This option ensures the updated document is returned
-    ).exec();
+    });
 
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -164,37 +167,42 @@ export const updateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+
 export const verifyEmail: RequestHandler = async (req, res, next) => {
   const { userId, verificationCode } = req.body;
 
   try {
-    const pendingChange = await PendingChangesModel.findOne({
-      userId,
-      verificationCode,
+    const pendingChange = await prisma.pendingChange.findFirst({
+      where: {
+        userId,
+        verificationCode,
+      },
     });
+
     if (!pendingChange) {
       return res.status(400).send("Invalid verification code.");
     }
 
-    const {
-      name,
-      emailAddress,
-      phoneNumber,
-      role,
-      profilePicture,
-      profilePictureType,
-    } = pendingChange.changes;
+    const { name, emailAddress, phoneNumber, role, profilePicture, profilePictureType } = pendingChange;
+    if (!name || !emailAddress || !phoneNumber || !role) {
+      return res.status(400).send("Missing required fields.");
+    }
 
-    await UserModel.findByIdAndUpdate(userId, {
-      ...(name && { name }),
-      ...(emailAddress && { emailAddress }),
-      ...(phoneNumber && { phoneNumber }),
-      ...(role && { role }),
-      ...(profilePicture && { profilePicture }),
-      ...(profilePictureType && { profilePictureType }),
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name,
+        emailAddress,
+        phoneNumber,
+        role,
+        profilePicture,
+        profilePictureType,
+      },
     });
 
-    await pendingChange.deleteOne();
+    await prisma.pendingChange.delete({
+      where: { id: pendingChange.id },
+    });
 
     res.status(200).send("Email verified and changes applied successfully.");
   } catch (error) {
@@ -202,11 +210,12 @@ export const verifyEmail: RequestHandler = async (req, res, next) => {
   }
 };
 
+
 export const deleteUser: RequestHandler = async (req, res, next) => {
   try {
-    const userFromDB = await UserModel.findByIdAndDelete(
-      req.body.userId
-    ).exec();
+    const userFromDB = await prisma.user.delete({
+      where: { id: req.body.userId },
+    });
 
     res.status(200).json(userFromDB);
   } catch (error) {
@@ -214,49 +223,57 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+
 export const createUser: RequestHandler<
   unknown,
   unknown,
   userCreationBody,
   unknown
 > = async (req, res, next) => {
-  const { name, emailAddress: email, password, role } = req.body;
+  const { name, phoneNumber, emailAddress, password, role }: {
+    name: string;
+    phoneNumber: string;
+    emailAddress: string;
+    password: string;
+    role: Role;
+  } = req.body;
 
   try {
-    if (!name || !email || !password || !role) {
-      throw createHttpError(
-        400,
-        "You didn't fill out all of the required fields, try again."
-      );
+    if (!name || !phoneNumber || !emailAddress || !password || !role || role in Role === false) {
+      throw createHttpError(400, "Missing required fields.");
     }
 
-    const existingEmail = await UserModel.findOne({
-      emailAddress: email,
-    }).exec();
+    const existingEmail = await prisma.user.findUnique({
+      where: { emailAddress },
+    });
+
     if (existingEmail) {
-      throw createHttpError(
-        409,
-        "Email already taken. Please choose a different one or log in."
-      );
+      throw createHttpError(409, "Email already taken.");
     }
 
     const passwordHashed = await bcrypt.hash(password, 10);
-    const newUser = await UserModel.create({
-      name,
-      emailAddress: email,
-      password: passwordHashed,
-      role,
-      isVerified: false,
+
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        phoneNumber,
+        emailAddress,
+        password: passwordHashed,
+        role: role,
+        isVerified: false,
+      },
     });
 
-    const verificationCode = generateRandomNumber(6, "string");
-    await PendingChangesModel.create({
-      userId: newUser._id,
-      changes: {},
-      verificationCode,
+    const verificationCode: string = generateRandomNumber(6).toString();
+
+    await prisma.pendingChange.create({
+      data: {
+        userId: newUser.id,
+        verificationCode,
+      },
     });
 
-    await sendVerificationCode(email, verificationCode as string, name);
+    await sendVerificationCode(emailAddress, verificationCode, name);
 
     res.status(201).json({
       message: "User created. Please check your email to verify your account.",
@@ -265,6 +282,7 @@ export const createUser: RequestHandler<
     next(error);
   }
 };
+
 
 export const login: RequestHandler<
   unknown,
@@ -277,17 +295,14 @@ export const login: RequestHandler<
 
   try {
     if (!email || !password) {
-      throw createHttpError(
-        400,
-        "You didn't fill out all of the required fields, try again."
-      );
+      throw createHttpError(400, "Missing required fields.");
     }
 
-    const user = await UserModel.findOne({ emailAddress: email })
-      .select("+password")
-      .exec();
+    const user = await prisma.user.findUnique({
+      where: { emailAddress: email },
+    });
 
-    if (!user) {
+    if (!user || !user.password) {
       throw createHttpError(401, "Invalid credentials");
     }
 
@@ -296,20 +311,14 @@ export const login: RequestHandler<
       throw createHttpError(401, "Invalid credentials");
     }
 
-    (req.session as CustomSession).userId = user._id.toString();
+    (req.session as CustomSession).userId = user.id;
 
-    // Set a cookie with the user's ID
-    (res.cookie as any)("userId", user._id, {
-      httpOnly: true, // This ensures that the cookie cannot be accessed by client-side scripts
-      secure: true, // This requires HTTPS to send the cookie
-      sameSite: "None", // This allows cross-origin requests
-    });
-
-    res.status(201).json(user);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 };
+
 
 export const logout: RequestHandler = (req, res, next) => {
   req.session.destroy((error) => {

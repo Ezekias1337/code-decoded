@@ -20,7 +20,8 @@ import { FormEvent } from "react";
 import fetchData from "../functions/network/fetchData.ts";
 import getUser from "../functions/network/getUser.ts";
 import { camelCasifyString } from "../../../shared/utils/strings/camelCasifyString.ts";
-
+// Types
+import { Role } from "../constants/interfaces/user.ts";
 // Constants
 import {
   fullNameAutocomplete,
@@ -65,9 +66,9 @@ const EditProfile = () => {
   }, [submissionSuccessful, navigate, redirectUrl]);
 
   useEffect(() => {
-    if (userIdToEdit === user?._id && userToEdit !== user) {
+    if (userIdToEdit === user?.id && userToEdit !== user) {
       setUserToEdit(user);
-    } else if (userIdToEdit !== user?._id && userToEdit === null) {
+    } else if (userIdToEdit !== user?.id && userToEdit === null) {
       const fetchUser = async () => {
         const userFromDB = await getUser(userIdToEdit);
         setUserToEdit(userFromDB);
@@ -143,7 +144,7 @@ const EditProfile = () => {
           name: "Role",
           label: "Role",
           additionalClassNames: "",
-          defaultValue: userToEdit?.role[0],
+          defaultValue: userToEdit.role as unknown as string,
           placeholder: "User",
           columns: "6",
           type: "dropdown",
@@ -157,35 +158,27 @@ const EditProfile = () => {
         },
       ];
 
+      const defaultValue = user?.role as unknown as string;
       let roleFieldOptions: string[];
 
-      if (user?.role[0] === "Admin") {
-        roleFieldOptions = ["Admin", "Admin Assistant", "Employee", "User"];
-        const roleField = {
-          ...tempInputFields[3],
-          defaultValue: user?.role[0],
-          dropdownOptions: roleFieldOptions,
-        };
-        tempInputFields[3] = roleField;
-      } else if (user?.role[0] === "Admin Assistant") {
-        roleFieldOptions = ["Admin Assistant", "Employee", "User"];
-        const roleField = {
-          ...tempInputFields[3],
-          defaultValue: user?.role[0],
-          dropdownOptions: roleFieldOptions,
-        };
-        tempInputFields[3] = roleField;
-      } else if (user?.role[0] === "Employee") {
-        roleFieldOptions = ["Employee", "User"];
-        const roleField = {
-          ...tempInputFields[3],
-          defaultValue: user?.role[0],
-          dropdownOptions: roleFieldOptions,
-        };
-        tempInputFields[3] = roleField;
+      if (user?.role === Role["Admin"]) {
+        roleFieldOptions = [Role[0], Role[1], Role[2], Role[3]];
+      } else if (user?.role === Role["Admin Assistant"]) {
+        roleFieldOptions = [Role[1], Role[2], Role[3]];
+      } else if (user?.role === Role["Employee"]) {
+        roleFieldOptions = [Role[2], Role[3]];
       } else {
-        tempInputFields = tempInputFields.slice(0, -1);
+        //tempInputFields = tempInputFields.slice(0, -1);
+        roleFieldOptions = [Role[3]];
       }
+
+      const roleField = {
+        ...tempInputFields[3],
+        defaultValue: defaultValue,
+        dropdownOptions: roleFieldOptions,
+      };
+
+      tempInputFields[3] = roleField;
 
       setArrayOfInputFields(tempInputFields);
     }
@@ -195,7 +188,7 @@ const EditProfile = () => {
     argument1: arrayOfInputFields,
     argument2: formInputData,
     argument3: setFormErrorData,
-    argument4: "/api/users/update-user",
+    argument4: `/api/users/:${userIdToEdit}`,
     argument5: "PATCH",
   };
 
@@ -248,7 +241,7 @@ const EditProfile = () => {
         const payloadForDispatch = {
           ...userToEdit,
           ...formStateWithDefaultValues,
-          role: [formStateWithDefaultValues.role],
+          role: [formStateWithDefaultValues.role] as unknown as Role,
         };
         dispatch({
           type: "SET_USER",
@@ -260,7 +253,7 @@ const EditProfile = () => {
           responseJson.message ===
           "Email Address on file is different than the one provided, verification code sent."
         ) {
-          setRedirectUrl(`/verify-email/?id=${userToEdit?._id}&update=${true}`);
+          setRedirectUrl(`/verify-email/?id=${userToEdit?.id}&update=${true}`);
           setSubmissionInProgress(false);
         }
         setSubmissionSuccessful(true);
@@ -296,7 +289,7 @@ const EditProfile = () => {
           {arrayOfInputFields ? (
             <Form
               inputFields={arrayOfInputFields}
-              apiEndpoint="/api/users/update-user"
+              apiEndpoint={`/api/users/:${userIdToEdit}`}
               formId="contact-us-form"
               setStateHook={setFormInputData}
               setErrorHook={setFormErrorData}
@@ -311,7 +304,7 @@ const EditProfile = () => {
                   arrayOfInputFields,
                   formInputData,
                   setFormErrorData,
-                  "/api/users/update-user",
+                  `/api/users/:${userIdToEdit}`,
                   "PATCH"
                 )
               }

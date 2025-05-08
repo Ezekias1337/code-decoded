@@ -11,6 +11,8 @@ import {
 import { isAuthenticated } from "../authentication/authState";
 // Functions, Helpers, Utils, and Hooks
 import { useAuth } from "../context/AuthContext";
+// Types and Interfaces
+import { Role } from "../constants/interfaces/user";
 // Components
 import { PageHeader } from "../components/general-page-layout/page-header/PageHeader";
 import { Card } from "../components/card/Card";
@@ -45,7 +47,7 @@ const UserHome = () => {
                 buttonCount={2}
                 cardVariant="bodyOnly"
                 button1Text="Edit Profile"
-                button1Link={`/edit-profile?id=${user?._id}`}
+                button1Link={`/edit-profile?id=${user.id}`}
                 button1Variant="primary-dark"
                 button1Icon={faPencil}
                 buttonSize="medium"
@@ -61,32 +63,33 @@ const UserHome = () => {
                 button1Icon={faGlobe}
                 buttonSize="medium"
               />
-              {user?.role[0] === ("Admin" || "Admin Assistant") && (
-                <>
-                  <Card
-                    headerText="Users"
-                    bodyText="View and manage the users of Code Decoded"
-                    buttonCount={1}
-                    cardVariant="bodyOnly"
-                    button1Text="View Accounts"
-                    button1Link="/accounts"
-                    button1Variant="primary-dark"
-                    button1Icon={faUser}
-                    buttonSize="medium"
-                  />
-                  <Card
-                    headerText="Analytics"
-                    bodyText="View the analytics of Code Decoded broken down by browser, device type, and operating system along with the corresponding page visits."
-                    buttonCount={1}
-                    cardVariant="bodyOnly"
-                    button1Text="View Analytics"
-                    button1Link="/analytics"
-                    button1Variant="primary-dark"
-                    button1Icon={faChartPie}
-                    buttonSize="medium"
-                  />
-                </>
-              )}
+              {user?.role === Role["Admin"] ||
+                (user?.role === Role["Admin Assistant"] && (
+                  <>
+                    <Card
+                      headerText="Users"
+                      bodyText="View and manage the users of Code Decoded"
+                      buttonCount={1}
+                      cardVariant="bodyOnly"
+                      button1Text="View Accounts"
+                      button1Link="/accounts"
+                      button1Variant="primary-dark"
+                      button1Icon={faUser}
+                      buttonSize="medium"
+                    />
+                    <Card
+                      headerText="Analytics"
+                      bodyText="View the analytics of Code Decoded broken down by browser, device type, and operating system along with the corresponding page visits."
+                      buttonCount={1}
+                      cardVariant="bodyOnly"
+                      button1Text="View Analytics"
+                      button1Link="/analytics"
+                      button1Variant="primary-dark"
+                      button1Icon={faChartPie}
+                      buttonSize="medium"
+                    />
+                  </>
+                ))}
             </div>
           </div>
         </>

@@ -1,16 +1,11 @@
 const generateRandomNumbers = (
   length: number,
-  numberOrString: "number" | "string"
-): string | number => {
+): number => {
   let result = "";
   for (let i = 0; i < length; i++) {
     result += Math.floor(Math.random() * 10);
   }
-  if (numberOrString === "number") {
-    return result;
-  } else {
-    return result.toString();
-  }
+  return parseInt(result);
 };
 
 export default generateRandomNumbers;

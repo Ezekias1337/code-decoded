@@ -5,7 +5,7 @@ import fetchData from "./fetchData";
 
 const getLoggedInUser = async (): Promise<UserReturnedFromDB | null> => {
   try {
-    const response = await fetchData("/api/users/get-authenticated-user", {
+    const response = await fetchData("/api/users/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
