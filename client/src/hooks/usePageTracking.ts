@@ -1,6 +1,7 @@
 // Library Imports
 import { useEffect, useCallback, useState } from "react";
 import { useRouter, useLocation } from "@tanstack/react-router";
+import { v4 as uuid } from "uuid";
 // Functions, Helpers, Utils, and Hooks
 import useCookieConsent from "./useCookieConsent";
 import useGlobalPrivacyControl from "./useGlobalPrivacyControl";
@@ -26,9 +27,12 @@ const usePageTracking = () => {
     const currentVisits = JSON.parse(
       localStorage.getItem("pageVisits") || "[]"
     );
+    const storedUserIdentifier = localStorage.getItem("userIdentifier");
     currentVisits.push({
       path: location.pathname,
       timestamp: new Date().toISOString(),
+      analyticsId: storedUserIdentifier,
+      id: uuid(),
     });
     localStorage.setItem("pageVisits", JSON.stringify(currentVisits));
   }, [location.pathname, hasCookieConsent, hasGlobalPrivacyControl]);

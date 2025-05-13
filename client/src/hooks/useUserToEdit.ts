@@ -9,9 +9,9 @@ const useUserToEdit = (userIdToEdit: string, user: UserReturnedFromDB | null) =>
   const [userToEdit, setUserToEdit] = useState<UserReturnedFromDB | null>(null);
 
   useEffect(() => {
-    if (userIdToEdit === user?._id) {
+    if (userIdToEdit === user?.id) {
       setUserToEdit(user);
-    } else if (userIdToEdit !== user?._id || userToEdit === null) {
+    } else if (userIdToEdit !== user?.id || userToEdit === null) {
       const fetchUser = async () => {
         const userFromDB = await getUser(userIdToEdit);
         setUserToEdit(userFromDB);

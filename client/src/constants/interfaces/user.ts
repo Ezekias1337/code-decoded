@@ -3,11 +3,11 @@ export interface User {
 }
 
 export enum Role {
-  "Admin",
-  "Admin Assistant",
-  "Employee",
-  "User"
+  Admin = "Admin",
+  Employee = "Employee",
+  User = "User"
 }
+
 
 export interface UserReturnedFromDB {
   id: string;

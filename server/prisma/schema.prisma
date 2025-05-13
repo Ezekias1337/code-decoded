@@ -48,3 +48,30 @@ model PendingChange {
   verificationCode   String
   createdAt          DateTime @default(now())
 }
+
+model Analytics {
+  userIdentifier String @id @default(uuid())
+  userAgentInfo  Json
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  pageVisits     PageVisit[] 
+  baseUrl        String
+}
+
+model PageVisit {
+  id          String    @id @default(uuid())
+  analytics   Analytics @relation(fields: [analyticsId], references: [userIdentifier], onDelete: Cascade)
+  analyticsId String
+  path        String
+  timestamp   DateTime
+}
+
+model WebsiteOrApp {
+  id                            Int    @id @default(autoincrement())
+  name                          String
+  phoneNumber                   String
+  emailAddress                  String
+  productTier                   String
+  describeYourDreamWebsiteOrApp String
+  websiteStatus                 String
+}

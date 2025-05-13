@@ -23,3 +23,5 @@ deleteExpiredPendingChanges().catch((err) => {
     prisma.$disconnect();
     process.exit(1);
 });
+
+export default deleteExpiredPendingChanges;

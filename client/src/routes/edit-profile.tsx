@@ -161,15 +161,17 @@ const EditProfile = () => {
       const defaultValue = user?.role as unknown as string;
       let roleFieldOptions: string[];
 
-      if (user?.role === Role["Admin"]) {
-        roleFieldOptions = [Role[0], Role[1], Role[2], Role[3]];
-      } else if (user?.role === Role["Admin Assistant"]) {
-        roleFieldOptions = [Role[1], Role[2], Role[3]];
-      } else if (user?.role === Role["Employee"]) {
-        roleFieldOptions = [Role[2], Role[3]];
+      if (user?.role === undefined) {
+        return;
+      }
+
+      if (user.role === Role.Admin) {
+        roleFieldOptions = [Role.Admin, Role.Employee, Role.User];
+      } else if (user.role === Role.Employee) {
+        roleFieldOptions = [Role.Employee, Role.User];
       } else {
-        //tempInputFields = tempInputFields.slice(0, -1);
-        roleFieldOptions = [Role[3]];
+        console.log("DEFAULT CASE");
+        roleFieldOptions = [Role.User];
       }
 
       const roleField = {
@@ -241,7 +243,7 @@ const EditProfile = () => {
         const payloadForDispatch = {
           ...userToEdit,
           ...formStateWithDefaultValues,
-          role: [formStateWithDefaultValues.role] as unknown as Role,
+          role: formStateWithDefaultValues.role as unknown as Role,
         };
         dispatch({
           type: "SET_USER",

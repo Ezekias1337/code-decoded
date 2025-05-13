@@ -4,10 +4,8 @@ import { Session } from "express-session";
 import createHttpError from "http-errors";
 import { Resend } from "resend";
 import bcrypt from "bcrypt";
-import { PrismaClient, Role } from "@prisma/client";
-// Models
-import UserModel from "../models/user";
-import PendingChangesModel from "../models/pendingChanges";
+import { Role } from "@prisma/client";
+import { prisma } from "../constants/prisma";
 // Functions, Helpers, and Utils
 import generateRandomNumber from "../../../shared/utils/strings/generateRandomNumbers";
 // ENV
@@ -30,8 +28,6 @@ interface CustomSession extends Session {
   userId?: string;
 }
 
-const prisma = new PrismaClient();
-
 const sendVerificationCode = async (
   emailAddress: string,
   verificationCode: string,
@@ -43,33 +39,20 @@ const sendVerificationCode = async (
     from: "no-reply@codeddecoded.com",
     to: [`${emailAddress}`],
     subject: "Your Email Verification Code",
-    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-                <html dir="ltr" lang="en">
-                  <body style="font-family:&quot;Times New Roman&quot;,Times,serif;background-color:#040a15;margin:0 auto;padding-left:40px;padding-right:40px;padding-top:80px;padding-bottom:80px">
-                      <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="max-width:37.5em;display:flex;justify-content:center;align-items:center">
-                        <tbody>
-                            <tr style="width:100%">
-                              <td><img src="https://codeddecoded.com/assets/images/logo/logo.png" style="display:block;outline:none;border:none;text-decoration:none" width="300" /></td>
-                            </tr>
-                        </tbody>
-                      </table>
-                      <h1>
-                        <p style="font-size:56.8px;line-height:40px;margin:16px 0;color:#d6e1f6;padding-bottom:40px">Dear ${name}, </p>
-                      </h1>
-                      <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd">You have requested a change to your registered email. Your verification code is:</p>
-                      <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="max-width:37.5em;border:1.5px solid;border-color:#4276cf;border-radius:5px;padding:40px;display:flex;justify-content:center;align-items:center;margin-top:80px;margin-bottom:80px">
-                        <tbody>
-                            <tr style="width:100%">
-                              <td>
-                                  <p style="font-size:44.79px;line-height:30px;margin:16px 0;color:#fcfcfd">${verificationCode}</p>
-                              </td>
-                            </tr>
-                        </tbody>
-                      </table>
-                      <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd">If you did not request a verification code, please disregard this email.</p>
-                  </body>
-                </html>
-                `,
+    html: `<!DOCTYPE html>
+      <html dir="ltr" lang="en">
+        <body style="font-family:'Times New Roman',Times,serif;background-color:#040a15;margin:0 auto;padding:80px 40px;">
+            <table align="center" style="max-width:37.5em;margin:auto;">
+              <tr><td><img src="https://codeddecoded.com/assets/images/logo/logo.png" width="300" /></td></tr>
+            </table>
+            <h1 style="font-size:56.8px;color:#d6e1f6;margin-top:40px;">Dear ${name},</h1>
+            <p style="font-size:31.1px;color:#fcfcfd;">You have requested a change to your registered email. Your verification code is:</p>
+            <table align="center" style="border:1.5px solid #4276cf;border-radius:5px;padding:40px;margin:80px auto;">
+              <tr><td><p style="font-size:44.79px;color:#fcfcfd;">${verificationCode}</p></td></tr>
+            </table>
+            <p style="font-size:31.1px;color:#fcfcfd;">If you did not request a verification code, please disregard this email.</p>
+        </body>
+      </html>`,
   });
 };
 
@@ -91,7 +74,6 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 export const getUser: RequestHandler = async (req, res, next) => {
   try {
     const userId = req.query.userId as string;
@@ -106,7 +88,6 @@ export const getUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 export const getAllUsers: RequestHandler = async (req, res, next) => {
   try {
     const arrayOfUsers = await prisma.user.findMany();
@@ -115,7 +96,6 @@ export const getAllUsers: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const updateUser: RequestHandler = async (req, res, next) => {
   try {
@@ -142,6 +122,8 @@ export const updateUser: RequestHandler = async (req, res, next) => {
           emailAddress,
           phoneNumber,
           role,
+          profilePicture: existingUser.profilePicture,
+          profilePictureType: existingUser.profilePictureType,
         },
       });
 
@@ -167,7 +149,6 @@ export const updateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 export const verifyEmail: RequestHandler = async (req, res, next) => {
   const { userId, verificationCode } = req.body;
 
@@ -182,21 +163,16 @@ export const verifyEmail: RequestHandler = async (req, res, next) => {
     if (!pendingChange) {
       return res.status(400).send("Invalid verification code.");
     }
-
-    const { name, emailAddress, phoneNumber, role, profilePicture, profilePictureType } = pendingChange;
-    if (!name || !emailAddress || !phoneNumber || !role) {
-      return res.status(400).send("Missing required fields.");
+    
+    if(!pendingChange.emailAddress) {
+      return res.status(400).send("Email address was not provided.");
     }
 
     await prisma.user.update({
       where: { id: userId },
       data: {
-        name,
-        emailAddress,
-        phoneNumber,
-        role,
-        profilePicture,
-        profilePictureType,
+        isVerified: true,
+        emailAddress: pendingChange.emailAddress,
       },
     });
 
@@ -210,7 +186,6 @@ export const verifyEmail: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 export const deleteUser: RequestHandler = async (req, res, next) => {
   try {
     const userFromDB = await prisma.user.delete({
@@ -223,23 +198,16 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 export const createUser: RequestHandler<
   unknown,
   unknown,
   userCreationBody,
   unknown
 > = async (req, res, next) => {
-  const { name, phoneNumber, emailAddress, password, role }: {
-    name: string;
-    phoneNumber: string;
-    emailAddress: string;
-    password: string;
-    role: Role;
-  } = req.body;
+  const { name, phoneNumber, emailAddress, password, role } = req.body;
 
   try {
-    if (!name || !phoneNumber || !emailAddress || !password || !role || role in Role === false) {
+    if (!name || !phoneNumber || !emailAddress || !password || !role || !(role in Role)) {
       throw createHttpError(400, "Missing required fields.");
     }
 
@@ -259,7 +227,7 @@ export const createUser: RequestHandler<
         phoneNumber,
         emailAddress,
         password: passwordHashed,
-        role: role,
+        role,
         isVerified: false,
       },
     });
@@ -282,7 +250,6 @@ export const createUser: RequestHandler<
     next(error);
   }
 };
-
 
 export const login: RequestHandler<
   unknown,
@@ -318,7 +285,6 @@ export const login: RequestHandler<
     next(error);
   }
 };
-
 
 export const logout: RequestHandler = (req, res, next) => {
   req.session.destroy((error) => {

@@ -148,6 +148,7 @@ const EditProfile = () => {
         const payloadForDispatch = {
           ...userToEdit,
         };
+        console.log("payloadForDispatch", payloadForDispatch);
         dispatch({
           type: "SET_USER",
           payload: payloadForDispatch as UserReturnedFromDB,

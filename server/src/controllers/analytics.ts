@@ -1,75 +1,104 @@
 // Library Imports
 import { RequestHandler } from "express";
 import createHttpError from "http-errors";
-import { Resend } from "resend";
-// Models
-import AnalyticsModel from "../models/analytics";
+import { prisma } from "../constants/prisma";
 
-/* export const getAnalyticsByBrowser: RequestHandler = async (req, res, next) => {
+export const updateAnalytics: RequestHandler = async (req, res, next) => {
+  const { userIdentifier, userAgentInfo, pageVisits, baseUrl } = req.body;
+
   try {
-    const browserAnalytics = await AnalyticsModel.findById(
-      req.params.websiteId
-    ).exec();
-
-    if (!websiteOrAppFromDB) {
-      return res
-        .status(404)
-        .json({ error: "Website with the given ID doesn't exist" });
+    if (!userIdentifier) {
+      throw createHttpError(400, "Missing required field: userIdentifier.");
     }
 
-    res.status(200).json(websiteOrAppFromDB);
+    if (!Array.isArray(pageVisits)) {
+      throw createHttpError(400, "pageVisits must be an array.");
+    }
+
+    const formattedPageVisits = pageVisits.map((visit: any) => ({
+      path: visit.path,
+      timestamp: new Date(visit.timestamp),
+    }));
+
+    const existingEntry = await prisma.analytics.findUnique({
+      where: { userIdentifier },
+    });
+
+    if (existingEntry) {
+      // Optionally add new visits to the existing entry
+      await prisma.pageVisit.createMany({
+        data: formattedPageVisits.map((visit) => ({
+          ...visit,
+          analyticsId: userIdentifier,
+        })),
+        skipDuplicates: true, // Optional: avoids duplicate inserts if UUIDs were being used
+      });
+
+      const updatedAnalytics = await prisma.analytics.update({
+        where: { userIdentifier },
+        data: {
+          userAgentInfo,
+          baseUrl,
+        },
+        include: {
+          pageVisits: true,
+        },
+      });
+
+      res.status(200).json(updatedAnalytics);
+    } else {
+      // Create new analytics entry with nested pageVisits
+      const newAnalytics = await prisma.analytics.create({
+        data: {
+          userIdentifier,
+          userAgentInfo,
+          baseUrl,
+          pageVisits: {
+            create: formattedPageVisits,
+          },
+        },
+        include: {
+          pageVisits: true,
+        },
+      });
+
+      res.status(201).json(newAnalytics);
+    }
   } catch (error) {
     next(error);
   }
 };
 
-export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
-  try {
-    const arrayOfWebsitesOrApps = await AnalyticsModel.find().exec();
 
-    if (!arrayOfWebsitesOrApps) {
+export const getAnalyticsByUserIdentifier: RequestHandler = async (req, res, next) => {
+  const userIdentifier = req.params.userIdentifier;
+
+  try {
+    if (!userIdentifier) {
+      throw createHttpError(400, "Missing user identifier in request params.");
+    }
+
+    const analytics = await prisma.analytics.findUnique({
+      where: { userIdentifier },
+    });
+
+    if (!analytics) {
       return res.status(404).json({
-        error:
-          "Unable to fetch websites from the Database, verify server is running properly.",
+        error: "Analytics entry not found for the provided user identifier.",
       });
     }
 
-    res.status(200).json(arrayOfWebsitesOrApps);
+    res.status(200).json(analytics);
   } catch (error) {
     next(error);
   }
 };
- */
 
-export const updateAnalytics: RequestHandler = async (req, res, next) => {
-  let currentDocumentExists;
-
+export const getAllAnalytics: RequestHandler = async (req, res, next) => {
   try {
-    currentDocumentExists = await AnalyticsModel.findOne({
-      userIdentifier: req.body.userIdentifier,
-    });
+    const allAnalytics = await prisma.analytics.findMany();
+    res.status(200).json(allAnalytics);
   } catch (error) {
     next(error);
-  }
-
-  if (!currentDocumentExists) {
-    try {
-      const analyticsData = new AnalyticsModel(req.body);
-      await analyticsData.save();
-      res.status(201).send(analyticsData);
-    } catch (error) {
-      next(error);
-    }
-  } else {
-    try {
-      let analyticsData = await AnalyticsModel.findOneAndUpdate(
-        { userIdentifier: req.body.userIdentifier },
-        req.body
-      ).exec();
-
-      res.status(201).send(analyticsData);
-    } catch (error) {
-      next(error);
-    }
   }
 };

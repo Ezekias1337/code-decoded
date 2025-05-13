@@ -162,7 +162,7 @@ const ContactUs = () => {
     argument1: arrayOfInputFields,
     argument2: formInputData,
     argument3: setFormErrorData,
-    argument4: "/api/websites-or-apps/create-website-or-app",
+    argument4: "/api/websites-or-apps",
     argument5: "POST",
   };
 
@@ -233,7 +233,7 @@ const ContactUs = () => {
       {arrayOfInputFields ? (
         <Form
           inputFields={arrayOfInputFields}
-          apiEndpoint="/api/websites-or-apps/create-website-or-app"
+          apiEndpoint="/api/websites-or-apps"
           formId="contact-us-form"
           setStateHook={setFormInputData}
           setErrorHook={setFormErrorData}
@@ -248,7 +248,7 @@ const ContactUs = () => {
               arrayOfInputFields,
               formInputData,
               setFormErrorData,
-              "/api/websites-or-apps/create-website-or-app",
+              "/api/websites-or-apps",
               "POST"
             )
           }

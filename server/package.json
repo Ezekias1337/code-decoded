@@ -6,7 +6,10 @@
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\"",
     "build": "tsc",
     "deploy": "npm install && npm run build",
-    "start": "node dist/server/src/index.js"
+    "start": "node dist/server/src/index.js",
+    "start:jobs": "node dist/server/src/jobs/index.js",
+    "start:jobs-dev": "ts-node src/jobs/index.ts",
+    "migrate": "prisma migrate dev --name init"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
@@ -22,6 +25,7 @@
     "helmet": "^8.1.0",
     "http": "^0.0.1-security",
     "http-errors": "^2.0.0",
+    "node-cron": "^4.0.4",
     "pg": "^8.15.6",
     "resend": "^3.2.0",
     "zod": "^3.24.3"

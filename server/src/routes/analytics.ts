@@ -3,8 +3,7 @@ import * as AnalyticsController from "../controllers/analytics";
 
 const router = express.Router();
 
-// POST requests
-router.post("/update-analytics", AnalyticsController.updateAnalytics);
+router.post("/", AnalyticsController.updateAnalytics);
 
 
 export default router;

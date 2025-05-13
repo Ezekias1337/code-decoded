@@ -18,7 +18,7 @@ const sendAnalytics = async (userIdentifier: string | null, userAgentInfo: UserA
             baseUrl: window.location.origin,
         };
 
-        fetchData("/api/analytics/update-analytics", {
+        fetchData("/api/analytics", {
             method: "POST",
             headers: {
                 Accept: "*/*",

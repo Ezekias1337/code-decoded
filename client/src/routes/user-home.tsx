@@ -63,8 +63,7 @@ const UserHome = () => {
                 button1Icon={faGlobe}
                 buttonSize="medium"
               />
-              {user?.role === Role["Admin"] ||
-                (user?.role === Role["Admin Assistant"] && (
+              {user?.role === Role.Admin  && (
                   <>
                     <Card
                       headerText="Users"
@@ -89,7 +88,7 @@ const UserHome = () => {
                       buttonSize="medium"
                     />
                   </>
-                ))}
+                )}
             </div>
           </div>
         </>

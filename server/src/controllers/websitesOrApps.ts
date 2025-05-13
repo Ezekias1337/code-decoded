@@ -1,13 +1,13 @@
 // Library Imports
 import { RequestHandler } from "express";
 import createHttpError from "http-errors";
+import { prisma } from "../constants/prisma"; // Assuming this is where your Prisma instance is
 import { Resend } from "resend";
-// Models
-import WebsiteOrAppModel from "../models/websiteOrApp";
 // ENV
 import env from "../util/validateEnv";
 
-interface websiteOrAppCreationBody {
+// Types
+interface WebsiteOrAppCreationBody {
   name: string;
   phoneNumber: string;
   emailAddress: string;
@@ -18,14 +18,12 @@ interface websiteOrAppCreationBody {
 
 export const getWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const websiteOrAppFromDB = await WebsiteOrAppModel.findById(
-      req.params.websiteId
-    ).exec();
+    const websiteOrAppFromDB = await prisma.websiteOrApp.findUnique({
+      where: { id: parseInt(req.params.websiteId) },
+    });
 
     if (!websiteOrAppFromDB) {
-      return res
-        .status(404)
-        .json({ error: "Website with the given ID doesn't exist" });
+      return res.status(404).json({ error: "Website with the given ID doesn't exist" });
     }
 
     res.status(200).json(websiteOrAppFromDB);
@@ -36,12 +34,11 @@ export const getWebsiteOrApp: RequestHandler = async (req, res, next) => {
 
 export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfWebsitesOrApps = await WebsiteOrAppModel.find().exec();
+    const arrayOfWebsitesOrApps = await prisma.websiteOrApp.findMany();
 
-    if (!arrayOfWebsitesOrApps) {
+    if (!arrayOfWebsitesOrApps.length) {
       return res.status(404).json({
-        error:
-          "Unable to fetch websites from the Database, verify server is running properly.",
+        error: "Unable to fetch websites from the Database, verify server is running properly.",
       });
     }
 
@@ -51,60 +48,44 @@ export const getAllWebsitesOrApps: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getNotStartedWebsitesOrApps: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const getNotStartedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfNotStartedWebsitesOrApps = await WebsiteOrAppModel.find({
-      websiteStatus: "Not Started",
-    }).exec();
+    const arrayOfNotStartedWebsitesOrApps = await prisma.websiteOrApp.findMany({
+      where: { websiteStatus: "Not Started" },
+    });
     res.status(200).json(arrayOfNotStartedWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getInProgressWebsitesOrApps: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const getInProgressWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfInProgressWebsitesOrApps = await WebsiteOrAppModel.find({
-      websiteStatus: "In Progress",
-    }).exec();
+    const arrayOfInProgressWebsitesOrApps = await prisma.websiteOrApp.findMany({
+      where: { websiteStatus: "In Progress" },
+    });
     res.status(200).json(arrayOfInProgressWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getCompletedWebsitesOrApps: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const getCompletedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfCompletedWebsitesOrApps = await WebsiteOrAppModel.find({
-      websiteStatus: "Completed",
-    }).exec();
+    const arrayOfCompletedWebsitesOrApps = await prisma.websiteOrApp.findMany({
+      where: { websiteStatus: "Completed" },
+    });
     res.status(200).json(arrayOfCompletedWebsitesOrApps);
   } catch (error) {
     next(error);
   }
 };
 
-export const getRejectedWebsitesOrApps: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const getRejectedWebsitesOrApps: RequestHandler = async (req, res, next) => {
   try {
-    const arrayOfRejectedWebsitesOrApps = await WebsiteOrAppModel.find({
-      websiteStatus: "Rejected",
-    }).exec();
+    const arrayOfRejectedWebsitesOrApps = await prisma.websiteOrApp.findMany({
+      where: { websiteStatus: "Rejected" },
+    });
     res.status(200).json(arrayOfRejectedWebsitesOrApps);
   } catch (error) {
     next(error);
@@ -113,11 +94,11 @@ export const getRejectedWebsitesOrApps: RequestHandler = async (
 
 export const approveWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const approvedWebsiteOrApp = await WebsiteOrAppModel.findOneAndUpdate(
-      { _id: req.body.websiteId },
-      { $set: { websiteStatus: "In Progress" } },
-      { new: true }
-    ).exec();
+    const approvedWebsiteOrApp = await prisma.websiteOrApp.update({
+      where: { id: req.body.websiteId },
+      data: { websiteStatus: "In Progress" },
+    });
+
     res.status(200).json(approvedWebsiteOrApp);
   } catch (error) {
     next(error);
@@ -126,97 +107,54 @@ export const approveWebsiteOrApp: RequestHandler = async (req, res, next) => {
 
 export const rejectWebsiteOrApp: RequestHandler = async (req, res, next) => {
   try {
-    const rejectedWebsiteOrApp = await WebsiteOrAppModel.findOneAndUpdate(
-      { _id: req.body.websiteId },
-      { $set: { websiteStatus: "Rejected" } },
-      { new: true }
-    ).exec();
+    const rejectedWebsiteOrApp = await prisma.websiteOrApp.update({
+      where: { id: req.body.websiteId },
+      data: { websiteStatus: "Rejected" },
+    });
+
     res.status(200).json(rejectedWebsiteOrApp);
   } catch (error) {
     next(error);
   }
 };
 
-export const createWebsiteOrApp: RequestHandler<
-  unknown,
-  unknown,
-  websiteOrAppCreationBody,
-  unknown
-> = async (req, res, next) => {
-  const name = req.body.name;
-  const phoneNumber = req.body.phoneNumber;
-  const emailAddress = req.body.emailAddress;
-  const productTier = req.body.productTier;
-  const websiteDescription = req.body.describeYourDreamWebsiteOrApp;
-  const websiteStatus = "Not Started";
+export const createWebsiteOrApp: RequestHandler = async (req, res, next) => {
+  const { name, phoneNumber, emailAddress, productTier, describeYourDreamWebsiteOrApp } = req.body;
 
   try {
-    if (
-      !name ||
-      !phoneNumber ||
-      !emailAddress ||
-      !productTier ||
-      !websiteDescription
-    ) {
-      throw createHttpError(
-        400,
-        "You didn't fill out all of the required fields, try again."
-      );
+    if (!name || !phoneNumber || !emailAddress || !productTier || !describeYourDreamWebsiteOrApp) {
+      throw createHttpError(400, "Missing required fields.");
     }
 
-    if (name.length > 100) {
-      throw createHttpError(400, "Name is too long, try again.");
-    } else if (phoneNumber.length > 20) {
-      throw createHttpError(400, "Phone number is too long, try again.");
-    } else if (emailAddress.length > 100) {
-      throw createHttpError(400, "Email address is too long, try again.");
-    } else if (websiteDescription.length > 5000) {
-      throw createHttpError(400, "Description is too long, try again.");
-    }
-
-    const newWebsiteOrApp = await WebsiteOrAppModel.create({
-      name: name,
-      phoneNumber: phoneNumber,
-      emailAddress: emailAddress,
-      productTier: productTier,
-      websiteOrAppDescription: websiteDescription,
-      websiteStatus: websiteStatus,
+    const newWebsiteOrApp = await prisma.websiteOrApp.create({
+      data: {
+        name,
+        phoneNumber,
+        emailAddress,
+        productTier,
+        describeYourDreamWebsiteOrApp,
+        websiteStatus: "Not Started",
+      },
     });
 
     res.status(201).json(newWebsiteOrApp);
-    const resend = new Resend(env.EMAIL_KEY);
-
-    await resend.emails.send({
-      from: "no-reply@codeddecoded.com",
-      to: ["codedecodedbiz@gmail.com"],
-      subject: "New Website or App Request Submitted",
-      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html dir="ltr" lang="en">
-          <body style="font-family:&quot;Times New Roman&quot;,Times,serif;background-color:#040a15;margin:0 auto;padding-left:40px;padding-right:40px;padding-top:80px;padding-bottom:80px"><img src="https://codeddecoded.com/assets/images/logo/logo.png" style="display:block;outline:none;border:none;text-decoration:none" width="300" />
-            <h1>
-              <p style="font-size:56.8px;line-height:40px;margin:16px 0;color:#4276cf;padding-bottom:40px">We have received a new potential customer:</p>
-            </h1>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Name:</strong> ${name}</p>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Phone Number:</strong> ${phoneNumber}</p>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Email Address:</strong> <a style="color:#4276cf;text-decoration:none;font-size:31.1px;line-height:30px" target="_blank">${emailAddress}</a></p>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Product Tier:</strong> ${productTier}</p>
-            <p style="font-size:31.1px;line-height:30px;margin:16px 0;color:#fcfcfd"><strong style="font-size:31.1px;line-height:30px;color:#84a5e2">Website Description:</strong> ${websiteDescription}</p>
-          </body>
-        </html>`,
-    });
   } catch (error) {
     next(error);
   }
 };
 
 export const deleteWebsiteOrApp: RequestHandler = async (req, res, next) => {
-  try {
-    const websiteOrAppFromDB = await WebsiteOrAppModel.findByIdAndDelete(
-      req.body.websiteId
-    ).exec();
+  const { websiteOrAppId } = req.params;
 
-    res.status(200).json(websiteOrAppFromDB);
+  try {
+    const deletedWebsiteOrApp = await prisma.websiteOrApp.delete({
+      where: { id: parseInt(websiteOrAppId) },
+    });
+
+    res.status(200).json({ message: "Website or app deleted successfully", deletedWebsiteOrApp });
   } catch (error) {
+
+    console.error(error);
     next(error);
   }
 };
